@@ -1,0 +1,3 @@
+[submodule "libsodium-uwp/libsodium"]
+	path = libsodium-uwp/libsodium
+	url = https://github.com/jedisct1/libsodium

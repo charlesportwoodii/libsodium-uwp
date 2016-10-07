@@ -1,0 +1,1 @@
+extern "C" void GenerateRandomBytes(unsigned char *buffer, unsigned int length);
