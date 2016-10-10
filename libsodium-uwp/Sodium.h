@@ -52,9 +52,9 @@ namespace Sodium
 	{
 	public:
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, const Array<unsigned char>^ recipientPublicKey);
-		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, KeyPair^ recipientPublicKey);
+		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, KeyPair^ recipientKeyPair);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ recipientSecretKey, const Array<unsigned char>^recipientPublicKey);
-		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, KeyPair^ recipientPublicKey);
+		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, KeyPair^ recipientKeyPair);
 	};
 
 	public ref class PublicKeyBox sealed

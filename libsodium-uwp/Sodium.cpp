@@ -178,26 +178,60 @@ Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ en
 
 Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(const Array<unsigned char>^ message, const Array<unsigned char>^ recipientPublicKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (recipientPublicKey->Length != crypto_box_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Recipient public key must be {0} bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(message->Length + crypto_box_SEALBYTES);
+	int result = crypto_box_seal(
+		buffer->Data,
+		message->Data,
+		message->Length,
+		recipientPublicKey->Data
+	);
+
+	if (result == 0) {
+		return buffer;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to create SealedPublicKeyBox");
 }
 
-Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(const Array<unsigned char>^ message, KeyPair ^ recipientPublicKey)
+Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(const Array<unsigned char>^ message, KeyPair ^ recipientKeyPair)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	return Sodium::SealedPublicKeyBox::Create(message, recipientKeyPair->Public);
 }
 
 Array<unsigned char>^ Sodium::SealedPublicKeyBox::Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ recipientSecretKey, const Array<unsigned char>^ recipientPublicKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (recipientPublicKey->Length != crypto_box_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Recipient public key must be {0} bytes in length");
+	}
+
+	if (recipientSecretKey->Length != crypto_box_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Recipient secret key must be {0} bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(cipherText->Length - crypto_box_SEALBYTES);
+
+	int result = crypto_box_seal_open(
+		buffer->Data,
+		cipherText->Data,
+		cipherText->Length,
+		recipientPublicKey->Data,
+		recipientSecretKey->Data
+	);
+
+	if (result == 0) {
+		return buffer;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to open SealedPublicKeyBox");
 }
 
-Array<unsigned char>^ Sodium::SealedPublicKeyBox::Open(const Array<unsigned char>^ cipherText, KeyPair ^ recipientPublicKey)
+Array<unsigned char>^ Sodium::SealedPublicKeyBox::Open(const Array<unsigned char>^ cipherText, KeyPair ^ recipientKeyPair)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	return Sodium::SealedPublicKeyBox::Create(cipherText, recipientKeyPair->Public);
 }
 
 // Generates a Crypto Box Nonce
@@ -226,9 +260,8 @@ KeyPair^ Sodium::PublicKeyBox::GenerateKeyPair(const Array<unsigned char>^ priva
 		throw ref new Platform::InvalidArgumentException("Private key must be {0} bytes");
 	}
 
-	kp->Public = ref new Array<unsigned char>(crypto_box_PUBLICKEYBYTES);
 	kp->Secret = privateKey;
-	crypto_scalarmult_base(kp->Public->Data, kp->Secret->Data);
+	kp->Public = Sodium::ScalarMult::Base(kp->Secret);
 
 	return kp;
 }
