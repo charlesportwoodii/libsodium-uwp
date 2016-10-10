@@ -35,7 +35,7 @@ namespace Sodium
 	public:
 		static Array<unsigned char>^ GenerateKey();
 		static Array<unsigned char>^ Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ key);
-		static Array<unsigned char>^ Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
+		static bool Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
 	};
 
 	public ref class SecretAead sealed

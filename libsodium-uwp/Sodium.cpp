@@ -41,14 +41,15 @@ Array<unsigned char>^ Sodium::SecretBox::GenerateKey()
 	return Sodium::Core::GetRandomBytes(crypto_secretbox_KEYBYTES);
 }
 
+// Generates an encrypted message using a key and nonce
 Array<unsigned char>^ Sodium::SecretBox::Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_secretbox_KEYBYTES) {
-		throw ref new Platform::Exception(1, "Key must be {0} bytes in length");
+		throw ref new Platform::InvalidArgumentException("Key must be {0} bytes in length");
 	}
 
 	if (nonce->Length != crypto_secretbox_NONCEBYTES) {
-		throw ref new Platform::Exception(1, "Nonce must be {0} bytes in length");
+		throw ref new Platform::InvalidArgumentException("Nonce must be {0} bytes in length");
 	}
 
 	int cipherLength = crypto_secretbox_MACBYTES + message->Length;
@@ -65,17 +66,18 @@ Array<unsigned char>^ Sodium::SecretBox::Create(const Array<unsigned char>^ mess
 		return cipherText;
 	}
 
-	throw ref new Platform::Exception(result, "Unable to create SecretBox.");
+	throw ref new Platform::Exception(result, "Unable to create SecretBox");
 }
 
+// Decrypts an encrypted string using a key and nonce
 Array<unsigned char>^ Sodium::SecretBox::Open(const Array<unsigned char>^ ciphertext, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_secretbox_KEYBYTES) {
-		throw ref new Platform::Exception(1, "Key must be {0} bytes in length");
+		throw ref new Platform::InvalidArgumentException("Key must be {0} bytes in length");
 	}
 
 	if (nonce->Length != crypto_secretbox_NONCEBYTES) {
-		throw ref new Platform::Exception(1, "Nonce must be {0} bytes in length");
+		throw ref new Platform::InvalidArgumentException("Nonce must be {0} bytes in length");
 	}
 
 	int cipherLength = ciphertext->Length - crypto_secretbox_MACBYTES;
@@ -95,27 +97,59 @@ Array<unsigned char>^ Sodium::SecretBox::Open(const Array<unsigned char>^ cipher
 	throw ref new Platform::Exception(result, "Unable to open SecretBox.");
 }
 
+// Generates a 32 byte SecretKeyAuth key
 Array<unsigned char>^ Sodium::SecretKeyAuth::GenerateKey()
 {
-	return Sodium::Core::GetRandomBytes(crypto_secretbox_KEYBYTES);
+	return Sodium::Core::GetRandomBytes(crypto_auth_KEYBYTES);
 }
 
+// Creates a secret key auth signature
 Array<unsigned char>^ Sodium::SecretKeyAuth::Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (key->Length != crypto_auth_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be {0} bytes in length");
+	}
+
+	Array<unsigned char>^ signature = ref new Array<unsigned char>(crypto_auth_KEYBYTES);
+	int result = crypto_auth(
+		signature->Data,
+		message->Data,
+		message->Length,
+		key->Data
+	);
+
+	if (result == 0) {
+		return signature;
+	}
+
+	throw ref new Platform::Exception(result, "Unable to generate signature");
 }
 
-Array<unsigned char>^ Sodium::SecretKeyAuth::Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
+// Verifies a secret key auth signature
+bool Sodium::SecretKeyAuth::Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (key->Length != crypto_auth_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be {0} bytes in length");
+	}
+
+	if (signature->Length != crypto_auth_BYTES) {
+		throw ref new Platform::InvalidArgumentException("Signature must be {0} bytes in length");
+	}
+
+	int result = crypto_auth_verify(
+		signature->Data,
+		message->Data,
+		message->Length,
+		key->Data
+	);
+
+	return result == 0;
 }
 
 // Generates a SecretAEAD Nonce
 Array<unsigned char>^ Sodium::SecretAead::GenerateNonce()
 {
-	return Sodium::Core::GetRandomBytes(8);
+	throw ref new Platform::NotImplementedException();
 }
 
 Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
@@ -172,28 +206,93 @@ Array<unsigned char>^ Sodium::PublicKeyBox::GenerateNonce()
 	return Sodium::Core::GetRandomBytes(crypto_box_NONCEBYTES);
 }
 
+// Creates a PublicKey KeyPair
 KeyPair^ Sodium::PublicKeyBox::GenerateKeyPair()
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	KeyPair^ kp = ref new KeyPair();
+	kp->Public = ref new Array<unsigned char>(crypto_box_PUBLICKEYBYTES);
+	kp->Secret = ref new Array<unsigned char>(crypto_box_SECRETKEYBYTES);
+
+	crypto_box_keypair(kp->Public->Data, kp->Secret->Data);
+
+	return kp;
 }
 
+// Generates a PublicKey KeyPair from a seed
 KeyPair^ Sodium::PublicKeyBox::GenerateKeyPair(const Array<unsigned char>^ privateKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	KeyPair^ kp = ref new KeyPair();
+	if (privateKey->Length != crypto_box_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Private key must be {0} bytes");
+	}
+
+	kp->Public = ref new Array<unsigned char>(crypto_box_PUBLICKEYBYTES);
+	kp->Secret = privateKey;
+	crypto_scalarmult_base(kp->Public->Data, kp->Secret->Data);
+
+	return kp;
 }
 
 Array<unsigned char>^ Sodium::PublicKeyBox::Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (secretKey->Length != crypto_box_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Private key must {0} bytes in length");
+	}
+
+	if (publicKey->Length != crypto_box_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Public key must {0} bytes in length");
+	}
+
+	if (nonce->Length != crypto_box_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be {0} bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(message->Length + crypto_box_MACBYTES);
+	int result = crypto_box_easy(
+		buffer->Data,
+		message->Data,
+		message->Length,
+		nonce->Data,
+		publicKey->Data,
+		secretKey->Data
+	);
+
+	if (result == 0) {
+		return buffer;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to create PublicKeyBox");
 }
 
 Array<unsigned char>^ Sodium::PublicKeyBox::Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (secretKey->Length != crypto_box_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Private key must {0} bytes in length");
+	}
+
+	if (publicKey->Length != crypto_box_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Public key must {0} bytes in length");
+	}
+
+	if (nonce->Length != crypto_box_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be {0} bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(cipherText->Length - crypto_box_MACBYTES);
+	int result = crypto_box_open_easy(
+		buffer->Data,
+		cipherText->Data,
+		cipherText->Length,
+		nonce->Data,
+		publicKey->Data,
+		secretKey->Data
+	);
+
+	if (result == 0) {
+		return buffer;
+	}
+
+	throw ref new Platform::Exception(result, "Unable to open PublicKeyBox");
 }
 
 KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair()
