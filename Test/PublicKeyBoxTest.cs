@@ -30,15 +30,14 @@ namespace Test
             Assert.AreEqual(32, kp.Public.Length);
             Assert.AreEqual(32, kp.Secret.Length);
 
-            // Check against a generated seed from libsodium
-            var seed = Convert.FromBase64String("slv6S2haNNh4Y3SzDk6VK3wCsfn5p/4MaFHdXjCpMP8=");
+            // Check against a generated key from libsodium
             var secret = Convert.FromBase64String("xIsxKqHum01qF1EmiV8WLm2jCiEfcHsXZYYucvOStDE=");
             var pub = Convert.FromBase64String("JnZhWB8n7nDgMKXGy2XwXmvLQP9wY4TU3nUJtwultA8=");
-            kp = PublicKeyBox.GenerateKeyPair(key);
-            Assert.AreEqual(32, kp.Public.Length);
-            Assert.AreEqual(32, kp.Secret.Length);
-            Assert.AreEqual(pub.ToString(), kp.Public.ToString());
-            Assert.AreEqual(secret.ToString(), kp.Secret.ToString());
+            var kp2 = PublicKeyBox.GenerateKeyPair(secret);
+            Assert.AreEqual(32, kp2.Public.Length);
+            Assert.AreEqual(32, kp2.Secret.Length);
+            Assert.AreEqual(pub.ToString(), kp2.Public.ToString());
+            Assert.AreEqual(secret.ToString(), kp2.Secret.ToString());
         }
 
         [TestMethod]
@@ -72,8 +71,8 @@ namespace Test
             // Key, CipherText, and Nonce generated from libsodium
             var cipherText = Convert.FromBase64String("9Zz8uwvPNqaSzebM4Lf1Gx9RmsaSiww+P0cUogk=");
             var nonce = Convert.FromBase64String("xMD3oIf1lzGK/3X0zFwB0pkcR4ajrb6N");
-            var seed = Convert.FromBase64String("xIsxKqHum01qF1EmiV8WLm2jCiEfcHsXZYYucvOStDE=");
-            var kp = PublicKeyBox.GenerateKeyPair(seed);
+            var key = Convert.FromBase64String("xIsxKqHum01qF1EmiV8WLm2jCiEfcHsXZYYucvOStDE=");
+            var kp = PublicKeyBox.GenerateKeyPair(key);
             byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
 
             var decrypted = PublicKeyBox.Open(cipherText, nonce, kp.Secret, kp.Public);

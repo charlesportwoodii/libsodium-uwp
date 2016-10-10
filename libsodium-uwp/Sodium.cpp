@@ -295,40 +295,127 @@ Array<unsigned char>^ Sodium::PublicKeyBox::Open(const Array<unsigned char>^ cip
 	throw ref new Platform::Exception(result, "Unable to open PublicKeyBox");
 }
 
+// Generates a PublicKeyAuth KeyPair
 KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair()
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	KeyPair^ kp = ref new KeyPair();
+	kp->Public = ref new Array<unsigned char>(crypto_sign_PUBLICKEYBYTES);
+	kp->Secret = ref new Array<unsigned char>(crypto_sign_SECRETKEYBYTES);
+
+	crypto_sign_keypair(kp->Public->Data, kp->Secret->Data);
+
+	return kp;
 }
 
-KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair(const Array<unsigned char>^ privateKey)
+// Generates a PublicKeyAuth KeyPair from a seed.
+KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair(const Array<unsigned char>^ seed)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	KeyPair^ kp = ref new KeyPair();
+	if (seed->Length != crypto_sign_SEEDBYTES) {
+		throw ref new Platform::InvalidArgumentException("Seed must be {0} bytes");
+	}
+
+	kp->Public = ref new Array<unsigned char>(crypto_sign_PUBLICKEYBYTES);
+	kp->Secret = ref new Array<unsigned char>(crypto_sign_SECRETKEYBYTES);
+	crypto_sign_seed_keypair(kp->Public->Data, kp->Secret->Data, seed->Data);
+
+	return kp;
 }
 
+// Signs a message given a private key
 Array<unsigned char>^ Sodium::PublicKeyAuth::Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ privateKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (privateKey->Length != crypto_sign_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be {0} bytes in length");
+	}
+
+	unsigned long long bufferLength = 0;
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(message->Length + crypto_sign_BYTES);
+
+	int result = crypto_sign(
+		buffer->Data,
+		&bufferLength,
+		message->Data,
+		message->Length,
+		privateKey->Data
+	);
+
+	if (result == 0) {
+		Array<unsigned char>^ final = ref new Array<unsigned char>(bufferLength);
+		memcpy(final->Data, buffer->Data, bufferLength);
+		return final;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to sign message");
 }
 
+// Verifies a signature with a public key
 Array<unsigned char>^ Sodium::PublicKeyAuth::Verify(const Array<unsigned char>^ signedMessage, const Array<unsigned char>^ publicKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (publicKey->Length != crypto_sign_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be {0} bytes in length");
+	}
+
+	unsigned long long bufferLength = 0;
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(signedMessage->Length);
+
+	int result = crypto_sign_open(
+		buffer->Data,
+		&bufferLength,
+		signedMessage->Data,
+		signedMessage->Length,
+		publicKey->Data
+	);
+
+	if (result == 0) {
+		Array<unsigned char>^ final = ref new Array<unsigned char>(bufferLength);
+		memcpy(final->Data, buffer->Data, bufferLength);
+		return final;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to verify signature");
 }
 
+// Converts an ED25519 Public Key to a Curve25519 Public Key
 Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519PublicKeyToCurve25519PublicKey(const Array<unsigned char>^ publicKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (publicKey->Length != crypto_sign_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("ed25519PublicKey must {0} bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_box_PUBLICKEYBYTES);
+
+	int result = crypto_sign_ed25519_pk_to_curve25519(
+		buffer->Data,
+		publicKey->Data
+	);
+
+	if (result == 0) {
+		return buffer;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to convert public key");
 }
 
+// Converts a Ed25519 Private Key to a Curve25519 Private Key
 Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519SecretKeyToCurve25519SecretKey(const Array<unsigned char>^ privateKey)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (privateKey->Length != crypto_sign_PUBLICKEYBYTES && privateKey->Length != crypto_sign_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Secret key must be either {0} or {1} bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_box_SECRETKEYBYTES);
+
+	int result = crypto_sign_ed25519_sk_to_curve25519(
+		buffer->Data,
+		privateKey->Data
+	);
+
+	if (result == 0) {
+		return buffer;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to convert private key");
 }
 
 // Creates a Sha256 hash
@@ -355,4 +442,60 @@ Array<unsigned char>^ Sodium::CryptoHash::Sha512(const Array<unsigned char>^ mes
 	}
 
 	throw ref new Platform::Exception(result, "Unable to generate Sha512 hash");
+}
+
+int Sodium::ScalarMult::Bytes()
+{
+	return crypto_scalarmult_bytes();
+}
+
+int Sodium::ScalarMult::ScalarBytes()
+{
+	return crypto_scalarmult_scalarbytes();
+}
+
+// Extracts the public key from a secret key
+Array<unsigned char>^ Sodium::ScalarMult::Base(const Array<unsigned char>^ secretKey)
+{
+	if (secretKey->Length != crypto_scalarmult_SCALARBYTES) {
+		throw ref new Platform::InvalidArgumentException("SecretKey must be {0} bytes in length");
+	}
+
+	Array<unsigned char>^ publicKey = ref new Array<unsigned char>(crypto_scalarmult_SCALARBYTES);
+	int result = crypto_scalarmult_base(
+		publicKey->Data,
+		secretKey->Data
+	);
+
+	if (result == 0) {
+		return publicKey;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to compute public key");
+}
+
+// Computes a shared secret
+Array<unsigned char>^ Sodium::ScalarMult::Mult(const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
+{
+	if (secretKey->Length != crypto_scalarmult_SCALARBYTES) {
+		throw ref new Platform::InvalidArgumentException("SecretKey must be {0} bytes in length");
+	}
+
+	if (publicKey->Length != crypto_scalarmult_BYTES) {
+		throw ref new Platform::InvalidArgumentException("PublicKey must be {0} bytes in length");
+	}
+
+	Array<unsigned char>^ sharedSecret = ref new Array<unsigned char>(crypto_scalarmult_SCALARBYTES);
+
+	int result = crypto_scalarmult(
+		sharedSecret->Data,
+		secretKey->Data,
+		publicKey->Data
+	);
+
+	if (result == 0) {
+		return sharedSecret;
+	}
+
+	throw ref new Platform::Exception(result, "Failed to compute shared secret");
 }

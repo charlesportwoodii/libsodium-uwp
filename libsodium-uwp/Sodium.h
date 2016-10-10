@@ -51,7 +51,7 @@ namespace Sodium
 	public ref class SealedPublicKeyBox sealed
 	{
 	public:
-		static Array<unsigned char>^ Create(const Array<unsigned char>^message, const Array<unsigned char>^ recipientPublicKey);
+		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, const Array<unsigned char>^ recipientPublicKey);
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, KeyPair^ recipientPublicKey);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ recipientSecretKey, const Array<unsigned char>^recipientPublicKey);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, KeyPair^ recipientPublicKey);
@@ -71,7 +71,7 @@ namespace Sodium
 	{
 	public:
 		static KeyPair^ GenerateKeyPair();
-		static KeyPair^ GenerateKeyPair(const Array<unsigned char>^ privateKey);
+		static KeyPair^ GenerateKeyPair(const Array<unsigned char>^ seed);
 		static Array<unsigned char>^ Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ privateKey);
 		static Array<unsigned char>^ Verify(const Array<unsigned char>^signedMessage, const Array<unsigned char>^ publicKey);
 		static Array<unsigned char>^ ConvertEd25519PublicKeyToCurve25519PublicKey(const Array<unsigned char>^ publicKey);
@@ -83,5 +83,15 @@ namespace Sodium
 	public:
 		static Array<unsigned char>^ Sha256(const Array<unsigned char>^ message);
 		static Array<unsigned char>^ Sha512(const Array<unsigned char>^ message);
+	};
+
+	public ref class ScalarMult sealed
+	{
+	public:
+		static int Bytes();
+		static int ScalarBytes();
+		/*static char* Primitive();*/
+		static Array<unsigned char>^ Base(const Array<unsigned char>^ secretKey);
+		static Array<unsigned char>^ Mult(const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey);
 	};
 }
