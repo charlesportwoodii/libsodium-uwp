@@ -65,5 +65,19 @@ namespace Test
             var decrypted = PublicKeyBox.Open(encrypted, nonce, bob.Secret, alice.Public);
             Assert.AreEqual(decrypted.ToString(), message.ToString());
         }
+
+        [TestMethod]
+        public void OpenWithKeyAndNonce()
+        {
+            // Key, CipherText, and Nonce generated from libsodium
+            var cipherText = Convert.FromBase64String("9Zz8uwvPNqaSzebM4Lf1Gx9RmsaSiww+P0cUogk=");
+            var nonce = Convert.FromBase64String("xMD3oIf1lzGK/3X0zFwB0pkcR4ajrb6N");
+            var seed = Convert.FromBase64String("xIsxKqHum01qF1EmiV8WLm2jCiEfcHsXZYYucvOStDE=");
+            var kp = PublicKeyBox.GenerateKeyPair(seed);
+            byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
+
+            var decrypted = PublicKeyBox.Open(cipherText, nonce, kp.Secret, kp.Public);
+            Assert.AreEqual(decrypted.ToString(), message.ToString());
+        }
     }
 }
