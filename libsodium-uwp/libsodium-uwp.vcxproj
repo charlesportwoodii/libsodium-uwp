@@ -284,7 +284,6 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Extern.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base2.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\hchacha20\core_hchacha20.h" />
@@ -395,7 +394,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sodium.cpp" />
-    <ClCompile Include="Extern.cpp" />
     <ClCompile Include="libsodium\src\libsodium\crypto_aead\aes256gcm\aesni\aead_aes256gcm_aesni.c">
       <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
       <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsWinRT>

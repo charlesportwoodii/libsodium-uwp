@@ -365,7 +365,6 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Extern.cpp" />
     <ClCompile Include="Sodium.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -685,7 +684,6 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Extern.h" />
     <ClInclude Include="Sodium.h" />
   </ItemGroup>
 </Project>
