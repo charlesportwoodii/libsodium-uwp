@@ -149,7 +149,7 @@ bool Sodium::SecretKeyAuth::Verify(const Array<unsigned char>^ message, const Ar
 // Generates a SecretAEAD Nonce
 Array<unsigned char>^ Sodium::SecretAead::GenerateNonce()
 {
-	throw ref new Platform::NotImplementedException();
+	return Sodium::Core::GetRandomBytes(crypto_aead_chacha20poly1305_NPUBBYTES);
 }
 
 Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)

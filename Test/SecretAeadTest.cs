@@ -8,8 +8,9 @@ namespace Test
     public class SecretAeadTest
     {
         [TestMethod]
-        public void ExampleTest()
+        public void GenerateNonceText()
         {
+            Assert.AreEqual(8, SecretAead.GenerateNonce().Length);
         }
     }
 }
