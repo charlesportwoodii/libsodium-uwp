@@ -154,26 +154,102 @@ Array<unsigned char>^ Sodium::SecretAead::GenerateNonce()
 
 Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	Array<unsigned char>^ ad = ref new Array<unsigned char>(1);
+	ad[0] = 0x00;
+
+	return Sodium::SecretAead::Encrypt(message, nonce, key, ad);
 }
 
 Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionaData)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (key->Length != crypto_aead_chacha20poly1305_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("key must be {0} bytes in length");
+	}
+
+	if (nonce->Length != crypto_aead_chacha20poly1305_NPUBBYTES) {
+		throw ref new Platform::InvalidArgumentException("nonce must be {0} bytes in length");
+	}
+
+	if (additionaData->Length > crypto_aead_chacha20poly1305_ABYTES || additionaData->Length < 0) {
+		throw ref new Platform::InvalidArgumentException("additionaData must be {0} and {1} bytes in length");
+	}
+
+	Array<unsigned char>^ cipher = ref new Array<unsigned char>(message->Length + crypto_aead_chacha20poly1305_ABYTES);
+	unsigned long long cipherLength;
+
+	int result = crypto_aead_chacha20poly1305_encrypt(
+		cipher->Data,
+		&cipherLength,
+		message->Data,
+		message->Length,
+		additionaData->Data,
+		additionaData->Length,
+		NULL,
+		nonce->Data,
+		key->Data
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(result, "Failed to encrypt message");
+	}
+
+	if (cipher->Length == cipherLength) {
+		return cipher;
+	}
+
+	Array<unsigned char>^ final = ref new Array<unsigned char>(cipherLength);
+	memcpy(final->Data, cipher->Data, cipherLength);
+	return final;
 }
 
 Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	Array<unsigned char>^ ad = ref new Array<unsigned char>(1);
+	ad[0] = 0x00;
+
+	return Sodium::SecretAead::Decrypt(encrypted, nonce, key, ad);
 }
 
 Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionaData)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	if (key->Length != crypto_aead_chacha20poly1305_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("key must be {0} bytes in length");
+	}
+
+	if (nonce->Length != crypto_aead_chacha20poly1305_NPUBBYTES) {
+		throw ref new Platform::InvalidArgumentException("nonce must be {0} bytes in length");
+	}
+
+	if (additionaData->Length > crypto_aead_chacha20poly1305_ABYTES || additionaData->Length < 0) {
+		throw ref new Platform::InvalidArgumentException("additionaData must be {0} and {1} bytes in length");
+	}
+
+	Array<unsigned char>^ message = ref new Array<unsigned char>(encrypted->Length - crypto_aead_chacha20poly1305_ABYTES);
+	unsigned long long messageLength;
+
+	int result = crypto_aead_chacha20poly1305_decrypt(
+		message->Data,
+		&messageLength,
+		NULL,
+		encrypted->Data,
+		encrypted->Length,
+		additionaData->Data,
+		additionaData->Length,
+		nonce->Data,
+		key->Data
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(result, "Failed to dencrypt message");
+	}
+
+	if (message->Length == messageLength) {
+		return message;
+	}
+
+	Array<unsigned char>^ final = ref new Array<unsigned char>(messageLength);
+	memcpy(final->Data, message->Data, messageLength);
+	return final;
 }
 
 Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(const Array<unsigned char>^ message, const Array<unsigned char>^ recipientPublicKey)

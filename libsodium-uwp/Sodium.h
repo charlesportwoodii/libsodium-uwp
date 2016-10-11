@@ -90,7 +90,6 @@ namespace Sodium
 	public:
 		static int Bytes();
 		static int ScalarBytes();
-		/*static char* Primitive();*/
 		static Array<unsigned char>^ Base(const Array<unsigned char>^ secretKey);
 		static Array<unsigned char>^ Mult(const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey);
 	};
