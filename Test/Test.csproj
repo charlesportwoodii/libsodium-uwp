@@ -99,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKeyAuthTest.cs" />
     <Compile Include="PublicKeyBoxTest.cs" />
+    <Compile Include="ScalarMultTest.cs" />
     <Compile Include="SealedPublicKeyBoxTest.cs" />
     <Compile Include="SecretAeadTest.cs" />
     <Compile Include="SecretBoxTest.cs" />
@@ -107,6 +108,7 @@
       <DependentUpon>UnitTestApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="CoreTest.cs" />
+    <Compile Include="UtilitiesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="UnitTestApp.xaml">

@@ -608,3 +608,20 @@ Array<unsigned char>^ Sodium::ScalarMult::Mult(const Array<unsigned char>^ secre
 
 	throw ref new Platform::Exception(result, "Failed to compute shared secret");
 }
+
+Array<unsigned char>^ Sodium::Utilities::Increment(const Array<unsigned char>^ value)
+{
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(value->Length);
+	memcpy(buffer->Data, value->Data, value->Length);
+	sodium_increment(buffer->Data, buffer->Length);
+
+	return buffer;
+}
+
+// Constant time string comparison
+bool Sodium::Utilities::Compare(const Array<unsigned char>^ a, const Array<unsigned char>^ b)
+{
+	int result = sodium_compare(a->Data, b->Data, a->Length);
+
+	return result == 0;
+}

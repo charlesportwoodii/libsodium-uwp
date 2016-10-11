@@ -21,6 +21,13 @@ namespace Sodium
 		static int GetRandomNumber(int upper_count);
 	};
 
+	public ref class Utilities sealed
+	{
+	public:
+		static Array<unsigned char>^ Increment(const Array<unsigned char>^ value);
+		static bool Compare(const Array<unsigned char>^ a, const Array<unsigned char>^ b);
+	};
+
 	public ref class SecretBox sealed
 	{
 	public:
