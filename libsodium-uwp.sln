@@ -19,13 +19,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|Any CPU.ActiveCfg = Release|Win32
-		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|ARM.ActiveCfg = Release|Win32
-		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|ARM.Build.0 = Debug|ARM
-		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|x64.ActiveCfg = Release|Win32
-		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|x64.Build.0 = Debug|x64
-		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|x86.ActiveCfg = Release|Win32
-		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|x86.Build.0 = Debug|Win32
+		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|ARM.ActiveCfg = Debug|Win32
+		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|x64.ActiveCfg = Debug|Win32
+		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Debug|x86.ActiveCfg = Debug|Win32
 		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Release|Any CPU.ActiveCfg = Release|Win32
 		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Release|ARM.ActiveCfg = Release|Win32
 		{0DDF9CB3-1501-4952-A389-A5459D945E25}.Release|ARM.Build.0 = Release|ARM
