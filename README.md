@@ -20,4 +20,4 @@ This library can be accessed within you C# project by `using Libsodium` in your 
 
 ## License
 
-NaCl has been released to the public domain to avoid copyright issues.libsodium is subject to the ISC license, and this software is subject to the BSD-3 Clause License (see LICENSE.md).
+NaCl has been released to the public domain to avoid copyright issues. libsodium is subject to the ISC license, and this software is subject to the BSD-3 Clause License (see LICENSE.md).
