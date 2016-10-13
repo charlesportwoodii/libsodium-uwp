@@ -1,8 +1,10 @@
 # libsodium-uwp
 
-libsodium-uwp ([libsodium](https://github.com/jedisct1/libsodium) for Universal Windows Platform (UWP)) is a C++ Windows Runtime Component for UWP applications.
+[![License](https://img.shields.io/github/license/charlesportwoodii/libsodium-uwp.svg?style=flat-square)](https://github.com/charlesportwoodii/libsodium-uwp/blob/master/LICENSE.md)
 
-Cryptography is hard. This library was written to make libsodium available to the .NET community building Universal Windows Applications so that developers.
+libsodium-uwp ([libsodium](https://github.com/jedisct1/libsodium) for Universal Windows Platform (UWP)) is a C++ Windows Runtime Component for UWP applications. This library is fully tested and executes on both Windows 10 and Windows 10 mobile.
+
+Cryptography is hard. This library was written to make libsodium available to the .NET community building Universal Windows Applications so that developers can safely and securely implement cryptography within their application.
 
 ## Requirements
 
