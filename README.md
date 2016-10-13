@@ -1,6 +1,12 @@
 # libsodium-uwp
 
-libsodium-uwp ([libsodium](https://github.com/jedisct1/libsodium) for Universal Windows Platform (UWP)) is a C++ Windows Runtime Component for UWP applications. This runtime component is a work in progress 
+libsodium-uwp ([libsodium](https://github.com/jedisct1/libsodium) for Universal Windows Platform (UWP)) is a C++ Windows Runtime Component for UWP applications.
+
+Cryptography is hard. This library was written to make libsodium available to the .NET community building Universal Windows Applications so that developers.
+
+## Requirements
+
+- [Visual Studio 2015](https://www.visualstudio.com/vs/)
 
 ## Installation
 
@@ -8,8 +14,15 @@ libsodium-uwp ([libsodium](https://github.com/jedisct1/libsodium) for Universal 
 ```
 git clone --recursive https://github.com/charlesportwoodii/libsodium-uwp
 ```
-2. Add the project solution to your project via `File->Add->Existing Project`
-3. Add a reference to `libsodium-uwp` by adding `libsodium-uwp\libsodium-uwp\libsodium-uwp.vcxproj` to your project references.
+2. Apply `libsodium.patch`
+```
+cd libsodium-uwp\libsodium-uwp\libsodium
+git apply ..\..\libsodium.patch
+cd ..\..
+```
+3. Add the project solution to your project via `File->Add->Existing Project`
+4. Add a reference to `libsodium-uwp` by adding `libsodium-uwp\libsodium-uwp\libsodium-uwp.vcxproj` to your project references.
+5. Add a reference to `Visual C++ Redistributable for Visual Studio 2015` to your project.
 
 ## Documentation
 This library can be accessed within you C# project by `using Libsodium` in your `.cs` file. See the [docs](docs/) folder for complete documentation on how to use this library.
@@ -17,6 +30,8 @@ This library can be accessed within you C# project by `using Libsodium` in your 
 ## Notes
 
 `libsodium` requires the [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
+
+This library is currently a work in progress. While many libsodium functions are implemented, not are all. See the [docs](docs/) folder for more information.
 
 ## License
 
