@@ -80,7 +80,7 @@ namespace Sodium
 		static KeyPair^ GenerateKeyPair();
 		static KeyPair^ GenerateKeyPair(const Array<unsigned char>^ seed);
 		static Array<unsigned char>^ Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ privateKey);
-		static Array<unsigned char>^ Verify(const Array<unsigned char>^signedMessage, const Array<unsigned char>^ publicKey);
+		static Array<unsigned char>^ Verify(const Array<unsigned char>^ signedMessage, const Array<unsigned char>^ publicKey);
 		static Array<unsigned char>^ ConvertEd25519PublicKeyToCurve25519PublicKey(const Array<unsigned char>^ publicKey);
 		static Array<unsigned char>^ ConvertEd25519SecretKeyToCurve25519SecretKey(const Array<unsigned char>^ privateKey);
 	};
