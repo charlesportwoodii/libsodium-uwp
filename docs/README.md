@@ -19,4 +19,6 @@ The primary goal of this runtime component is to implement libsodium for UWP usi
 
 # Using this library
 
-After installation, you can use this library by `using Sodium`.
+After installation, you can use this library by `using Sodium`. For more indepth examples about using this library, reference the `Tests` directory.
+
+> __NOTE:__ This library is compatible with `libsodium` 1.0.11+. Compatability with version <= 1.0.11 is not guaranteed.
