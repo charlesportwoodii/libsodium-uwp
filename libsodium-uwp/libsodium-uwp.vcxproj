@@ -138,6 +138,7 @@
       <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
+      <Optimization>MinSpace</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -284,6 +285,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Extern.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base2.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\hchacha20\core_hchacha20.h" />
@@ -384,16 +386,24 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\curve25519_ref10.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\mutex.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes.h" />
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_nativeclient.h" />
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_salsa20_random.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_sysrandom.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\runtime.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\utils.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="randombytes_uwp.h" />
     <ClInclude Include="Sodium.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Extern.cpp" />
     <ClCompile Include="Sodium.cpp" />
+    <ClCompile Include="randombytes_uwp.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_aead\aes256gcm\aesni\aead_aes256gcm_aesni.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -838,19 +848,7 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\nativeclient\randombytes_nativeclient.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\randombytes\randombytes.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\salsa20\randombytes_salsa20_random.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>

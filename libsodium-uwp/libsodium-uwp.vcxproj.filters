@@ -238,15 +238,6 @@
     <ClCompile Include="libsodium\src\libsodium\randombytes\randombytes.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\nativeclient\randombytes_nativeclient.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\salsa20\randombytes_salsa20_random.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\sodium\runtime.c">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -366,6 +357,13 @@
     </ClCompile>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Sodium.cpp" />
+    <ClCompile Include="Extern.cpp" />
+    <ClCompile Include="randombytes_uwp.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2.h">
@@ -647,15 +645,6 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_nativeclient.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_salsa20_random.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_sysrandom.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\include\sodium\runtime.h">
       <Filter>Resources</Filter>
     </ClInclude>
@@ -685,5 +674,12 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Sodium.h" />
+    <ClInclude Include="Extern.h" />
+    <ClInclude Include="randombytes_uwp.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_sysrandom.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

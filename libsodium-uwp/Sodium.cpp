@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Sodium.h"
+#include "randombytes_uwp.h"
 
 using namespace Sodium;
 using namespace Platform;
