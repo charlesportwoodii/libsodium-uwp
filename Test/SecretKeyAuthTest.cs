@@ -22,6 +22,7 @@ namespace Test
             byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
             byte[] signature = SecretKeyAuth.Sign(message, key);
 
+            Assert.AreEqual(32, signature.Length);
             Assert.AreEqual(expectedSignature, Convert.ToBase64String(signature));
         }
 
@@ -42,6 +43,7 @@ namespace Test
             byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
 
             byte[] signature = SecretKeyAuth.Sign(message, key);
+            Assert.AreEqual(32, signature.Length);
             bool verification = SecretKeyAuth.Verify(message, signature, key);
             Assert.IsTrue(verification);
         }
