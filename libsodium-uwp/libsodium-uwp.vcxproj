@@ -138,7 +138,7 @@
       <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MinSpace</Optimization>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
