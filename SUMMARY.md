@@ -10,6 +10,6 @@
    * [PublicKeyBox](docs/PublicKeyBox.md)
    * [SecretBox](docs/SecretBox.md)
    * [SealedPublicKeyBox](docs/SealedPublicKeyBox.md)
-   * [CryptoHash](docs\CryptoHash.md)
-   * Utilities
+   * [CryptoHash](docs/CryptoHash.md)
+   * [Utilities](docs\Utilities.md)
 
