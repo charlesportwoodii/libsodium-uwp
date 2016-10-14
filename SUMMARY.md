@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Documentation](docs/README.md)
+* [Classes](docs/README.md)
    * [Core](docs/Core.md)
    * [PublicKeyAuth](docs/PublicKeyAuth.md)
    * [KeyPair](docs/KeyPair.md)
@@ -11,5 +11,5 @@
    * [SecretBox](docs/SecretBox.md)
    * [SealedPublicKeyBox](docs/SealedPublicKeyBox.md)
    * [CryptoHash](docs/CryptoHash.md)
-   * [Utilities](docs\Utilities.md)
+   * [Utilities](docs/Utilities.md)
 
