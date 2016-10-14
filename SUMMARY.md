@@ -4,7 +4,7 @@
 * [Documentation](docs/README.md)
    * [Core](docs/Core.md)
    * [PublicKeyAuth](docs/PublicKeyAuth.md)
-   * KeyPair
+   * [KeyPair](docs\KeyPair.md)
    * SecretAead
    * SecretKeyAuth
    * PublicKeyBox
