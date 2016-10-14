@@ -53,7 +53,7 @@ Cryptography is hard. This library was written to make libsodium available to th
     ```
 
 ## Documentation
-See the [docs](docs/) folder for complete documentation on how to use this library.
+See the [docs](docs/) folder, or the [Gitbook page](https://charlesportwoodii.gitbooks.io/libsodium-uwp/content/) for complete documentation on how to use this library.
 
 ## Notes
 
