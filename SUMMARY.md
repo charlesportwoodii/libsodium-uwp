@@ -7,8 +7,8 @@
    * [KeyPair](docs/KeyPair.md)
    * [SecretAead](docs/SecretAead.md)
    * [SecretKeyAuth](docs/SecretKeyAuth.md)
-   * [PublicKeyBox](docs\PublicKeyBox.md)
-   * SecretBox
+   * [PublicKeyBox](docs/PublicKeyBox.md)
+   * [SecretBox](docs\Secretbox.md)
    * SealedPublicKeyBox
    * CryptoHash
    * Utilities
