@@ -20,6 +20,36 @@ git clone --recursive https://github.com/charlesportwoodii/libsodium-uwp
 3. Add a reference to `libsodium-uwp` by adding `libsodium-uwp\libsodium-uwp\libsodium-uwp.vcxproj` to your project references.
 4. Add a reference to `Visual C++ Redistributable for Visual Studio 2015` to your project.
 
+
+### Nuget Installation
+
+1. Install from Nuget
+```
+Install-Package libsodium-uwp
+```
+2. Add the following to your `Package.appxmanifest`
+```xml
+<Extensions>
+<Extension Category="windows.activatableClass.inProcessServer">
+    <InProcessServer>
+        <Path>libsodium-uwp.dll</Path>
+        <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.Utilities" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.SecretBox" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.SecretKeyAuth" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.SecretAead" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.SealedPublicKeyBox" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.PublicKeyBox" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.PublicKeyAuth" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.CryptoHash" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.ScalarMult" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
+    </InProcessServer>
+</Extension>
+</Extensions>
+```
+
 ## Documentation
 See the [docs](docs/) folder for complete documentation on how to use this library.
 
