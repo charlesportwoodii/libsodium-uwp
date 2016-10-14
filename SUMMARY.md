@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [Documentation](docs/README.md)
    * [Core](docs/Core.md)
-   * PublicKeyAuth
+   * [PublicKeyAuth](docs\PublicKeyAuth.md)
    * KeyPair
    * SecretAead
    * SecretKeyAuth
