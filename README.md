@@ -27,7 +27,7 @@ cd ..\..
 5. Add a reference to `Visual C++ Redistributable for Visual Studio 2015` to your project.
 
 ## Documentation
-This library can be accessed within you C# project by `using Libsodium` in your `.cs` file. See the [docs](docs/) folder for complete documentation on how to use this library.
+See the [docs](docs/) folder for complete documentation on how to use this library.
 
 ## Notes
 
