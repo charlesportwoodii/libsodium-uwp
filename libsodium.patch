@@ -1,17 +1,3 @@
-diff --git a/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c b/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c
-index 83c8a39..05b0323 100644
---- a/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c
-+++ b/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c
-@@ -326,7 +326,8 @@ randombytes_sysrandom_buf(void * const buf, const size_t size)
-     if (size > (size_t) 0xffffffff) {
-         abort(); /* LCOV_EXCL_LINE */
-     }
--    if (! RtlGenRandom((PVOID) buf, (ULONG) size)) {
-+	if (!GenerateRandomBytes((unsigned char*)buf, (unsigned int)size)) {
-+    //if (! RtlGenRandom((PVOID) buf, (ULONG) size)) {
-         abort(); /* LCOV_EXCL_LINE */
-     }
- #endif
 diff --git a/src/libsodium/sodium/runtime.c b/src/libsodium/sodium/runtime.c
 index 78f0a58..1adde5c 100644
 --- a/src/libsodium/sodium/runtime.c

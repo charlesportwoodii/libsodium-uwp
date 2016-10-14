@@ -361,9 +361,6 @@
     <ClCompile Include="randombytes_uwp.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2.h">
@@ -675,10 +672,10 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Sodium.h" />
     <ClInclude Include="Extern.h" />
-    <ClInclude Include="randombytes_uwp.h">
+    <ClInclude Include="include\randombytes_uwp.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_sysrandom.h">
+    <ClInclude Include="include\randombytes_default.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
