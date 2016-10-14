@@ -8,4 +8,5 @@
    * SecretAead
    * SecretKeyAuth
    * PublicKeyBox
+   * SecretBox
 
