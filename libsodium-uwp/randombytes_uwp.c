@@ -16,7 +16,7 @@
 #endif
 
 #include "randombytes.h"
-#include "randombytes_default.h"
+#include "randombytes_uwp.h"
 #include "utils.h"
 
 #ifndef SSIZE_MAX
