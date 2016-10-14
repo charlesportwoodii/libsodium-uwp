@@ -11,4 +11,5 @@
    * SecretBox
    * SealedPublicKeyBox
    * CryptoHash
+   * Utilities
 
