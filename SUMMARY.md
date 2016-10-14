@@ -10,4 +10,5 @@
    * PublicKeyBox
    * SecretBox
    * SealedPublicKeyBox
+   * CryptoHash
 
