@@ -6,4 +6,5 @@
    * PublicKeyAuth
    * KeyPair
    * SecretAead
+   * SecretKeyauth
 
