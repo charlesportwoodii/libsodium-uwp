@@ -7,4 +7,5 @@
    * KeyPair
    * SecretAead
    * SecretKeyAuth
+   * PublicKeyBox
 
