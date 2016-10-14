@@ -9,7 +9,7 @@
    * [SecretKeyAuth](docs/SecretKeyAuth.md)
    * [PublicKeyBox](docs/PublicKeyBox.md)
    * [SecretBox](docs/SecretBox.md)
-   * SealedPublicKeyBox
+   * [SealedPublicKeyBox](docs\SealedPublicKeyBox.md)
    * CryptoHash
    * Utilities
 
