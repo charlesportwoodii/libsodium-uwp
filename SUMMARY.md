@@ -4,4 +4,5 @@
 * [Documentation](docs/README.md)
    * [Core](docs/Core.md)
    * PublicKeyAuth
+   * KeyPair
 
