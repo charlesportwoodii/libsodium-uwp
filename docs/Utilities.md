@@ -6,7 +6,7 @@ Useful utilities exposed by libsodium.
 
 __Namespace:__ _Sodium.Utilities_
 
-```
+```C#
 public static byte[] Sodium.Utilities.Increment(byte[] value)
 ```
 
@@ -17,7 +17,8 @@ _This function implements `sodium_increment`_
 ## Constant time comparison of large numbers
 
 __Namespace:__ _Sodium.Utilities_
-```
+
+```C#
 public static bool Sodium.Utilities.Compare(byte[] a, byte[] b)
 ```
 
@@ -31,27 +32,27 @@ While not implemented by this library, you may find the following UWP methods us
 
 ## Converting a string to byte[]
 
-```
+```C#
 String str = "My Data";
 byte[] message = System.Text.Encoding.UTF8.GetBytes(str);
 ```
 
 ## Convert byte[] to hex
 
-```
+```C#
 var data = Sodium.Core.GetRandomBytes(32);
 string hex = BitConverter.ToString(data).Replace("-", string.Empty).ToLower();
 ```
 
 ## Convert byte[] to base64
 
-```
+```C#
 var data = Sodium.Core.GetRandomBytes(32);
 var data = Convert.ToBase64String(bytes);
 ```
 
 ## Convert base64 to byte[]
 
-```
+```C#
 byte[] data = Convert.FromBase64String("<base64_encoded_string>==");
 ```

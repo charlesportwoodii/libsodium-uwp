@@ -13,9 +13,10 @@ Cryptography is hard. This library was written to make libsodium available to th
 ## Installation
 
 1. Clone this project
-```
-git clone --recursive https://github.com/charlesportwoodii/libsodium-uwp
-```
+
+    ```
+    git clone --recursive https://github.com/charlesportwoodii/libsodium-uwp
+    ```
 2. Add the project solution to your project via `File->Add->Existing Project`
 3. Add a reference to `libsodium-uwp` by adding `libsodium-uwp\libsodium-uwp\libsodium-uwp.vcxproj` to your project references.
 4. Add a reference to `Visual C++ Redistributable for Visual Studio 2015` to your project.
@@ -24,30 +25,32 @@ git clone --recursive https://github.com/charlesportwoodii/libsodium-uwp
 ### Nuget Installation
 
 1. Install from Nuget
-```
-Install-Package libsodium-uwp
-```
+
+    ```
+    Install-Package libsodium-uwp -Pre
+    ```
 2. Add the following to your `Package.appxmanifest`
-```xml
-<Extensions>
-<Extension Category="windows.activatableClass.inProcessServer">
-    <InProcessServer>
-        <Path>libsodium-uwp.dll</Path>
-        <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.Utilities" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.SecretBox" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.SecretKeyAuth" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.SecretAead" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.SealedPublicKeyBox" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.PublicKeyBox" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.PublicKeyAuth" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.CryptoHash" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.ScalarMult" ThreadingModel="both" />
-    </InProcessServer>
-</Extension>
-</Extensions>
-```
+
+    ```xml
+    <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+        <InProcessServer>
+            <Path>libsodium-uwp.dll</Path>
+            <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.Utilities" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.SecretBox" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.SecretKeyAuth" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.SecretAead" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.SealedPublicKeyBox" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.PublicKeyBox" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.PublicKeyAuth" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.CryptoHash" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.ScalarMult" ThreadingModel="both" />
+        </InProcessServer>
+    </Extension>
+    </Extensions>
+    ```
 
 ## Documentation
 See the [docs](docs/) folder for complete documentation on how to use this library.

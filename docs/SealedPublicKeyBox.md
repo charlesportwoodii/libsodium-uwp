@@ -1,7 +1,7 @@
 # Sealed Public Key Cryptography
 
 ## Example
-```
+```C#
 var message = System.Text.Encoding.UTF8.GetBytes("My secret message");
 
 // Recipient creates a long-term key pair
@@ -25,7 +25,7 @@ The message is encrypted using an ephemeral key pair whose secret part is destro
 
 __Namespace:__ _Sodium.SealedPublicKeyBox_
 
-```
+```C#
 public static byte[] Sodium.SealedPublicKeyBox.Create(byte[] message, byte[] recipientPublicKey)
 public static byte[] Sodium.SealedPublicKeyBox.Create(byte[] message, KeyPair recipientKeyPair)
 ```
@@ -40,7 +40,7 @@ _This method uses internally `crypto_box_seal`._
 
 __Namespace:__ _Sodium.SealedPublicKeyBox_
 
-```
+```C#
 public static byte[] Sodium.SealedPublicKeyBox.Open(byte[] cipherText, byte[] recipientSecretKey, byte[] recipientPublicKey)
 public static byte[] Sodium.SealedPublicKeyBox.Open(byte[] cipherText, KeyPair recipientKeyPair)
 ```

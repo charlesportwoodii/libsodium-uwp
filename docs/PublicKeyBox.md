@@ -1,7 +1,7 @@
 # Public Key Cryptography
 
 ## Example
-```
+```C#
 var message = System.Text.Encoding.UTF8.GetBytes("My secret message");
 var alice = PublicKeyBox.GenerateKeyPair();
 var bob = PublicKeyBox.GenerateKeyPair();
@@ -29,7 +29,7 @@ Public key boxes provided mutal authentication.
 
 __Namespace:__ _Sodium.PublicKeyBox_
 
-```
+```C#
 public static byte[] Sodium.PublicKeyBox.GenerateNonce()
 ```
 
@@ -39,7 +39,7 @@ This method returns a 24 byte nonce.
 
 __Namespace:__ _Sodium.PublicKeyBox_
 
-```
+```C#
 public static KeyPair Sodium.PublicKeyBox.GenerateKeyPair()
 public static KeyPair Sodium.PublicKeyBox.GenerateKeyPair(byte[] privateKey)
 ```
@@ -52,7 +52,7 @@ _If a new `KeyPair` is generated, this method will use `crypto_box_keypair` to g
 
 __Namespace:__ _Sodium.PublicKeyBox_
 
-```
+```C#
 public static byte[] Sodium.PublicKeyBox.Create(byte[] message, byte[] nonce, byte[] secretKey, byte[] publicKey)
 ```
 
@@ -64,7 +64,7 @@ _This method internally uses `crypto_box_easy`._
 
 __Namespace:__ _Sodium.PublicKeyBox_
 
-```
+```C#
 public static byte[] Sodium.PublicKeyBox.Open(byte[] cioherText, byte[] nonce, byte[] secretKey, byte[] publicKey)
 ```
 

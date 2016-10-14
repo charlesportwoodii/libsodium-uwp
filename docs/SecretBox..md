@@ -1,8 +1,7 @@
 # Secret-key authenticated encryption
 
 ## Example
-
-```
+```C#
 var nonce = Sodium.SecretBox.GenerateNonce(); // 24 byte nonce
 var key = Sodium.SecretBox.GenerateKey(); // 32 byte key
 var message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
@@ -25,7 +24,7 @@ The nonce used does not have to be confidential, but should never be reused with
 
 __Namespace:__ _Sodium.SecretBox_
 
-```
+```C#
 public static byte[] Sodium.SecretBox.GenerateNonce()
 ```
 
@@ -35,7 +34,7 @@ This method generates a 24 byte nonce.
 
 __Namespace:__ _Sodium.SecretBox_
 
-```
+```C#
 public static byte[] Sodium.SecretBox.GenerateKey()
 ```
 
@@ -47,7 +46,7 @@ This method generates a 32 byte key.
 
 __Namespace:__ _Sodium.SecretBox_
 
-```
+```C#
 public static byte[] Sodium.SecretBox.Create(byte[] message, byte[] nonce, byte[] key)
 ```
 
@@ -59,7 +58,7 @@ _This method internally uses `crypto_secretbox_easy`._
 
 __Namespace:__ _Sodium.SecretBox_
 
-```
+```C#
 public static byte[] Sodium.SecretBox.Open(byte[] ciphertext, byte[] nonce, byte[] key)
 ```
 

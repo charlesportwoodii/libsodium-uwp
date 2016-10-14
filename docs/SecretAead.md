@@ -1,8 +1,7 @@
 # Authenticated Encryption with Additional Data
 
 ## Example
-
-```
+```C#
 var message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
 var key = SecretBox.GenerateKey();
 var nonce = SecretAead.GenerateNonce();
@@ -26,7 +25,7 @@ This class allows you to encrypt a message with a given key and nonce, and addit
 
 __Namespace:__ _Sodium.SecretAead_
 
-```
+```C#
 public static byte[] Sodium.SecertAead.GenerateNonce()
 ```
 
@@ -38,7 +37,7 @@ This method generates a 8 byte `nonce`
 
 __Namespace:__ _Sodium.SecretAead_
 
-```
+```C#
 public static byte[] Sodium.SecretAead.Encrypt(byte[] message, byte[] nonce, byte[] key)
 public static byte[] Sodium.SecretAead.Encrypt(byte[] message, byte[] nonce, byte[] key, byte[] additionalData)
 ```
@@ -53,7 +52,7 @@ _This method uses internally `crypto_aead_chacha20poly1305_encrypt`._
 
 __Namespace:__ _Sodium.SecretAead_
 
-```
+```C#
 public static byte[] Sodium.SecretAead.Decrypt(byte[] encrypted, byte[] nonce, byte[] key)
 public static byte[] Sodium.SecretAead.Decrypt(byte[] encrypted, byte[] nonce, byte[] key, byte[] additionalData)
 ```

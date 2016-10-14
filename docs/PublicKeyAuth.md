@@ -1,7 +1,7 @@
 # Public Key signatures
 
 ## Example
-```
+```C#
 var message = System.Text.Encoding.UTF8.GetBytes("My secret message");
 var keyPair = PublicKeyAuth.GenerateKeyPair(); // 64 byte private key | 32 byte public key
 
@@ -25,7 +25,7 @@ Public key signatures are used to sign a given message which can then be verifie
 
 __Namespace:__ _Sodium.PublicKeyAuth_
 
-```
+```C#
 public static KeyPair Sodium.PublicKeyAuth.GenerateKeyPair()
 public static KeyPair Sodium.PublicKeyAuth.GenerateKeyPair(byte[] seed)
 ```
@@ -38,7 +38,7 @@ _If a seed is specified, `crypto_sign_seed_keypair` will be used internally. Oth
 
 __Namespace:__ _Sodium.PublicKeyAuth_
 
-```
+```C#
 public static byte[] Sodium.PublicKeyAuth.Sign(byte[] message, byte[] privateKey)
 ```
 
@@ -50,7 +50,7 @@ _This method internally uses `crypto_sign`._
 
 __Namespace:__ _Sodium.PublicKeyAuth_
 
-```
+```C#
 public static byte[] Sodium.PublicKeyAuth.Verify(byte[] signedMessage, byte[] publicKey)
 ```
 
@@ -64,7 +64,7 @@ _This method internally uses `crypto_sign_open`._
 
 __Namespace:__ _Sodium.PublicKeyAuth_
 
-```
+```C#
 public static byte[] Sodium.PublicKeyAuth.ConvertEd25519SecretKeyToCurve25519SecretKey(byte[] privateKey)
 ```
 
@@ -76,7 +76,7 @@ _This method internally uses `crypto_sign_ed25519_pk_to_curve25519`._
 
 __Namespace:__ _Sodium.PublicKeyAuth_
 
-```
+```C#
 public static byte[] Sodium.PublicKeyAuth.ConvertEd25519PublicKeyToCurve25519PublicKey(byte[] publicKey)
 ```
 

@@ -1,8 +1,7 @@
 # Secret-key authentication
 
 ## Example
-
-```
+```C#
 var message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
 var key = SecretKeyAuth.GenerateKey(); // 32 byte key
 
@@ -27,7 +26,7 @@ The computed authentication tag may be public, however your secret key should be
 
 __Namespace:__ _Sodium.SecretKeyAuth
 
-```
+```C#
 public static byte[] Sodium.SecretKeyAuth.GenerateKey()
 ```
 
@@ -37,7 +36,7 @@ This method generates a 32 byte key.
 
 __Namespace:__ _Sodium.SecretKeyAuth
 
-```
+```C#
 pubic static byte[] Sodium.SecretKeyAuth.Sign(byte[] message, byte[] key)
 ```
 
@@ -49,7 +48,7 @@ _This method internally uses `crypto_auth`._
 
 __Namespace:__ _Sodium.SecretKeyAuth
 
-```
+```C#
 public static bool Sodium.SecretKeyAuth.Verify(byte[] message, byte[] signature, byte[] key)
 ```
 

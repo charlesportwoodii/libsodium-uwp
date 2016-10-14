@@ -6,7 +6,7 @@ Core methods for this library.
 
 __Namespace:__ _Sodium.Core_
 
-```
+```C#
 public static String SodiumVersionString()
 ```
 
@@ -18,7 +18,7 @@ This function returns the version number of the `libsodium` library itself. The 
 
 __Namespace:__ _Sodium.Core_
 
-```
+```C#
 public static byte[] GetRandomBytes(int count)
 ```
 
@@ -32,7 +32,7 @@ __Note:__ In classes where appropriate, there are `GenerateKey()` and/or `Genera
 
 __Namespace:__ _Sodium.Core_
 
-```
+```C#
 public static int GetRandomNumber(int upper_bound)
 ```
 

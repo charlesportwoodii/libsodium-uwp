@@ -6,7 +6,7 @@ Common hashing functions.
 
 __Namespace:__ _Sodium.CryptoHash_
 
-```
+```C#
 public byte[] Sodium.CryptoHash.Sha256(byte[] message)
 ```
 
@@ -18,7 +18,7 @@ _This method implements crypto_hash_sha256_.
 
 __Namespace:__ _Sodium.CryptoHash_
 
-```
+```C#
 public byte[] Sodium.CryptoHash.Sha512(byte[] message)
 ```
 
