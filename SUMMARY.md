@@ -1,3 +1,4 @@
 # Summary
 
+* docs\Core.md
 
