@@ -16,15 +16,9 @@ Cryptography is hard. This library was written to make libsodium available to th
 ```
 git clone --recursive https://github.com/charlesportwoodii/libsodium-uwp
 ```
-2. Apply `libsodium.patch`
-```
-cd libsodium-uwp\libsodium-uwp\libsodium
-git apply ..\..\libsodium.patch
-cd ..\..
-```
-3. Add the project solution to your project via `File->Add->Existing Project`
-4. Add a reference to `libsodium-uwp` by adding `libsodium-uwp\libsodium-uwp\libsodium-uwp.vcxproj` to your project references.
-5. Add a reference to `Visual C++ Redistributable for Visual Studio 2015` to your project.
+2. Add the project solution to your project via `File->Add->Existing Project`
+3. Add a reference to `libsodium-uwp` by adding `libsodium-uwp\libsodium-uwp\libsodium-uwp.vcxproj` to your project references.
+4. Add a reference to `Visual C++ Redistributable for Visual Studio 2015` to your project.
 
 ## Documentation
 See the [docs](docs/) folder for complete documentation on how to use this library.
