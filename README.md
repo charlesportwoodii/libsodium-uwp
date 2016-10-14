@@ -44,7 +44,6 @@ Install-Package libsodium-uwp
         <ActivatableClass ActivatableClassId="Sodium.PublicKeyAuth" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="Sodium.CryptoHash" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="Sodium.ScalarMult" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
     </InProcessServer>
 </Extension>
 </Extensions>
