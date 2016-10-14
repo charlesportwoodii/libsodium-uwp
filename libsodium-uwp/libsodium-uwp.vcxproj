@@ -139,6 +139,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,13 +158,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
@@ -191,6 +192,7 @@
       <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -209,13 +211,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
@@ -243,6 +245,7 @@
       <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -261,13 +264,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
