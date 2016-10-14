@@ -5,4 +5,5 @@
    * [Core](docs/Core.md)
    * PublicKeyAuth
    * KeyPair
+   * SecretAead
 
