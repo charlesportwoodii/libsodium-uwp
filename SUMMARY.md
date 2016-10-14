@@ -9,4 +9,5 @@
    * SecretKeyAuth
    * PublicKeyBox
    * SecretBox
+   * SealedPublicKeyBox
 
