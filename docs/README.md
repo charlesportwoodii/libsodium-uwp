@@ -4,6 +4,7 @@
 |-------|--------------|
 | [Core](Core.md) | Core cryptographic functions |
 | [CryptoHash](CryptoHash.md) | Hashing functions|
+| [KDF](KDF.md) | Useful Key Derivation Functions (KDF) implementations (non-libsodium) |
 | [KeyPair](KeyPair) | Curve25519/Ed25519 helpers for managing key pairs|
 | [PublicKeyAuth](PublicKeyAuth.md) | Authenticated encryption with a public key|
 | [PublicKeyBox](PublicKeyAuth.md) | Encryption with a public key |

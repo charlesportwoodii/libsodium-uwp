@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoHashTest.cs" />
+    <Compile Include="KDFTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKeyAuthTest.cs" />
     <Compile Include="PublicKeyBoxTest.cs" />

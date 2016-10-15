@@ -2,6 +2,8 @@
 
 using namespace Platform;
 using namespace Platform::Collections;
+using namespace Windows::Security::Cryptography;
+using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Foundation::Collections;
 
 namespace Sodium
@@ -108,5 +110,17 @@ namespace Sodium
 		static int ScalarBytes();
 		static Array<unsigned char>^ Base(const Array<unsigned char>^ secretKey);
 		static Array<unsigned char>^ Mult(const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey);
+	};
+
+	public ref class KDF sealed
+	{
+	public:
+		static Array<unsigned char>^ PBKDF2(String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize, String^ algorithm);
+	};
+
+	private ref class internal sealed
+	{
+	public:
+		static Array<unsigned char>^ StringToUnsignedCharArray(String^ str);
 	};
 }
