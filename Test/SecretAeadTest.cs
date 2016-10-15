@@ -16,24 +16,35 @@ namespace Test
         [TestMethod]
         public void EncryptAndDecryptTest()
         {
-            byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
+            String message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
             var key = SecretBox.GenerateKey();
             var nonce = SecretAead.GenerateNonce();
-            var encrypted = SecretAead.Encrypt(message, nonce, key);
+            var encrypted = SecretAead.Encrypt(byteMessage, nonce, key);
             var decrypted = SecretAead.Decrypt(encrypted, nonce, key);
-            Assert.AreEqual(message.ToString(), decrypted.ToString());
+            Assert.AreEqual(byteMessage.ToString(), decrypted.ToString());
+
+            var newEncrypted = SecretAead.Encrypt(message, nonce, key);
+            Assert.AreEqual(Convert.ToBase64String(encrypted), Convert.ToBase64String(newEncrypted));
+            decrypted = SecretAead.Decrypt(newEncrypted, nonce, key);
+            Assert.AreEqual(byteMessage.ToString(), decrypted.ToString());
         }
 
         [TestMethod]
         public void EncryptAndDecryptWithADTest()
         {
-            byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
+            String message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
             byte[] ad = System.Text.Encoding.UTF8.GetBytes("Additional Data");
             var key = SecretBox.GenerateKey();
             var nonce = SecretAead.GenerateNonce();
-            var encrypted = SecretAead.Encrypt(message, nonce, key, ad);
+            var encrypted = SecretAead.Encrypt(byteMessage, nonce, key, ad);
             var decrypted = SecretAead.Decrypt(encrypted, nonce, key, ad);
-            Assert.AreEqual(message.ToString(), decrypted.ToString());
+            Assert.AreEqual(byteMessage.ToString(), decrypted.ToString());
+
+            encrypted = SecretAead.Encrypt(message, nonce, key, ad);
+            decrypted = SecretAead.Decrypt(encrypted, nonce, key, ad);
+            Assert.AreEqual(byteMessage.ToString(), decrypted.ToString());
         }
 
         /// <remarks>Binary source from: https://github.com/jedisct1/libsodium/blob/master/test/default/aead_chacha20poly1305.c</remarks>

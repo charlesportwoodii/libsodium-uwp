@@ -33,6 +33,7 @@ namespace Sodium
 	public:
 		static Array<unsigned char>^ GenerateNonce();
 		static Array<unsigned char>^ GenerateKey();
+		static Array<unsigned char>^ Create(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ ciphertext, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 	};
@@ -42,7 +43,9 @@ namespace Sodium
 	public:
 		static Array<unsigned char>^ GenerateKey();
 		static Array<unsigned char>^ Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ Sign(String^ message, const Array<unsigned char>^ key);
 		static bool Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
+		static bool Verify(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
 	};
 
 	public ref class SecretAead sealed
@@ -50,16 +53,20 @@ namespace Sodium
 	public:
 		static Array<unsigned char>^ GenerateNonce();
 		static Array<unsigned char>^ Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
-		static Array<unsigned char>^ Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionaData);
+		static Array<unsigned char>^ Encrypt(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData);
+		static Array<unsigned char>^ Encrypt(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData);
 		static Array<unsigned char>^ Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
-		static Array<unsigned char>^ Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionaData);
+		static Array<unsigned char>^ Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData);
 	};
 
 	public ref class SealedPublicKeyBox sealed
 	{
 	public:
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, const Array<unsigned char>^ recipientPublicKey);
+		static Array<unsigned char>^ Create(String^ message, const Array<unsigned char>^ recipientPublicKey);
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, KeyPair^ recipientKeyPair);
+		static Array<unsigned char>^ Create(String^ message, KeyPair^ recipientKeyPair);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ recipientSecretKey, const Array<unsigned char>^recipientPublicKey);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, KeyPair^ recipientKeyPair);
 	};
@@ -71,6 +78,7 @@ namespace Sodium
 		static KeyPair^ GenerateKeyPair();
 		static KeyPair^ GenerateKeyPair(const Array<unsigned char>^ privateKey);
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey);
+		static Array<unsigned char>^ Create(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey);
 	};
 
@@ -80,6 +88,7 @@ namespace Sodium
 		static KeyPair^ GenerateKeyPair();
 		static KeyPair^ GenerateKeyPair(const Array<unsigned char>^ seed);
 		static Array<unsigned char>^ Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ privateKey);
+		static Array<unsigned char>^ Sign(String^ message, const Array<unsigned char>^ privateKey);
 		static Array<unsigned char>^ Verify(const Array<unsigned char>^ signedMessage, const Array<unsigned char>^ publicKey);
 		static Array<unsigned char>^ ConvertEd25519PublicKeyToCurve25519PublicKey(const Array<unsigned char>^ publicKey);
 		static Array<unsigned char>^ ConvertEd25519SecretKeyToCurve25519SecretKey(const Array<unsigned char>^ privateKey);

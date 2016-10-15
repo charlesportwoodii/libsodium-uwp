@@ -4,9 +4,7 @@
 using namespace Sodium;
 using namespace Platform;
 using namespace Platform::Collections;
-using namespace Windows::Foundation::Collections;
 using namespace Windows::Security::Cryptography;
-using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
 // Returns the libsodium version string
@@ -39,6 +37,15 @@ Array<unsigned char>^ Sodium::SecretBox::GenerateNonce()
 Array<unsigned char>^ Sodium::SecretBox::GenerateKey()
 {
 	return Sodium::Core::GetRandomBytes(crypto_secretbox_KEYBYTES);
+}
+
+Array<unsigned char>^ Sodium::SecretBox::Create(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::SecretBox::Create(msg, nonce, key);
 }
 
 // Generates an encrypted message using a key and nonce
@@ -125,6 +132,15 @@ Array<unsigned char>^ Sodium::SecretKeyAuth::Sign(const Array<unsigned char>^ me
 	throw ref new Platform::Exception(result, "Unable to generate signature");
 }
 
+Array<unsigned char>^ Sodium::SecretKeyAuth::Sign(String ^ message, const Array<unsigned char>^ key)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::SecretKeyAuth::Sign(msg, key);
+}
+
 // Verifies a secret key auth signature
 bool Sodium::SecretKeyAuth::Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
@@ -146,6 +162,15 @@ bool Sodium::SecretKeyAuth::Verify(const Array<unsigned char>^ message, const Ar
 	return result == 0;
 }
 
+bool Sodium::SecretKeyAuth::Verify(String ^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::SecretKeyAuth::Verify(msg, signature, key);
+}
+
 // Generates a SecretAEAD Nonce
 Array<unsigned char>^ Sodium::SecretAead::GenerateNonce()
 {
@@ -160,7 +185,16 @@ Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ me
 	return Sodium::SecretAead::Encrypt(message, nonce, key, ad);
 }
 
-Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionaData)
+Array<unsigned char>^ Sodium::SecretAead::Encrypt(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::SecretAead::Encrypt(msg, nonce, key);
+}
+
+Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData)
 {
 	if (key->Length != crypto_aead_chacha20poly1305_KEYBYTES) {
 		throw ref new Platform::InvalidArgumentException("key must be {0} bytes in length");
@@ -170,8 +204,8 @@ Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ me
 		throw ref new Platform::InvalidArgumentException("nonce must be {0} bytes in length");
 	}
 
-	if (additionaData->Length > crypto_aead_chacha20poly1305_ABYTES || additionaData->Length < 0) {
-		throw ref new Platform::InvalidArgumentException("additionaData must be {0} and {1} bytes in length");
+	if (additionalData->Length > crypto_aead_chacha20poly1305_ABYTES || additionalData->Length < 0) {
+		throw ref new Platform::InvalidArgumentException("additionalData must be {0} and {1} bytes in length");
 	}
 
 	Array<unsigned char>^ cipher = ref new Array<unsigned char>(message->Length + crypto_aead_chacha20poly1305_ABYTES);
@@ -182,8 +216,8 @@ Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ me
 		&cipherLength,
 		message->Data,
 		message->Length,
-		additionaData->Data,
-		additionaData->Length,
+		additionalData->Data,
+		additionalData->Length,
 		NULL,
 		nonce->Data,
 		key->Data
@@ -202,6 +236,15 @@ Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ me
 	return final;
 }
 
+Array<unsigned char>^ Sodium::SecretAead::Encrypt(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::SecretAead::Encrypt(msg, nonce, key, additionalData);
+}
+
 Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	Array<unsigned char>^ ad = ref new Array<unsigned char>(1);
@@ -210,7 +253,7 @@ Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ en
 	return Sodium::SecretAead::Decrypt(encrypted, nonce, key, ad);
 }
 
-Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionaData)
+Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData)
 {
 	if (key->Length != crypto_aead_chacha20poly1305_KEYBYTES) {
 		throw ref new Platform::InvalidArgumentException("key must be {0} bytes in length");
@@ -220,8 +263,8 @@ Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ en
 		throw ref new Platform::InvalidArgumentException("nonce must be {0} bytes in length");
 	}
 
-	if (additionaData->Length > crypto_aead_chacha20poly1305_ABYTES || additionaData->Length < 0) {
-		throw ref new Platform::InvalidArgumentException("additionaData must be {0} and {1} bytes in length");
+	if (additionalData->Length > crypto_aead_chacha20poly1305_ABYTES || additionalData->Length < 0) {
+		throw ref new Platform::InvalidArgumentException("additionalData must be {0} and {1} bytes in length");
 	}
 
 	Array<unsigned char>^ message = ref new Array<unsigned char>(encrypted->Length - crypto_aead_chacha20poly1305_ABYTES);
@@ -233,8 +276,8 @@ Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ en
 		NULL,
 		encrypted->Data,
 		encrypted->Length,
-		additionaData->Data,
-		additionaData->Length,
+		additionalData->Data,
+		additionalData->Length,
 		nonce->Data,
 		key->Data
 	);
@@ -273,9 +316,27 @@ Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(const Array<unsigned ch
 	throw ref new Platform::Exception(result, "Failed to create SealedPublicKeyBox");
 }
 
+Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(String ^ message, const Array<unsigned char>^ recipientPublicKey)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::SealedPublicKeyBox::Create(msg, recipientPublicKey);
+}
+
 Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(const Array<unsigned char>^ message, KeyPair ^ recipientKeyPair)
 {
 	return Sodium::SealedPublicKeyBox::Create(message, recipientKeyPair->Public);
+}
+
+Array<unsigned char>^ Sodium::SealedPublicKeyBox::Create(String ^ message, KeyPair ^ recipientKeyPair)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::SealedPublicKeyBox::Create(msg, recipientKeyPair);
 }
 
 Array<unsigned char>^ Sodium::SealedPublicKeyBox::Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ recipientSecretKey, const Array<unsigned char>^ recipientPublicKey)
@@ -373,6 +434,15 @@ Array<unsigned char>^ Sodium::PublicKeyBox::Create(const Array<unsigned char>^ m
 	throw ref new Platform::Exception(result, "Failed to create PublicKeyBox");
 }
 
+Array<unsigned char>^ Sodium::PublicKeyBox::Create(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::PublicKeyBox::Create(msg, nonce, secretKey, publicKey);
+}
+
 Array<unsigned char>^ Sodium::PublicKeyBox::Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
 {
 	if (secretKey->Length != crypto_box_SECRETKEYBYTES) {
@@ -456,6 +526,15 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::Sign(const Array<unsigned char>^ me
 	}
 
 	throw ref new Platform::Exception(result, "Failed to sign message");
+}
+
+Array<unsigned char>^ Sodium::PublicKeyAuth::Sign(String ^ message, const Array<unsigned char>^ privateKey)
+{
+	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;
+	IBuffer^ buffer = CryptographicBuffer::ConvertStringToBinary(message, encoding);
+	Array<unsigned char>^ msg = ref new Array<unsigned char>(buffer->Length);
+	CryptographicBuffer::CopyToByteArray(buffer, &msg);
+	return Sodium::PublicKeyAuth::Sign(msg, privateKey);
 }
 
 // Verifies a signature with a public key

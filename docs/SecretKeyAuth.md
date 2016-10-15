@@ -38,6 +38,7 @@ __Namespace:__ _Sodium.SecretKeyAuth
 
 ```C#
 pubic static byte[] Sodium.SecretKeyAuth.Sign(byte[] message, byte[] key)
+pubic static byte[] Sodium.SecretKeyAuth.Sign(string message, byte[] key)
 ```
 
 This method signs a given `message` using a 32 byte `key`, and will return a 32 byte authentication tag.
@@ -50,6 +51,7 @@ __Namespace:__ _Sodium.SecretKeyAuth
 
 ```C#
 public static bool Sodium.SecretKeyAuth.Verify(byte[] message, byte[] signature, byte[] key)
+public static bool Sodium.SecretKeyAuth.Verify(string message, byte[] signature, byte[] key)
 ```
 
 This method verifies that the given 32 byte `signature` associated with a given `message` and 32 byte `key` is valid. This method will return `true` of the signature is valid, and `false` otherwise.

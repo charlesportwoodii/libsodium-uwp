@@ -39,6 +39,7 @@ _If a seed is specified, `crypto_sign_seed_keypair` will be used internally. Oth
 __Namespace:__ _Sodium.PublicKeyAuth_
 
 ```C#
+public static byte[] Sodium.PublicKeyAuth.Sign(string message, byte[] privateKey)
 public static byte[] Sodium.PublicKeyAuth.Sign(byte[] message, byte[] privateKey)
 ```
 

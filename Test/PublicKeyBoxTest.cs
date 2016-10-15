@@ -58,11 +58,17 @@ namespace Test
             var alice = PublicKeyBox.GenerateKeyPair();
             var bob = PublicKeyBox.GenerateKeyPair();
             var nonce = PublicKeyBox.GenerateNonce();
-            byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
+            String message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
 
-            var encrypted = PublicKeyBox.Create(message, nonce, alice.Secret, bob.Public);
+            var encrypted = PublicKeyBox.Create(byteMessage, nonce, alice.Secret, bob.Public);
             var decrypted = PublicKeyBox.Open(encrypted, nonce, bob.Secret, alice.Public);
-            Assert.AreEqual(decrypted.ToString(), message.ToString());
+            Assert.AreEqual(decrypted.ToString(), byteMessage.ToString());
+
+            var newEncrypted = PublicKeyBox.Create(message, nonce, alice.Secret, bob.Public);
+            Assert.AreEqual(encrypted.ToString(), newEncrypted.ToString());
+            var newDecrypted = PublicKeyBox.Open(newEncrypted, nonce, bob.Secret, alice.Public);
+            Assert.AreEqual(decrypted.ToString(), newDecrypted.ToString());
         }
 
         [TestMethod]
@@ -73,10 +79,11 @@ namespace Test
             var nonce = Convert.FromBase64String("xMD3oIf1lzGK/3X0zFwB0pkcR4ajrb6N");
             var key = Convert.FromBase64String("xIsxKqHum01qF1EmiV8WLm2jCiEfcHsXZYYucvOStDE=");
             var kp = PublicKeyBox.GenerateKeyPair(key);
-            byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
+            String message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
 
             var decrypted = PublicKeyBox.Open(cipherText, nonce, kp.Secret, kp.Public);
-            Assert.AreEqual(decrypted.ToString(), message.ToString());
+            Assert.AreEqual(decrypted.ToString(), byteMessage.ToString());
         }
     }
 }

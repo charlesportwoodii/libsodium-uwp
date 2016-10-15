@@ -28,13 +28,17 @@ namespace Test
         public void SignTest()
         {
             var kp = PublicKeyAuth.GenerateKeyPair();
-            byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
+            String message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
             var signature = PublicKeyAuth.Sign(message, kp.Secret);
 
             // Test against a seed and expected output generated from libsodium
             var seed = Convert.FromBase64String("zYZceFCtMRu4FAi/a47fN+21396uv/QcUMvi/u08zCw=");
             var expected = Convert.FromBase64String("BlWhHIrosG+Q7jq/lMgxkw79f7dM1x2u+IR6f5nPojaVdaXpUbSpzVSPT238CCDInCnQQ5ueMetEoaXYhET+CEhlbGxvLCBXb3JsZCE=");
             kp = PublicKeyAuth.GenerateKeyPair(seed);
+            signature = PublicKeyAuth.Sign(byteMessage, kp.Secret);
+            Assert.AreEqual(expected.ToString(), signature.ToString());
+
             signature = PublicKeyAuth.Sign(message, kp.Secret);
             Assert.AreEqual(expected.ToString(), signature.ToString());
         }

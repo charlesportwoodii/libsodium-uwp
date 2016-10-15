@@ -8,37 +8,40 @@ namespace Test
     public class SecretBoxTest
     {
         [TestMethod]
-        public void GenerateNonceText()
+        public void SecretBoxGenerateNonceText()
         {
             Assert.AreEqual(24, SecretBox.GenerateNonce().Length);
         }
 
         [TestMethod]
-        public void GenerateKeyTest()
+        public void SecretBoxGenerateKeyTest()
         {
             Assert.AreEqual(32, SecretBox.GenerateKey().Length);
         }
 
         [TestMethod]
-        public void CreateTest()
+        public void SecretBoxCreateTest()
         {
             // Randomly generate key and nonce from a separate libsodium implementation
             var key = "7IygDz/Hy8LC/wqXb6vsrpq7Vyn7mxCoh8nYOn5yVXc=";
             var nonce = "bUBIsnfvIv2Wo95SEkt4DIvBqZLGGBjV";
-            byte[] message = System.Text.Encoding.UTF8.GetBytes("Hello, World!");
+            String message = "Hello, World!";
 
             String expectedCipherText = "cZFTGV7SrPeSdX5Q6b30PBEm5Y2uby/W5BSrrfU=";
             byte[] expectedCipherTextBytes = Convert.FromBase64String(expectedCipherText);
 
             byte[] bitKey = Convert.FromBase64String(key);
             byte[] bitNonce = Convert.FromBase64String(nonce);
-            byte[] cipherText = SecretBox.Create(message, bitNonce, bitKey);
+            byte[] cipherText = SecretBox.Create(System.Text.Encoding.UTF8.GetBytes(message), bitNonce, bitKey);
 
+            Assert.AreEqual(expectedCipherText, Convert.ToBase64String(cipherText));
+
+            cipherText = SecretBox.Create(message, bitNonce, bitKey);
             Assert.AreEqual(expectedCipherText, Convert.ToBase64String(cipherText));
         }
 
         [TestMethod]
-        public void OpenTest()
+        public void SecretBoxOpenTest()
         {
             var key = "7IygDz/Hy8LC/wqXb6vsrpq7Vyn7mxCoh8nYOn5yVXc=";
             var nonce = "bUBIsnfvIv2Wo95SEkt4DIvBqZLGGBjV";
@@ -55,7 +58,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void OpenWithGeneratedDataTest()
+        public void SecretBoxOpenWithGeneratedDataTest()
         {
             var key = SecretBox.GenerateKey();
             var nonce = SecretBox.GenerateNonce();

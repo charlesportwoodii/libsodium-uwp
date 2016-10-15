@@ -48,6 +48,7 @@ __Namespace:__ _Sodium.SecretBox_
 
 ```C#
 public static byte[] Sodium.SecretBox.Create(byte[] message, byte[] nonce, byte[] key)
+public static byte[] Sodium.SecretBox.Create(string message, byte[] nonce, byte[] key)
 ```
 
 This method encrypts a given `message` with a 24 byte `nonce` and a 32 byte `key`. The resulting byte array will contain the encrypted message and a 16 byte authentication tag prepended to the encrypted message.

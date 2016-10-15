@@ -39,7 +39,9 @@ __Namespace:__ _Sodium.SecretAead_
 
 ```C#
 public static byte[] Sodium.SecretAead.Encrypt(byte[] message, byte[] nonce, byte[] key)
+public static byte[] Sodium.SecretAead.Encrypt(string message, byte[] nonce, byte[] key)
 public static byte[] Sodium.SecretAead.Encrypt(byte[] message, byte[] nonce, byte[] key, byte[] additionalData)
+public static byte[] Sodium.SecretAead.Encrypt(string message, byte[] nonce, byte[] key, byte[] additionalData)
 ```
 
 This method encrypts a message with a 8 bytes `nonce` and a 32 byte `key`. The public `nonce` should never be reused with the same key. `Sodium.Utilities.Increment` can be used to increment your nonce when computing new mesages.

@@ -27,7 +27,9 @@ __Namespace:__ _Sodium.SealedPublicKeyBox_
 
 ```C#
 public static byte[] Sodium.SealedPublicKeyBox.Create(byte[] message, byte[] recipientPublicKey)
+public static byte[] Sodium.SealedPublicKeyBox.Create(string message, byte[] recipientPublicKey)
 public static byte[] Sodium.SealedPublicKeyBox.Create(byte[] message, KeyPair recipientKeyPair)
+public static byte[] Sodium.SealedPublicKeyBox.Create(string message, KeyPair recipientKeyPair)
 ```
 
 This method encrypts a given message using a 32 byte `recipientPublicKey`. A new key pair is created for each message, and the corresponding public key is attached to the output ciphertext. the secret key is destroyed after the message has been encrypted, and is not available after this method returns.
