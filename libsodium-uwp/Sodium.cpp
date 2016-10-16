@@ -710,19 +710,49 @@ Array<unsigned char>^ Sodium::internal::StringToUnsignedCharArray(String ^ str)
 
 	return msg;
 }
-/*
-IBuffer ^ Sodium::KDF::extract(IBuffer^ salt, IBuffer^ ikm, MacAlgorithmProvider^ provider)
+
+// HKDF extract
+IBuffer^ Sodium::KDF::extract(IBuffer^ salt, IBuffer^ ikm, MacAlgorithmProvider^ provider)
 {
 	return Sodium::KDF::HMAC(salt, ikm, provider);
 }
 
-IBuffer ^ Sodium::KDF::expand(IBuffer^ prk, IBuffer^ info, int l, MacAlgorithmProvider^ provider)
+// HKDF expand
+IBuffer^ Sodium::KDF::expand(IBuffer^ prk, IBuffer^ infoBuff, int l, MacAlgorithmProvider^ provider, int digestLength)
 {
-	throw ref new Platform::NotImplementedException();
-	// TODO: insert return statement here
+	int outputLength = l;
+	if (l < 0 || l > 255 * digestLength) {
+		throw ref new Platform::Exception(0, "Bad output length requested of HKDF");
+	}
+
+	// Conver info back to byte[]
+	Array<unsigned char>^ info;
+	CryptographicBuffer::CopyToByteArray(infoBuff, &info);
+
+	Array<unsigned char>^ resultBlock = ref new Array<unsigned char>(0);
+	Array<unsigned char>^ result = ref new Array<unsigned char>(outputLength);
+	int bytesRemaining = outputLength;
+
+	for (int i = 1; bytesRemaining > 0; i++) {
+		Array<unsigned char>^ currentInfo = ref new Array<unsigned char>(resultBlock->Length + info->Length + 1);
+		memmove(&resultBlock + 0, &currentInfo + 0, resultBlock->Length);
+		memmove(&info + 0, &currentInfo + resultBlock->Length, info->Length);
+		currentInfo[currentInfo->Length - 1] = (byte)i;
+
+		// Copy out the byte array
+		IBuffer^ messageBuff = CryptographicBuffer::CreateFromByteArray(currentInfo);
+		IBuffer^ hmac = Sodium::KDF::HMAC(prk, messageBuff, provider);
+		CryptographicBuffer::CopyToByteArray(hmac, &resultBlock);
+
+		memmove(&resultBlock + 0, &result + (outputLength - bytesRemaining), min(resultBlock->Length, bytesRemaining));
+		bytesRemaining -= resultBlock->Length;
+	}
+
+	return CryptographicBuffer::CreateFromByteArray(result);
 }
 
-IBuffer ^ Sodium::KDF::HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider^ provider)
+// HKDF HMAC
+IBuffer^ Sodium::KDF::HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider^ provider)
 {
 	CryptographicKey^ saltKey = provider->CreateKey(key);
 	IBuffer^ data = CryptographicEngine::Sign(saltKey, message);
@@ -730,8 +760,9 @@ IBuffer ^ Sodium::KDF::HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider
 	if (data->Length < provider->MacLength) {
 		throw ref new Platform::Exception(0, "Error computing digest");
 	}
+
+	return data;
 }
-*/
 
 // Standard PBKDF2 implementation 
 Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize, String^ algorithm)
@@ -772,4 +803,65 @@ Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ password, const Array<unsigned
 	CryptographicBuffer::CopyToByteArray(keyDerived, &hash);
 
 	return hash;
+}
+
+// RFC 5869 HKDF implementation
+Array<unsigned char>^ Sodium::KDF::HKDF(String ^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ info, int outputLength, const Array<unsigned char>^ salt)
+{
+	Array<String^>^ algorithms = {
+		MacAlgorithmNames::HmacMd5,
+		MacAlgorithmNames::HmacSha1,
+		MacAlgorithmNames::HmacSha256,
+		MacAlgorithmNames::HmacSha384,
+		MacAlgorithmNames::HmacSha512
+	};
+
+	bool inArray = false;
+	for (int i = 0; i < algorithms->Length; i++) {
+		if (algorithms[i] == algorithm) {
+			inArray = true;
+		}
+	}
+
+	if (!inArray) {
+		throw ref new Platform::InvalidArgumentException("algorithm must be a `MacAlgorithmNames` algorithm");
+	}
+
+	MacAlgorithmProvider^ provider = MacAlgorithmProvider::OpenAlgorithm(algorithm);
+	int digestLength = (int)provider->MacLength;
+
+	// Check the info
+	IBuffer^ authInfo;
+	if (info->Length == 0) {
+		authInfo = CryptographicBuffer::CreateFromByteArray(ref new Array<unsigned char>(0));
+	} else {
+		authInfo = CryptographicBuffer::CreateFromByteArray(info);
+	}
+
+	// Convert the IBuffer to a salt
+	IBuffer^ s;
+	if (salt->Length == 0) {
+		s = CryptographicBuffer::CreateFromByteArray(ref new Array<unsigned char>(digestLength));
+	} else {
+		s = CryptographicBuffer::CreateFromByteArray(salt);
+	}
+
+	// If the output length is set to 0, use the algorithm length
+	if (outputLength == 0) {
+		outputLength = provider->MacLength;
+	}
+
+	IBuffer^ ikmReal = CryptographicBuffer::CreateFromByteArray(ikm);
+	IBuffer^ prk = Sodium::KDF::extract(s, ikmReal, provider);
+
+	if (prk->Length < digestLength) {
+		throw ref new Platform::Exception(0, "Psuedo-random key is larger then digest length. Cannot perform operation");
+	}
+
+	IBuffer^ orm = Sodium::KDF::expand(prk, authInfo, outputLength, provider, digestLength);
+
+	Array<unsigned char>^ hkdf = ref new Array<unsigned char>(orm->Length);
+	CryptographicBuffer::CopyToByteArray(orm, &hkdf);
+
+	return hkdf;
 }

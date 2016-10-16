@@ -117,5 +117,117 @@ namespace Test
 
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
+
+        [TestMethod]
+        public void HKDFTest()
+        {
+            // salt and ikm are 32 random bytes, base46 encoded
+            var salt = Convert.FromBase64String("hsXKrSfNu/9qMc3j6sohQuSymsrkL6URwRkthQM4+yI=");
+            var ikm = Convert.FromBase64String("XC+Ph8miNDofAtYDrsyOoPFN6ofTmmA6z+BsjNgjIC0=");
+        
+            // The expected result is calculated from a known working HKDF implementation, base64 encoded
+            var expected = Convert.FromBase64String("uP5Uvdmamdg1uzEbh/Tvg+BYsHXHcwAg/VRGJ5yPj3Y=");
+            var algorithm = MacAlgorithmNames.HmacSha256;
+            var authInfo = System.Text.Encoding.UTF8.GetBytes("test");
+
+            var result = Sodium.KDF.HKDF(algorithm, ikm, authInfo, 32, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+
+            // This should be the same, because outputLength will transform to 32
+            result = Sodium.KDF.HKDF(algorithm, ikm, authInfo, 0, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+        }
+
+        // Test vectors derived from https://tools.ietf.org/html/rfc5869
+        // NOTE: values are base64 encodings of their hexidecimal representation in the RFC.
+        // This is done to reduce typing. The values are equivalent
+        [TestMethod]
+        public void RFC5869A1Test()
+        {
+            var ikm = Convert.FromBase64String("AAsLCwsLCwsLCwsLCwsLCwsLCwsLCws=");
+            var salt = Convert.FromBase64String("AAABAgMEBQYHCAkKCww=");
+            var info = Convert.FromBase64String("APDx8vP09fb3+Pk=");
+            var expected = Convert.FromBase64String("ADyyXyX6rNV6kENPZNA2LyotLQqQzxpaTF2wLVbsxMW/NAByCNW4hxhYZQ==");
+            int l = 42;
+
+            var algorithm = MacAlgorithmNames.HmacSha256;
+            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+        }
+        
+        /*
+        [TestMethod]
+        public void RFC5869A2Test()
+        {
+            var ikm = Convert.FromBase64String("AAABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5P");
+            var salt = Convert.FromBase64String("AGBhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6v");
+            var info = Convert.FromBase64String("ALCxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/");
+            var expected = Convert.FromBase64String("ALEeOY3IAyehyOf3jFlqSTRPAS7aLU762KBQzEwZr6l8WQRamcrHgnJxy0HGXlkOCdoydWAMLwm4NneTqayj23HMMMWBeew+h8FMAdXB80NPHYc=");
+            int l = 82;
+
+            var algorithm = MacAlgorithmNames.HmacSha256;
+            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+        }
+        */
+
+        [TestMethod]
+        public void RFC5869A3Test()
+        {
+            var ikm = Convert.FromBase64String("AAsLCwsLCwsLCwsLCwsLCwsLCwsLCws=");
+            var salt = new byte[] { };
+            var info = new byte[] { };
+            var expected = Convert.FromBase64String("AI2k53WlY8GPcV+AKgY8WjG4oR9cXuGHnsNFTl88c40tnSATlfqkthqWyA==");
+            int l = 42;
+
+            var algorithm = MacAlgorithmNames.HmacSha256;
+            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+        }
+
+        [TestMethod]
+        public void RFC5869A4Test()
+        {
+            var ikm = Convert.FromBase64String("AAsLCwsLCwsLCwsL");
+            var salt = Convert.FromBase64String("AAABAgMEBQYHCAkKCww=");
+            var info = Convert.FromBase64String("APDx8vP09fb3+Pk=");
+            var expected = Convert.FromBase64String("AAhaAeobEPNpMwaLVu+lrYGk8UuCL1sJFWipzdTxVf2iwi5CJHjTBfP4lg==");
+            int l = 42;
+
+            var algorithm = MacAlgorithmNames.HmacSha256;
+            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+        }
+
+        /*
+        [TestMethod]
+        public void RFC5869A5Test()
+        {
+            var ikm = Convert.FromBase64String("AAABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5P");
+            var salt = Convert.FromBase64String("AGBhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6ipqqusra6v");
+            var info = Convert.FromBase64String("ALCxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f7/");
+            var expected = Convert.FromBase64String("AAvXcKdNEWD3yfEs1ZEqBuv/atyuiZ2SGR/kMFZzui/+j6PxpOWtefPzNLOyArIXPEhuo3zj05ftA0x/nf6xXF6SczbQRB9MQwDiz/DQkAtS07Q=");
+            int l = 82;
+
+            var algorithm = MacAlgorithmNames.HmacSha1;
+            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+        }
+        */
+
+        // Test case A6 and A7 are more or less equivalent since our API doesn't permit NULL values for salt
+        [TestMethod]
+        public void RFC5869A6Test()
+        {
+            var ikm = Convert.FromBase64String("AAwMDAwMDAwMDAwMDAwMDAwMDAwMDAw=");
+            var salt = new byte[] { };
+            var info = new byte[] { };
+            var expected = Convert.FromBase64String("ACyREXIE10XzUA1jamL2TwqzuuVIqlPUI7DR8n67pvXlZzoIHXDM56z8SA==");
+            int l =42;
+
+            var algorithm = MacAlgorithmNames.HmacSha1;
+            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            Assert.AreEqual(expected.ToString(), result.ToString());
+        }
     }
 }

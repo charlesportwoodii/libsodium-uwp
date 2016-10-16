@@ -4,6 +4,8 @@ While not part of libsodium itself, key-derivation functions are useful for gene
 
 ## Password-based Key Derivation Function 2 (PBKDF2)
 
+https://tools.ietf.org/html/rfc6070
+
 __Namespace:__ _Sodium.KDF_
 
 ```C#
@@ -16,12 +18,12 @@ PBKDF2 takes 5 parameters:
 3. The number of iterations (`iterationCount`) that the algorithm should run for.
 4. The `targetSize` of the output.
 5. A `KeyDerivationAlgorithmNames `algorithm, as defined from https://msdn.microsoft.com/en-us/library/windows/apps/windows.security.cryptography.core.keyderivationalgorithmnames.aspx.
-    ```
-    KeyDerivationAlgorithmNames.Pbkdf2Md5,
-    KeyDerivationAlgorithmNames.Pbkdf2Sha1,
-    KeyDerivationAlgorithmNames.Pbkdf2Sha256,
-    KeyDerivationAlgorithmNames.Pbkdf2Sha384,
-    KeyDerivationAlgorithmNames.Pbkdf2Sha384,
+    ```C#
+    KeyDerivationAlgorithmNames.Pbkdf2Md5
+    KeyDerivationAlgorithmNames.Pbkdf2Sha1
+    KeyDerivationAlgorithmNames.Pbkdf2Sha256
+    KeyDerivationAlgorithmNames.Pbkdf2Sha384
+    KeyDerivationAlgorithmNames.Pbkdf2Sha384
     ```
 
 ### Example
@@ -42,3 +44,39 @@ c = 10000;
 dkLen = 32;
 result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha256);
 ```
+
+## HMAC-based Extract-and-Expand Key Derivation Function (HKDF)
+
+https://tools.ietf.org/html/rfc5869
+
+__Namespace:__ _Sodium.KDF_
+
+```C#
+static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] info, int outputLength, byte[] salt)
+```
+
+HKDF takes 5 parameters:
+1. A `MacAlgorithmNames` algorithm as defined from https://msdn.microsoft.com/en-us/library/windows/apps/windows.security.cryptography.core.macalgorithmnames.aspx.
+    ```C#
+    MacAlgorithmNames.HmacMd5
+    MacAlgorithmNames.HmacSha1
+    MacAlgorithmNames.HmacSha256
+    MacAlgorithmNames.HmacSha384
+    MacAlgorithmNames.HmacSha512
+    ```
+2. The initial keying material `ikm` represented in bytes.
+3. The additional authentication information `info`.
+4. The desired `outputLength` represented as an integer. If `0` is set, the `outputLength` will be set to the algorithm length.
+5. A byte `salt`.
+
+### Example
+```C#
+var salt = Sodium.Core.GetRandomBytes(32);
+var ikm = Sodium.Core.GetRandomBytes(32);
+var algorithm = MacAlgorithmNames.HmacSha256;
+var info = System.Text.Encoding.UTF8.GetBytes("test");
+
+var result = Sodium.KDF.HKDF(algorithm, ikm, info, 32, salt);
+```
+
+> Note: This implementation currently does run with test vectors A.2 and A.5 of RFC5869.
