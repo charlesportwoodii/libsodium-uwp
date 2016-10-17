@@ -19,6 +19,7 @@ PBKDF2 takes 5 parameters:
 3. The number of iterations (`iterationCount`) that the algorithm should run for.
 4. The `targetSize` of the output.
 5. A `KeyDerivationAlgorithmNames `algorithm, as defined from https://msdn.microsoft.com/en-us/library/windows/apps/windows.security.cryptography.core.keyderivationalgorithmnames.aspx.
+
     ```C#
     KeyDerivationAlgorithmNames.Pbkdf2Md5
     KeyDerivationAlgorithmNames.Pbkdf2Sha1
@@ -59,6 +60,7 @@ static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, by
 HKDF takes 5 parameters:
 
 1. A `MacAlgorithmNames` algorithm as defined from https://msdn.microsoft.com/en-us/library/windows/apps/windows.security.cryptography.core.macalgorithmnames.aspx.
+
     ```C#
     MacAlgorithmNames.HmacMd5
     MacAlgorithmNames.HmacSha1
@@ -66,6 +68,7 @@ HKDF takes 5 parameters:
     MacAlgorithmNames.HmacSha384
     MacAlgorithmNames.HmacSha512
     ```
+    
 2. The initial keying material `ikm` represented in bytes.
 3. The additional authentication information `info`.
 4. The desired `outputLength` represented as an integer. If `0` is set, the `outputLength` will be set to the algorithm length.
