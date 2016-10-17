@@ -37,6 +37,7 @@ Cryptography is hard. This library was written to make libsodium available to th
         <InProcessServer>
             <Path>libsodium-uwp.dll</Path>
             <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
+            <ActivatableClass ActivatableClassId="Sodium.KDF" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Sodium.Utilities" ThreadingModel="both" />
             <ActivatableClass ActivatableClassId="Sodium.SecretBox" ThreadingModel="both" />
