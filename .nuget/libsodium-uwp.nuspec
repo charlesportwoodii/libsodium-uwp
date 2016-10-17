@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>libsodium-uwp</id>
-    <version>0.1.0-alpha2</version>
+    <version>0.1.0-alpha3</version>
     <title>libsodium for UWP</title>
     <authors>Charles R. Portwood II (charlesportwoodii)</authors>
     <licenseUrl>https://github.com/charlesportwoodii/libsodium-uwp/blob/master/LICENSE.md</licenseUrl>
@@ -12,7 +12,7 @@
     <releaseNotes>Initial release. Please see README.md for full installation instructions.</releaseNotes>
     <copyright>Copyright (c) 2016 Charles R. Portwood II &amp; Contributors</copyright>
     <language>en-US</language>
-    <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash</tags>
+    <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash kdf pbdfk2 hkdf</tags>
   </metadata>
   <files>
     <file src="..\README.md" target="" />
@@ -21,11 +21,11 @@
     <!-- WinMd and IntelliSense -->
     <file src="..\Release\libsodium-uwp\Sodium.winmd" target="lib\uap10.0"/>
 
-		<!-- x86 runtime DLL, PRI -->
-		<file src="..\Release\libsodium-uwp\*.*" target="runtimes\win10-x86\native" />
-		<!-- x64 runtime DLL, PRI -->
-		<file src="..\x64\Release\libsodium-uwp\*.*" target="runtimes\win10-x64\native" />
-		<!-- ARM runtime DLL, PRI -->
-		<file src="..\ARM\Release\libsodium-uwp\*.*" target="runtimes\win10-arm\native" />
+    <!-- x86 runtime DLL, PRI -->
+    <file src="..\Release\libsodium-uwp\*.*" target="runtimes\win10-x86\native" />
+    <!-- x64 runtime DLL, PRI -->
+    <file src="..\x64\Release\libsodium-uwp\*.*" target="runtimes\win10-x64\native" />
+    <!-- ARM runtime DLL, PRI -->
+    <file src="..\ARM\Release\libsodium-uwp\*.*" target="runtimes\win10-arm\native" />
   </files>
 </package>
