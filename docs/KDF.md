@@ -9,7 +9,8 @@ https://tools.ietf.org/html/rfc6070
 __Namespace:__ _Sodium.KDF_
 
 ```C#
-static byte[] Sodium.KDF.PBKDF2(string password, byte[] salt, int iterationCount, int targetSize, KeyDerivationAlgorithmNames|String algorithm);
+static byte[] Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames|String algorithm, string password, byte[] salt, int iterationCount, int targetSize);
+static byte[] Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames|String algorithm, string password, String salt, int iterationCount, int targetSize);
 ```
 
 PBKDF2 takes 5 parameters:
@@ -35,14 +36,14 @@ var s = System.Text.Encoding.ASCII.GetBytes("salt");
 var c = 1;
 var dkLen = 20;
 
-var result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha1);
+var result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha1, p, s, c, dkLen);
 
 // Additional example
 p = "correct horse battery staple";
 s = Sodium.Core.GetRandomBytes(64);
 c = 10000;
 dkLen = 32;
-result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha256);
+result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha256, p, s, c, dkLen);
 ```
 
 ## HMAC-based Extract-and-Expand Key Derivation Function (HKDF)
@@ -52,7 +53,8 @@ https://tools.ietf.org/html/rfc5869
 __Namespace:__ _Sodium.KDF_
 
 ```C#
-static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] info, int outputLength, byte[] salt)
+static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] salt, byte[] info, int outputLength)
+static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, String salt, byte[] info, int outputLength)
 ```
 
 HKDF takes 5 parameters:
@@ -76,7 +78,7 @@ var ikm = Sodium.Core.GetRandomBytes(32);
 var algorithm = MacAlgorithmNames.HmacSha256;
 var info = System.Text.Encoding.UTF8.GetBytes("test");
 
-var result = Sodium.KDF.HKDF(algorithm, ikm, info, 32, salt);
+var result = Sodium.KDF.HKDF(algorithm, ikm, info, salt, 32);
 ```
 
 > Note: This implementation currently does run with test vectors A.2 and A.5 of RFC5869.

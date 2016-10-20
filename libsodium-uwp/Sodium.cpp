@@ -765,7 +765,7 @@ IBuffer^ Sodium::KDF::HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider^
 }
 
 // Standard PBKDF2 implementation 
-Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize, String^ algorithm)
+Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ algorithm, String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize)
 {
 	Array<String^>^ algorithms = {
 		KeyDerivationAlgorithmNames::Pbkdf2Md5,
@@ -805,8 +805,19 @@ Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ password, const Array<unsigned
 	return hash;
 }
 
+Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ algorithm, String^ password, String^ salt, int iterationCount, int targetSize)
+{
+	return Sodium::KDF::PBKDF2(
+		algorithm,
+		password,
+		Sodium::internal::StringToUnsignedCharArray(salt),
+		iterationCount,
+		targetSize
+	);
+}
+
 // RFC 5869 HKDF implementation
-Array<unsigned char>^ Sodium::KDF::HKDF(String ^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ info, int outputLength, const Array<unsigned char>^ salt)
+Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, const Array<unsigned char>^ info, int outputLength)
 {
 	Array<String^>^ algorithms = {
 		MacAlgorithmNames::HmacMd5,
@@ -864,4 +875,15 @@ Array<unsigned char>^ Sodium::KDF::HKDF(String ^ algorithm, const Array<unsigned
 	CryptographicBuffer::CopyToByteArray(orm, &hkdf);
 
 	return hkdf;
+}
+
+Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, String^ info, int outputLength)
+{
+	return Sodium::KDF::HKDF(
+		algorithm,
+		ikm,
+		salt,
+		Sodium::internal::StringToUnsignedCharArray(info),
+		outputLength
+	);
 }

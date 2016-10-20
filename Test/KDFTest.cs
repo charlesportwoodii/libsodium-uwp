@@ -17,7 +17,7 @@ namespace Test
             var expected = Convert.FromBase64String("PFjtIDyW8JV9IZ7D19EGuUlSTLvJePc+PfeZEDYSM88=");
             var password = "correct horse battery staple";
 
-            var result = Sodium.KDF.PBKDF2(password, salt, 10000, 32, KeyDerivationAlgorithmNames.Pbkdf2Sha256);
+            var result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha256, password, salt, 10000, 32);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
 
@@ -32,7 +32,7 @@ namespace Test
             var c = 1;
             var dkLen = 20;
 
-            var result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha1);
+            var result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha1, p, s, c, dkLen);
             var expected = new byte[]
             {
                 0x0c, 0x60, 0xc8, 0x0f, 0x96, 0x1f, 0x0e, 0x71,
@@ -47,7 +47,7 @@ namespace Test
             c = 2;
             dkLen = 20;
 
-            result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha1);
+            result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha1, p, s, c, dkLen);
             expected = new byte[]
             {
                 0xea, 0x6c, 0x01, 0x4d, 0xc7, 0x2d, 0x6f, 0x8c,
@@ -62,7 +62,7 @@ namespace Test
             c = 4096;
             dkLen = 20;
 
-            result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha1);
+            result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha1, p, s, c, dkLen);
             expected = new byte[]
             {
                 0x4b, 0x00, 0x79, 0x01, 0xb7, 0x65, 0x48, 0x9a,
@@ -77,7 +77,7 @@ namespace Test
             c = 16777216;
             dkLen = 20;
 
-            result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha1);
+            result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha1, p, s, c, dkLen);
             expected = new byte[]
             {
                 0xee, 0xfe, 0x3d, 0x61, 0xcd, 0x4d, 0xa4, 0xe4,
@@ -92,7 +92,7 @@ namespace Test
             c = 4096;
             dkLen = 25;
 
-            result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha1);
+            result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha1, p, s, c, dkLen);
             expected = new byte[]
             {
                 0x3d, 0x2e, 0xec, 0x4f, 0xe4, 0x1c, 0x84, 0x9b,
@@ -108,7 +108,7 @@ namespace Test
             c = 4096;
             dkLen = 16;
 
-            result = Sodium.KDF.PBKDF2(p, s, c, dkLen, KeyDerivationAlgorithmNames.Pbkdf2Sha1);
+            result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha1, p, s, c, dkLen);
             expected = new byte[]
             {
                 0x56, 0xfa, 0x6a, 0xa7, 0x55, 0x48, 0x09, 0x9d,
@@ -130,11 +130,11 @@ namespace Test
             var algorithm = MacAlgorithmNames.HmacSha256;
             var authInfo = System.Text.Encoding.UTF8.GetBytes("test");
 
-            var result = Sodium.KDF.HKDF(algorithm, ikm, authInfo, 32, salt);
+            var result = Sodium.KDF.HKDF(algorithm, ikm, salt, authInfo, 32);
             Assert.AreEqual(expected.ToString(), result.ToString());
 
             // This should be the same, because outputLength will transform to 32
-            result = Sodium.KDF.HKDF(algorithm, ikm, authInfo, 0, salt);
+            result = Sodium.KDF.HKDF(algorithm, ikm, salt, authInfo, 0);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
 
@@ -151,7 +151,7 @@ namespace Test
             int l = 42;
 
             var algorithm = MacAlgorithmNames.HmacSha256;
-            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
         
@@ -166,7 +166,7 @@ namespace Test
             int l = 82;
 
             var algorithm = MacAlgorithmNames.HmacSha256;
-            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
         */
@@ -181,7 +181,7 @@ namespace Test
             int l = 42;
 
             var algorithm = MacAlgorithmNames.HmacSha256;
-            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
 
@@ -195,7 +195,7 @@ namespace Test
             int l = 42;
 
             var algorithm = MacAlgorithmNames.HmacSha256;
-            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
 
@@ -210,7 +210,7 @@ namespace Test
             int l = 82;
 
             var algorithm = MacAlgorithmNames.HmacSha1;
-            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
         */
@@ -226,7 +226,7 @@ namespace Test
             int l =42;
 
             var algorithm = MacAlgorithmNames.HmacSha1;
-            var result = Sodium.KDF.HKDF(algorithm, ikm, info, l, salt);
+            var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
             Assert.AreEqual(expected.ToString(), result.ToString());
         }
     }

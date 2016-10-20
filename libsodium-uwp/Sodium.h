@@ -120,8 +120,10 @@ namespace Sodium
 		static IBuffer^ expand(IBuffer^ prk, IBuffer^ infoBuff, int l, MacAlgorithmProvider^ provider, int digestLength);
 		static IBuffer^ HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider^ provider);
 	public:
-		static Array<unsigned char>^ PBKDF2(String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize, String^ algorithm);
-		static Array<unsigned char>^ HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ info, int outputLength, const Array<unsigned char>^ salt);
+		static Array<unsigned char>^ PBKDF2(String^ algorithm, String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize);
+		static Array<unsigned char>^ PBKDF2(String^ algorithm, String^ password, String^ salt, int iterationCount, int targetSize);
+		static Array<unsigned char>^ HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, const Array<unsigned char>^ info, int outputLength);
+		static Array<unsigned char>^ HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, String^ info, int outputLength);
 	};
 
 	private ref class internal sealed
