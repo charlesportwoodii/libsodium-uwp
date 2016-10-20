@@ -30,6 +30,29 @@ Cryptography is hard. This library was written to make libsodium available to th
     Install-Package libsodium-uwp -Pre
     ```
 
+2. Add the following to your `Package.appxmanifest` file.
+
+    ```xml
+    <Extensions>
+        <Extension Category="windows.activatableClass.inProcessServer">
+            <InProcessServer>
+                <Path>libsodium-uwp.dll</Path>
+                <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.KDF" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.Utilities" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.SecretBox" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.SecretKeyAuth" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.SecretAead" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.SealedPublicKeyBox" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.PublicKeyBox" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.PublicKeyAuth" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.CryptoHash" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.ScalarMult" ThreadingModel="both" />
+            </InProcessServer>
+        </Extension>
+    </Extensions>
+    ```
 ## Documentation
 See the [docs](docs/) folder for complete documentation on how to use this library.
 
