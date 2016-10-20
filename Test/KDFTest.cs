@@ -18,7 +18,7 @@ namespace Test
             var password = "correct horse battery staple";
 
             var result = Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames.Pbkdf2Sha256, password, salt, 10000, 32);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
 
 
@@ -39,8 +39,8 @@ namespace Test
                 0xf3, 0xa9, 0xb5, 0x24, 0xaf, 0x60, 0x12, 0x06,
                 0x2f, 0xe0, 0x37, 0xa6
             };
-
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
 
             p = "password";
             s = System.Text.Encoding.ASCII.GetBytes("salt");
@@ -54,8 +54,8 @@ namespace Test
                 0xcd, 0x1e, 0xd9, 0x2a, 0xce, 0x1d, 0x41, 0xf0,
                 0xd8, 0xde, 0x89, 0x57
             };
-
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
 
             p = "password";
             s = System.Text.Encoding.ASCII.GetBytes("salt");
@@ -69,8 +69,8 @@ namespace Test
                 0xbe, 0xad, 0x49, 0xd9, 0x26, 0xf7, 0x21, 0xd0,
                 0x65, 0xa4, 0x29, 0xc1
             };
-
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
 
             p = "password";
             s = System.Text.Encoding.ASCII.GetBytes("salt");
@@ -84,8 +84,8 @@ namespace Test
                 0xe9, 0x94, 0x5b, 0x3d, 0x6b, 0xa2, 0x15, 0x8c,
                 0x26, 0x34, 0xe9, 0x84
             };
-
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
 
             p = "passwordPASSWORDpassword";
             s = System.Text.Encoding.ASCII.GetBytes("saltSALTsaltSALTsaltSALTsaltSALTsalt");
@@ -100,8 +100,8 @@ namespace Test
                 0x8b, 0x29, 0x1a, 0x96, 0x4c, 0xf2, 0xf0, 0x70,
                 0x38
             };
-
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
 
             p = "pass\0word";
             s = System.Text.Encoding.ASCII.GetBytes("sa\0lt");
@@ -114,8 +114,8 @@ namespace Test
                 0x56, 0xfa, 0x6a, 0xa7, 0x55, 0x48, 0x09, 0x9d,
                 0xcc, 0x37, 0xd7, 0xf0, 0x34, 0x25, 0xe0, 0xc3
             };
-
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
 
         [TestMethod]
@@ -131,11 +131,11 @@ namespace Test
             var authInfo = System.Text.Encoding.UTF8.GetBytes("test");
 
             var result = Sodium.KDF.HKDF(algorithm, ikm, salt, authInfo, 32);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
 
             // This should be the same, because outputLength will transform to 32
             result = Sodium.KDF.HKDF(algorithm, ikm, salt, authInfo, 0);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
 
         // Test vectors derived from https://tools.ietf.org/html/rfc5869
@@ -152,7 +152,7 @@ namespace Test
 
             var algorithm = MacAlgorithmNames.HmacSha256;
             var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
         
         /*
@@ -167,7 +167,7 @@ namespace Test
 
             var algorithm = MacAlgorithmNames.HmacSha256;
             var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
         */
 
@@ -182,7 +182,7 @@ namespace Test
 
             var algorithm = MacAlgorithmNames.HmacSha256;
             var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
 
         [TestMethod]
@@ -196,7 +196,7 @@ namespace Test
 
             var algorithm = MacAlgorithmNames.HmacSha256;
             var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
 
         /*
@@ -211,7 +211,6 @@ namespace Test
 
             var algorithm = MacAlgorithmNames.HmacSha1;
             var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
-            Assert.AreEqual(expected.ToString(), result.ToString());
         }
         */
 
@@ -227,7 +226,7 @@ namespace Test
 
             var algorithm = MacAlgorithmNames.HmacSha1;
             var result = Sodium.KDF.HKDF(algorithm, ikm, salt, info, l);
-            Assert.AreEqual(expected.ToString(), result.ToString());
+            Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
         }
     }
 }

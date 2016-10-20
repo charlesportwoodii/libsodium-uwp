@@ -36,8 +36,8 @@ namespace Test
             var kp2 = PublicKeyBox.GenerateKeyPair(secret);
             Assert.AreEqual(32, kp2.Public.Length);
             Assert.AreEqual(32, kp2.Secret.Length);
-            Assert.AreEqual(pub.ToString(), kp2.Public.ToString());
-            Assert.AreEqual(secret.ToString(), kp2.Secret.ToString());
+            Assert.AreEqual(Convert.ToBase64String(pub), Convert.ToBase64String(kp2.Public));
+            Assert.AreEqual(Convert.ToBase64String(secret), Convert.ToBase64String(kp2.Secret));
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace Test
 
             var encrypted = PublicKeyBox.Create(message, nonce, kp.Secret, kp.Public);
             var decrypted = PublicKeyBox.Open(encrypted, nonce, kp.Secret, kp.Public);
-            Assert.AreEqual(decrypted.ToString(), message.ToString());
+            Assert.AreEqual(message.ToString(), decrypted.ToString());
         }
 
         [TestMethod]
