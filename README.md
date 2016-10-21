@@ -1,6 +1,7 @@
 # libsodium-uwp
 
 [![License](https://img.shields.io/github/license/charlesportwoodii/libsodium-uwp.svg?style=flat-square)](https://github.com/charlesportwoodii/libsodium-uwp/blob/master/LICENSE.md)
+[![Nuget](https://img.shields.io/nuget/vpre/libsodium-uwp.svg?style=flat-square)](https://www.nuget.org/packages/libsodium-uwp/)
 
 libsodium-uwp ([libsodium](https://github.com/jedisct1/libsodium) for Universal Windows Platform (UWP)) is a C++ Windows Runtime Component for UWP applications. This library is fully tested and executes on both Windows 10 and Windows 10 mobile.
 
