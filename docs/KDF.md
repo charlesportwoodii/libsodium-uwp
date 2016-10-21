@@ -85,5 +85,3 @@ var info = System.Text.Encoding.UTF8.GetBytes("test");
 
 var result = Sodium.KDF.HKDF(algorithm, ikm, info, salt, 32);
 ```
-
-> Note: This implementation currently does run with test vectors A.2 and A.5 of RFC5869.

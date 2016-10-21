@@ -7,18 +7,21 @@ namespace Test
     [TestClass]
     public class SecretBoxTest
     {
+        [TestCategory("SecretBox")]
         [TestMethod]
         public void SecretBoxGenerateNonceText()
         {
             Assert.AreEqual(24, SecretBox.GenerateNonce().Length);
         }
 
+        [TestCategory("SecretBox")]
         [TestMethod]
         public void SecretBoxGenerateKeyTest()
         {
             Assert.AreEqual(32, SecretBox.GenerateKey().Length);
         }
 
+        [TestCategory("SecretBox")]
         [TestMethod]
         public void SecretBoxCreateTest()
         {
@@ -40,6 +43,7 @@ namespace Test
             Assert.AreEqual(expectedCipherText, Convert.ToBase64String(cipherText));
         }
 
+        [TestCategory("SecretBox")]
         [TestMethod]
         public void SecretBoxOpenTest()
         {
@@ -57,6 +61,7 @@ namespace Test
             Assert.AreEqual(message.ToString(), plainText.ToString());
         }
 
+        [TestCategory("SecretBox")]
         [TestMethod]
         public void SecretBoxOpenWithGeneratedDataTest()
         {

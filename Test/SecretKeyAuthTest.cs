@@ -7,12 +7,14 @@ namespace Test
     [TestClass]
     public class SecretKeyAuthTest
     {
+        [TestCategory("SecretKeyAuth")]
         [TestMethod]
         public void SecretKeyAuthGenerateKeyTest()
         {
             Assert.AreEqual(32, SecretKeyAuth.GenerateKey().Length);
         }
 
+        [TestCategory("SecretKeyAuth")]
         [TestMethod]
         public void SecretKeyAuthSignTest()
         {
@@ -30,6 +32,7 @@ namespace Test
             Assert.AreEqual(expectedSignature, Convert.ToBase64String(signature));
         }
 
+        [TestCategory("SecretKeyAuth")]
         [TestMethod]
         public void SecretKeyAuthOpenTest()
         {
@@ -41,6 +44,7 @@ namespace Test
             Assert.IsTrue(result);
         }
 
+        [TestCategory("SecretKeyAuth")]
         [TestMethod]
         public void SecretKeyAuthSignAndVerifyTest()
         {

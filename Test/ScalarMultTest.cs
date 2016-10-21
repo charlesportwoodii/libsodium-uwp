@@ -8,6 +8,7 @@ namespace Test
     [TestClass]
     public class ScalarMultTest
     {
+        [TestCategory("ScalarMult")]
         [TestMethod]
         public void ScalarMult1()
         {
@@ -30,6 +31,7 @@ namespace Test
             Assert.AreEqual(Convert.ToBase64String(alicePk), Convert.ToBase64String(result));
         }
 
+        [TestCategory("ScalarMult")]
         [TestMethod]
         public void ScalarMult2()
         {
@@ -52,6 +54,7 @@ namespace Test
             Assert.AreEqual(Convert.ToBase64String(bobPk), Convert.ToBase64String(result));
         }
 
+        [TestCategory("ScalarMult")]
         [TestMethod]
         public void ScalarMult5()
         {
@@ -81,6 +84,7 @@ namespace Test
             Assert.AreEqual(Convert.ToBase64String(k), Convert.ToBase64String(result));
         }
 
+        [TestCategory("ScalarMult")]
         [TestMethod]
         public void ScalarMult6()
         {

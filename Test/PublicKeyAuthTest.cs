@@ -7,6 +7,7 @@ namespace Test
     [TestClass]
     public class PublicKeyAuthTest
     {
+        [TestCategory("PublicKeyAuth")]
         [TestMethod]
         public void GenerateKeyPairTest()
         {
@@ -15,6 +16,7 @@ namespace Test
             Assert.AreEqual(64, kp.Secret.Length);
         }
 
+        [TestCategory("PublicKeyAuth")]
         [TestMethod]
         public void GenerateKeyPairFromSeedTest()
         {
@@ -24,6 +26,7 @@ namespace Test
             Assert.AreEqual(64, kp.Secret.Length);
         }
 
+        [TestCategory("PublicKeyAuth")]
         [TestMethod]
         public void SignTest()
         {
@@ -43,6 +46,7 @@ namespace Test
             Assert.AreEqual(expected.ToString(), signature.ToString());
         }
 
+        [TestCategory("PublicKeyAuth")]
         [TestMethod]
         public void VerifyTest()
         {
@@ -53,6 +57,7 @@ namespace Test
             Assert.AreEqual(message.ToString(), verification.ToString());
         }
 
+        [TestCategory("PublicKeyAuth")]
         [TestMethod]
         public void ConvertToCurve25519Test()
         {

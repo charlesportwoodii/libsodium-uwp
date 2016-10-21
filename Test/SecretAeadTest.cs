@@ -7,12 +7,14 @@ namespace Test
     [TestClass]
     public class SecretAeadTest
     {
+        [TestCategory("SecretAead::Chacha20-Poly1309")]
         [TestMethod]
         public void GenerateNonceTest()
         {
             Assert.AreEqual(8, SecretAead.GenerateNonce().Length);
         }
 
+        [TestCategory("SecretAead::Chacha20-Poly1309")]
         [TestMethod]
         public void EncryptAndDecryptTest()
         {
@@ -30,6 +32,7 @@ namespace Test
             Assert.AreEqual(byteMessage.ToString(), decrypted.ToString());
         }
 
+        [TestCategory("SecretAead::Chacha20-Poly1309")]
         [TestMethod]
         public void EncryptAndDecryptWithADTest()
         {
@@ -48,6 +51,7 @@ namespace Test
         }
 
         /// <remarks>Binary source from: https://github.com/jedisct1/libsodium/blob/master/test/default/aead_chacha20poly1305.c</remarks>
+        [TestCategory("SecretAead::Chacha20-Poly1309")]
         [TestMethod]
         public void AeadWithAdditionalDataTest()
         {
@@ -80,6 +84,7 @@ namespace Test
         }
 
         /// <remarks>Binary source from: https://github.com/jedisct1/libsodium/blob/master/test/default/aead_chacha20poly1305.c</remarks>
+        [TestCategory("SecretAead::Chacha20-Poly1309")]
         [TestMethod]
         public void AeadWithoutAdditionalDataTest()
         {

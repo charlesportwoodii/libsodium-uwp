@@ -7,6 +7,7 @@ namespace Test
     [TestClass]
     public class SealedPublicKeyBoxTest
     {
+        [TestCategory("SealedPublicKeyBox")]
         [TestMethod]
         public void CreateAndOpenSealedBoxTest()
         {
@@ -19,11 +20,11 @@ namespace Test
             Assert.AreEqual(byteMessage.ToString(), decrypted.ToString());
 
             var newEncrypted = SealedPublicKeyBox.Create(message, keyPair.Public);
-            Assert.AreEqual(encrypted.ToString(), newEncrypted.ToString());
             var newDecrypted = SealedPublicKeyBox.Open(newEncrypted, keyPair.Secret, keyPair.Public);
             Assert.AreEqual(decrypted.ToString(), newDecrypted.ToString());
         }
 
+        [TestCategory("SealedPublicKeyBox")]
         [TestMethod]
         public void CreateAndOpenSealedBoxWithKeyPairTest()
         {
@@ -36,7 +37,6 @@ namespace Test
             Assert.AreEqual(byteMessage.ToString(), decrypted.ToString());
 
             var newEncrypted = SealedPublicKeyBox.Create(message, keyPair.Public);
-            Assert.AreEqual(encrypted.ToString(), newEncrypted.ToString());
             var newDecrypted = SealedPublicKeyBox.Open(newEncrypted, keyPair);
             Assert.AreEqual(decrypted.ToString(), newDecrypted.ToString());
         }

@@ -101,7 +101,9 @@ namespace Sodium
 	{
 	public:
 		static Array<unsigned char>^ Sha256(const Array<unsigned char>^ message);
+		static Array<unsigned char>^ Sha256(String^ message);
 		static Array<unsigned char>^ Sha512(const Array<unsigned char>^ message);
+		static Array<unsigned char>^ Sha512(String^ message);
 	};
 
 	public ref class ScalarMult sealed
@@ -117,7 +119,7 @@ namespace Sodium
 	{
 	private:
 		static IBuffer^ extract(IBuffer^ salt, IBuffer^ ikm, MacAlgorithmProvider^ provider);
-		static IBuffer^ expand(IBuffer^ prk, IBuffer^ infoBuff, int l, MacAlgorithmProvider^ provider, int digestLength);
+		static IBuffer^ expand(IBuffer^ prk, const Array<unsigned char>^ info, int l, MacAlgorithmProvider^ provider);
 		static IBuffer^ HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider^ provider);
 	public:
 		static Array<unsigned char>^ PBKDF2(String^ algorithm, String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize);

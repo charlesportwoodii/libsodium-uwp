@@ -7,12 +7,14 @@ namespace Test
     [TestClass]
     public class PublicKeyBoxTest
     {
+        [TestCategory("PublicKeyBox")]
         [TestMethod]
         public void GenerateNonceText()
         {
             Assert.AreEqual(24, PublicKeyBox.GenerateNonce().Length);
         }
 
+        [TestCategory("PublicKeyBox")]
         [TestMethod]
         public void GenerateKeyPairTest()
         {
@@ -21,6 +23,7 @@ namespace Test
             Assert.AreEqual(32, kp.Secret.Length);
         }
 
+        [TestCategory("PublicKeyBox")]
         [TestMethod]
         public void GenerateKeyPairFromSeedTest()
         {
@@ -40,6 +43,7 @@ namespace Test
             Assert.AreEqual(Convert.ToBase64String(secret), Convert.ToBase64String(kp2.Secret));
         }
 
+        [TestCategory("PublicKeyBox")]
         [TestMethod]
         public void CreateAndOpenWithOneKeyTest()
         {
@@ -52,6 +56,7 @@ namespace Test
             Assert.AreEqual(message.ToString(), decrypted.ToString());
         }
 
+        [TestCategory("PublicKeyBox")]
         [TestMethod]
         public void CreateAndOpenWithKeyExchangeTest()
         {
@@ -66,11 +71,12 @@ namespace Test
             Assert.AreEqual(decrypted.ToString(), byteMessage.ToString());
 
             var newEncrypted = PublicKeyBox.Create(message, nonce, alice.Secret, bob.Public);
-            Assert.AreEqual(encrypted.ToString(), newEncrypted.ToString());
+            Assert.AreEqual(Convert.ToBase64String(encrypted), Convert.ToBase64String(newEncrypted));
             var newDecrypted = PublicKeyBox.Open(newEncrypted, nonce, bob.Secret, alice.Public);
             Assert.AreEqual(decrypted.ToString(), newDecrypted.ToString());
         }
 
+        [TestCategory("PublicKeyBox")]
         [TestMethod]
         public void OpenWithKeyAndNonce()
         {

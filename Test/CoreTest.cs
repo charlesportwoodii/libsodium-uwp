@@ -7,6 +7,7 @@ namespace Test
     [TestClass]
     public class CoreTest
     {
+        [TestCategory("Core")]
         [TestMethod]
         public void SodiumVersionStringTest()
         {
@@ -18,6 +19,7 @@ namespace Test
             Assert.AreNotEqual("1.0.10", actual);
         }
 
+        [TestCategory("Core")]
         [TestMethod]
         public void GetRandomBytesTest()
         {
@@ -39,6 +41,7 @@ namespace Test
             }
         }
 
+        [TestCategory("Core")]
         [TestMethod]
         public void GetRandomNumberTest()
         {
