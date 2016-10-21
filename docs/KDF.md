@@ -56,7 +56,7 @@ __Namespace:__ _Sodium.KDF_
 
 ```C#
 static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] salt, byte[] info, int outputLength)
-static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, String salt, byte[] info, int outputLength)
+static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] salt, String info, int outputLength)
 ```
 
 HKDF takes 5 parameters:
