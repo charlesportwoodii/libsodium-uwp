@@ -694,7 +694,11 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519SecretKeyToCurve25519
 Array<unsigned char>^ Sodium::CryptoHash::Sha256(const Array<unsigned char>^ message)
 {
 	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_hash_sha256_BYTES);
-	int result = crypto_hash_sha256(buffer->Data, message->Data, message->Length);
+	int result = crypto_hash_sha256(
+		buffer->Data,
+		message->Data,
+		message->Length
+	);
 
 	if (result == 0) {
 		return buffer;
@@ -712,7 +716,11 @@ Array<unsigned char>^ Sodium::CryptoHash::Sha256(String^ message)
 Array<unsigned char>^ Sodium::CryptoHash::Sha512(const Array<unsigned char>^ message)
 {
 	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_hash_sha512_BYTES);
-	int result = crypto_hash_sha512(buffer->Data, message->Data, message->Length);
+	int result = crypto_hash_sha512(
+		buffer->Data,
+		message->Data,
+		message->Length
+	);
 
 	if (result == 0) {
 		return buffer;
@@ -724,6 +732,23 @@ Array<unsigned char>^ Sodium::CryptoHash::Sha512(const Array<unsigned char>^ mes
 Array<unsigned char>^ Sodium::CryptoHash::Sha512(String^ message)
 {
 	return Sodium::CryptoHash::Sha512(Sodium::internal::StringToUnsignedCharArray(message));
+}
+
+Array<unsigned char>^ Sodium::CryptoHash::Hash(const Array<unsigned char>^ message)
+{
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_hash_sha512_BYTES);
+	int result = crypto_hash(buffer->Data, message->Data, message->Length);
+
+	if (result == 0) {
+		return buffer;
+	}
+
+	throw ref new Platform::Exception(result, "Unable to generate Sha512 hash");
+}
+
+Array<unsigned char>^ Sodium::CryptoHash::Hash(String^ message)
+{
+	return Sodium::CryptoHash::Hash(Sodium::internal::StringToUnsignedCharArray(message));
 }
 
 int Sodium::ScalarMult::Bytes()

@@ -127,6 +127,8 @@ namespace Sodium
 		static Array<unsigned char>^ Sha256(String^ message);
 		static Array<unsigned char>^ Sha512(const Array<unsigned char>^ message);
 		static Array<unsigned char>^ Sha512(String^ message);
+		static Array<unsigned char>^ Hash(const Array<unsigned char>^ message);
+		static Array<unsigned char>^ Hash(String^ message);
 	};
 
 	public ref class ScalarMult sealed

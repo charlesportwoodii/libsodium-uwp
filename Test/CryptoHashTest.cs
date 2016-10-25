@@ -37,5 +37,18 @@ namespace Test
             hex = BitConverter.ToString(sha512).Replace("-", string.Empty).ToLower();
             Assert.AreEqual(sha512out, hex);
         }
+
+        [TestCategory("CryptoHash")]
+        [TestMethod]
+        public void HashTest()
+        {
+            var hash = CryptoHash.Hash(System.Text.Encoding.UTF8.GetBytes(hashString));
+            string hex = BitConverter.ToString(hash).Replace("-", string.Empty).ToLower();
+            Assert.AreEqual(sha512out, hex);
+
+            hash = CryptoHash.Hash(hashString);
+            hex = BitConverter.ToString(hash).Replace("-", string.Empty).ToLower();
+            Assert.AreEqual(sha512out, hex);
+        }
     }
 }
