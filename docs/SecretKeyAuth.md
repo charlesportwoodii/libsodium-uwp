@@ -57,6 +57,7 @@ public static bool Sodium.SecretKeyAuth.Verify(string message, byte[] signature,
 This method verifies that the given 32 byte `signature` associated with a given `message` and 32 byte `key` is valid. This method will return `true` of the signature is valid, and `false` otherwise.
 
 _This method internally uses `crypto_auth_verify`._
+
 # Algorithm Details
 
-- HMAC-SHA512256
+- HMAC-SHA512/256

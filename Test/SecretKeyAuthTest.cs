@@ -61,5 +61,53 @@ namespace Test
             verification = SecretKeyAuth.Verify(message, signature, key);
             Assert.IsTrue(verification);
         }
+
+        [TestCategory("SecretKeyAuth")]
+        [TestMethod]
+        public void HmacSha256Test()
+        {
+            var key = SecretKeyAuth.GenerateKey();
+            string message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
+            var sig1 = SecretKeyAuth.SignHmacSha256(message, key);
+            var sig2 = SecretKeyAuth.SignHmacSha256(byteMessage, key);
+
+            // Verify the overload works
+            Assert.AreEqual(Convert.ToBase64String(sig1), Convert.ToBase64String(sig2));
+
+            var result = SecretKeyAuth.VerifyHmacSha256(message, sig1, key);
+            Assert.IsTrue(result);
+            result = SecretKeyAuth.VerifyHmacSha256(message, sig2, key);
+            Assert.IsTrue(result);
+
+            result = SecretKeyAuth.VerifyHmacSha256(byteMessage, sig1, key);
+            Assert.IsTrue(result);
+            result = SecretKeyAuth.VerifyHmacSha256(byteMessage, sig2, key);
+            Assert.IsTrue(result);
+        }
+
+        [TestCategory("SecretKeyAuth")]
+        [TestMethod]
+        public void HmacSha512Test()
+        {
+            var key = SecretKeyAuth.GenerateKey();
+            string message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
+            var sig1 = SecretKeyAuth.SignHmacSha512(message, key);
+            var sig2 = SecretKeyAuth.SignHmacSha512(byteMessage, key);
+
+            // Verify the overload works
+            Assert.AreEqual(Convert.ToBase64String(sig1), Convert.ToBase64String(sig2));
+
+            var result = SecretKeyAuth.VerifyHmacSha512(message, sig1, key);
+            Assert.IsTrue(result);
+            result = SecretKeyAuth.VerifyHmacSha512(message, sig2, key);
+            Assert.IsTrue(result);
+
+            result = SecretKeyAuth.VerifyHmacSha512(byteMessage, sig1, key);
+            Assert.IsTrue(result);
+            result = SecretKeyAuth.VerifyHmacSha512(byteMessage, sig2, key);
+            Assert.IsTrue(result);
+        }
     }
 }

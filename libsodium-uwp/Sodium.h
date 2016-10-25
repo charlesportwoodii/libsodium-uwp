@@ -72,6 +72,14 @@ namespace Sodium
 		static Array<unsigned char>^ Sign(String^ message, const Array<unsigned char>^ key);
 		static bool Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
 		static bool Verify(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ SignHmacSha256(const Array<unsigned char>^ message, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ SignHmacSha256(String^ message, const Array<unsigned char>^ key);
+		static bool VerifyHmacSha256(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
+		static bool VerifyHmacSha256(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ SignHmacSha512(const Array<unsigned char>^ message, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ SignHmacSha512(String^ message, const Array<unsigned char>^ key);
+		static bool VerifyHmacSha512(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
+		static bool VerifyHmacSha512(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
 	};
 
 	public ref class SecretAead sealed

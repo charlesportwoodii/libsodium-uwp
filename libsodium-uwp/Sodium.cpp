@@ -260,6 +260,114 @@ bool Sodium::SecretKeyAuth::Verify(String ^ message, const Array<unsigned char>^
 	);
 }
 
+Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha256(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_auth_hmacsha256_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_auth_hmacsha256_KEYBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_auth_hmacsha256_BYTES);
+	int result = crypto_auth_hmacsha256(
+		buffer->Data,
+		message->Data,
+		message->Length,
+		key->Data
+	);
+
+	return buffer;
+}
+
+Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha256(String^ message, const Array<unsigned char>^ key)
+{
+	return Sodium::SecretKeyAuth::SignHmacSha256(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		key
+	);
+}
+
+bool Sodium::SecretKeyAuth::VerifyHmacSha256(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_auth_hmacsha256_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_auth_hmacsha256_KEYBYTES + " bytes in length");
+	}
+
+	if (signature->Length != crypto_auth_hmacsha256_BYTES) {
+		throw ref new Platform::InvalidArgumentException("Signature must be " + crypto_auth_hmacsha256_BYTES + " bytes in length");
+	}
+
+	int result = crypto_auth_hmacsha256_verify(
+		signature->Data,
+		message->Data,
+		message->Length,
+		key->Data
+	);
+
+	return result == 0;
+}
+
+bool Sodium::SecretKeyAuth::VerifyHmacSha256(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
+{
+	return Sodium::SecretKeyAuth::VerifyHmacSha256(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		signature,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha512(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_auth_hmacsha256_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_auth_hmacsha256_KEYBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_auth_hmacsha512_BYTES);
+	int result = crypto_auth_hmacsha512(
+		buffer->Data,
+		message->Data,
+		message->Length,
+		key->Data
+	);
+
+	return buffer;
+}
+
+Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha512(String ^ message, const Array<unsigned char>^ key)
+{
+	return Sodium::SecretKeyAuth::SignHmacSha512(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		key
+	);
+}
+
+bool Sodium::SecretKeyAuth::VerifyHmacSha512(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_auth_hmacsha512_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_auth_hmacsha512_KEYBYTES + " bytes in length");
+	}
+
+	if (signature->Length != crypto_auth_hmacsha512_BYTES) {
+		throw ref new Platform::InvalidArgumentException("Signature must be " + crypto_auth_hmacsha512_BYTES + " bytes in length");
+	}
+
+	int result = crypto_auth_hmacsha512_verify(
+		signature->Data,
+		message->Data,
+		message->Length,
+		key->Data
+	);
+
+	return result == 0;
+}
+
+bool Sodium::SecretKeyAuth::VerifyHmacSha512(String ^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
+{
+	return Sodium::SecretKeyAuth::VerifyHmacSha512(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		signature,
+		key
+	);
+}
+
 // Generates a SecretAEAD Nonce
 Array<unsigned char>^ Sodium::SecretAead::GenerateNonce()
 {

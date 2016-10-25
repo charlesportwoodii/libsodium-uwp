@@ -3,7 +3,8 @@
 | Class | Description  |
 |-------|--------------|
 | [Core](Core.md) | Core cryptographic functions |
-| [CryptoHash](CryptoHash.md) | Hashing functions|
+| [CryptoHash](CryptoHash.md) | Hashing functions |
+| [HMAC-SHA2](HMAC-SHA2.md) | HMAC-SHA2 keyhed message authentication |
 | [KDF](KDF.md) | Useful Key Derivation Functions (KDF) implementations (non-libsodium) |
 | [KeyPair](KeyPair) | Curve25519/Ed25519 helpers for managing key pairs|
 | [PublicKeyAuth](PublicKeyAuth.md) | Authenticated encryption with a public key|
