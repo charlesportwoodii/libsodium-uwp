@@ -16,7 +16,7 @@ var key = OneTimeAuth.GenerateKey();
 var signature = OneTimeAuth.Sign(message, key);
 
 if (OneTimeAuth.Verify(message, signature, key)) {
-    // message iis ok
+    // message is ok
 }
 ```
 
