@@ -85,3 +85,13 @@ var info = System.Text.Encoding.UTF8.GetBytes("test");
 
 var result = Sodium.KDF.HKDF(algorithm, ikm, info, salt, 32);
 ```
+
+## HSalsa20 (intermediate key generation)
+
+__Namespace:__ _Sodium.KDF_
+
+```C#
+static byte[] Sodium.KDF.HSalsa20(byte[] in, byte[] k, byte[] c);
+```
+
+_Internally this function uses `crypto_core_hsalsa20`._

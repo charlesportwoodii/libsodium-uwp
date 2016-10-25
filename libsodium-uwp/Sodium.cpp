@@ -884,3 +884,24 @@ Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned 
 		outputLength
 	);
 }
+
+Array<unsigned char>^ Sodium::KDF::HSalsa20(const Array<unsigned char>^ in, const Array<unsigned char>^ k, const Array<unsigned char>^ c)
+{
+	if (k->Length != crypto_core_hsalsa20_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("k must be " + crypto_core_hsalsa20_KEYBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ out = ref new Array<unsigned char>(crypto_core_hsalsa20_OUTPUTBYTES);
+	int result = crypto_core_hsalsa20(
+		out->Data,
+		in->Data,
+		k->Data,
+		c->Data
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Unable to calculate intermediate key");
+	}
+
+	return out;
+}

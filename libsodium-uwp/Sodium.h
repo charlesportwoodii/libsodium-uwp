@@ -126,6 +126,7 @@ namespace Sodium
 		static Array<unsigned char>^ PBKDF2(String^ algorithm, String^ password, String^ salt, int iterationCount, int targetSize);
 		static Array<unsigned char>^ HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, const Array<unsigned char>^ info, int outputLength);
 		static Array<unsigned char>^ HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, String^ info, int outputLength);
+		static Array<unsigned char>^ HSalsa20(const Array<unsigned char>^ in, const Array<unsigned char>^ k, const Array<unsigned char>^ c);
 	};
 
 	private ref class internal sealed

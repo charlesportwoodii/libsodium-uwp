@@ -9,6 +9,7 @@
 | [PublicKeyAuth](PublicKeyAuth.md) | Authenticated encryption with a public key|
 | [PublicKeyBox](PublicKeyAuth.md) | Encryption with a public key |
 | [SealedPublicKeyBox](SealedPublicKeyBox.md) | Anonymous public key encryption |
+| [ScalarMult](ScalarMult.md) | Scalar Multiplication |
 | [SecretAead](SecretAead.md) | Secret authenticated encryption with additional data |
 | [SecretBox](SecretBox.md) | Secret key cryptography |
 | [SecretKeyAuth](SecretKeyAuth.md) | Authenticated secret key cryptography |
