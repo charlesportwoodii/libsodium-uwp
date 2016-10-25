@@ -101,7 +101,7 @@ namespace Sodium
 		static Array<unsigned char>^ Create(String^ message, const Array<unsigned char>^ recipientPublicKey);
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, KeyPair^ recipientKeyPair);
 		static Array<unsigned char>^ Create(String^ message, KeyPair^ recipientKeyPair);
-		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ recipientSecretKey, const Array<unsigned char>^recipientPublicKey);
+		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ recipientSecretKey, const Array<unsigned char>^ recipientPublicKey);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ cipherText, KeyPair^ recipientKeyPair);
 	};
 
@@ -160,6 +160,16 @@ namespace Sodium
 		static Array<unsigned char>^ HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, const Array<unsigned char>^ info, int outputLength);
 		static Array<unsigned char>^ HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, String^ info, int outputLength);
 		static Array<unsigned char>^ HSalsa20(const Array<unsigned char>^ in, const Array<unsigned char>^ k, const Array<unsigned char>^ c);
+	};
+
+	public ref class OneTimeAuth sealed
+	{
+	public:
+		static Array<unsigned char>^ GenerateKey();
+		static Array<unsigned char>^ Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ Sign(String^ message, const Array<unsigned char>^ key);
+		static bool Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
+		static bool Verify(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
 	};
 
 	private ref class internal sealed

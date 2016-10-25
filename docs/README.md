@@ -6,8 +6,9 @@
 | [CryptoHash](CryptoHash.md) | Hashing functions |
 | [HMAC-SHA2](HMAC-SHA2.md) | HMAC-SHA2 keyhed message authentication |
 | [KDF](KDF.md) | Useful Key Derivation Functions (KDF) implementations (non-libsodium) |
-| [KeyPair](KeyPair) | Curve25519/Ed25519 helpers for managing key pairs|
-| [PublicKeyAuth](PublicKeyAuth.md) | Authenticated encryption with a public key|
+| [KeyPair](KeyPair.md) | Curve25519/Ed25519 helpers for managing key pairs |
+| [OneTimeAuth](OneTimeAuth.md) | One Time Authentication |
+| [PublicKeyAuth](PublicKeyAuth.md) | Authenticated encryption with a public key |
 | [PublicKeyBox](PublicKeyAuth.md) | Encryption with a public key |
 | [SealedPublicKeyBox](SealedPublicKeyBox.md) | Anonymous public key encryption |
 | [ScalarMult](ScalarMult.md) | Scalar Multiplication |
