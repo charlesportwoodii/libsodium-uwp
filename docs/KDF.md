@@ -9,8 +9,8 @@ https://tools.ietf.org/html/rfc6070
 __Namespace:__ _Sodium.KDF_
 
 ```C#
-static byte[] Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames|String algorithm, string password, byte[] salt, int iterationCount, int targetSize);
-static byte[] Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames|String algorithm, string password, String salt, int iterationCount, int targetSize);
+public static byte[] Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames|String algorithm, string password, byte[] salt, int iterationCount, int targetSize);
+public static byte[] Sodium.KDF.PBKDF2(KeyDerivationAlgorithmNames|String algorithm, string password, String salt, int iterationCount, int targetSize);
 ```
 
 PBKDF2 takes 5 parameters:
@@ -55,8 +55,8 @@ https://tools.ietf.org/html/rfc5869
 __Namespace:__ _Sodium.KDF_
 
 ```C#
-static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] salt, byte[] info, int outputLength)
-static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] salt, String info, int outputLength)
+public static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] salt, byte[] info, int outputLength)
+public static byte[] Sodium.KDF.HKDF(MacAlgorithmNames|String algorithm, byte[] ikm, byte[] salt, String info, int outputLength)
 ```
 
 HKDF takes 5 parameters:
@@ -91,7 +91,7 @@ var result = Sodium.KDF.HKDF(algorithm, ikm, info, salt, 32);
 __Namespace:__ _Sodium.KDF_
 
 ```C#
-static byte[] Sodium.KDF.HSalsa20(byte[] in, byte[] k, byte[] c);
+public static byte[] Sodium.KDF.HSalsa20(byte[] in, byte[] k, byte[] c);
 ```
 
 _Internally this function uses `crypto_core_hsalsa20`._

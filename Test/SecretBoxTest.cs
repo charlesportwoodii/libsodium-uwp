@@ -74,7 +74,24 @@ namespace Test
             byte[] decrypted = SecretBox.Open(cipherText, nonce, key);
 
             Assert.AreEqual(plainText.ToString(), decrypted.ToString());
+        }
 
+        [TestCategory("Detached SecretBox")]
+        [TestMethod]
+        public void DetachedSecretBoxTest()
+        {
+            var nonce = Sodium.SecretBox.GenerateNonce();
+            var key = Sodium.SecretBox.GenerateKey();
+            var message = System.Text.Encoding.UTF8.GetBytes("Charles R. Portwood II");
+            var actual = Sodium.SecretBox.CreateDetached(message, nonce, key);
+
+            Assert.AreEqual(actual.Mac.Length, 16);
+            var clear = Sodium.SecretBox.OpenDetached(actual.Cipher, actual.Mac, nonce, key);
+
+            Assert.AreEqual(Convert.ToBase64String(message), Convert.ToBase64String(clear));
+
+            clear = Sodium.SecretBox.OpenDetached(actual, nonce, key);
+            Assert.AreEqual(Convert.ToBase64String(message), Convert.ToBase64String(clear));
         }
     }
 }

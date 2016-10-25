@@ -12,8 +12,26 @@ namespace Sodium
 	public ref class KeyPair sealed
 	{
 	public:
+		KeyPair(const Array<unsigned char>^ Public, const Array<unsigned char>^ Secret)
+		{
+			this->Public = Public;
+			this->Secret = Secret;
+		};
+		KeyPair() {};
 		property Array<unsigned char>^ Public;
 		property Array<unsigned char>^ Secret;
+	};
+
+	public ref class DetachedBox sealed
+	{
+	public:
+		DetachedBox(const Array<unsigned char>^ Cipher, const Array<unsigned char>^ Mac)
+		{
+			this->Cipher = Cipher;
+			this->Mac = Mac;
+		};
+		property Array<unsigned char>^ Cipher;
+		property Array<unsigned char>^ Mac;
 	};
 
 	public ref class Core sealed
@@ -39,6 +57,11 @@ namespace Sodium
 		static Array<unsigned char>^ Create(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ ciphertext, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
+		static DetachedBox^ CreateDetached(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
+		static DetachedBox^ CreateDetached(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ OpenDetached(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ OpenDetached(String^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ OpenDetached(DetachedBox^ detached, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 	};
 
 	public ref class SecretKeyAuth sealed
