@@ -1385,3 +1385,236 @@ bool Sodium::OneTimeAuth::Verify(String^ message, const Array<unsigned char>^ si
 		key
 	);
 }
+
+Array<unsigned char>^ Sodium::StreamEncryption::ProcessInternal(const Array<unsigned char>^ data, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, int method)
+{
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(data->Length);
+	int result = -1;
+
+	if (method == 1) { // XSALSA20
+		result = crypto_stream_xsalsa20_xor(
+			buffer->Data,
+			data->Data,
+			data->Length,
+			nonce->Data,
+			key->Data
+		);
+	} else if (method == 2) { // CHACHA20
+		result = crypto_stream_chacha20_xor(
+			buffer->Data,
+			data->Data,
+			data->Length,
+			nonce->Data,
+			key->Data
+		);
+	} else if (method == 3) { // SALSA20
+		result = crypto_stream_salsa20_xor(
+			buffer->Data,
+			data->Data,
+			data->Length,
+			nonce->Data,
+			key->Data
+		);
+	} else {
+		throw ref new Platform::InvalidArgumentException("Unable to process");
+	}
+
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Error processing message");
+	}
+
+	return buffer;
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::GenerateKey()
+{
+	return Sodium::Core::GetRandomBytes(crypto_stream_KEYBYTES);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonce()
+{
+	return Sodium::Core::GetRandomBytes(crypto_stream_NONCEBYTES);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonceXSalsa20()
+{
+	return Sodium::Core::GetRandomBytes(crypto_stream_xsalsa20_NONCEBYTES);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_stream_xsalsa20_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_stream_xsalsa20_KEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_stream_xsalsa20_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_stream_xsalsa20_NONCEBYTES + " bytes in length");
+	}
+
+	return Sodium::StreamEncryption::ProcessInternal(message, nonce, key, 1);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::Encrypt(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::Encrypt(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::Decrypt(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_stream_xsalsa20_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_stream_xsalsa20_KEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_stream_xsalsa20_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_stream_xsalsa20_NONCEBYTES + " bytes in length");
+	}
+
+	return Sodium::StreamEncryption::ProcessInternal(cipherText, nonce, key, 1);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::Decrypt(String^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::Decrypt(
+		Sodium::internal::StringToUnsignedCharArray(cipherText),
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::EncryptXSalsa20(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::Encrypt(
+		message,
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::EncryptXSalsa20(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::Encrypt(
+		message,
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::DecryptXSalsa20(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::Decrypt(
+		cipherText,
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::DecryptXSalsa20(String ^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::Decrypt(
+		cipherText,
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonceChaCha20()
+{
+	return Sodium::Core::GetRandomBytes(crypto_stream_chacha20_NONCEBYTES);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::EncryptChaCha20(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_stream_chacha20_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_stream_chacha20_KEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_stream_chacha20_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_stream_chacha20_NONCEBYTES + " bytes in length");
+	}
+
+	return Sodium::StreamEncryption::ProcessInternal(message, nonce, key, 2);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::EncryptChaCha20(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::EncryptChaCha20(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::DecryptChaCha20(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_stream_chacha20_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_stream_chacha20_KEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_stream_chacha20_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_stream_chacha20_NONCEBYTES + " bytes in length");
+	}
+
+	return Sodium::StreamEncryption::ProcessInternal(cipherText, nonce, key, 2);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::DecryptChaCha20(String^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::DecryptChaCha20(
+		Sodium::internal::StringToUnsignedCharArray(cipherText),
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonceSalsa20()
+{
+	return Sodium::Core::GetRandomBytes(crypto_stream_salsa20_NONCEBYTES);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::EncryptSalsa20(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_stream_salsa20_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_stream_salsa20_KEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_stream_salsa20_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_stream_salsa20_NONCEBYTES + " bytes in length");
+	}
+
+	return Sodium::StreamEncryption::ProcessInternal(message, nonce, key, 3);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::EncryptSalsa20(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::EncryptSalsa20(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		nonce,
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::DecryptSalsa20(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_stream_salsa20_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Key must be " + crypto_stream_salsa20_KEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_stream_salsa20_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_stream_salsa20_NONCEBYTES + " bytes in length");
+	}
+
+	return Sodium::StreamEncryption::ProcessInternal(cipherText, nonce, key, 3);
+}
+
+Array<unsigned char>^ Sodium::StreamEncryption::DecryptSalsa20(String^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+{
+	return Sodium::StreamEncryption::DecryptSalsa20(
+		Sodium::internal::StringToUnsignedCharArray(cipherText),
+		nonce,
+		key
+	);
+}

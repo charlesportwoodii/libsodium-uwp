@@ -15,6 +15,7 @@
 | [SecretAead](SecretAead.md) | Secret authenticated encryption with additional data |
 | [SecretBox](SecretBox.md) | Secret key cryptography |
 | [SecretKeyAuth](SecretKeyAuth.md) | Authenticated secret key cryptography |
+| [StreamEncryption](StreamEncryption.md) | Streaming encryption with Salsa20, ChaCha20, and XSalsa20 |
 | [Utilities](Utilities.md) | libsodium utilities |
 
 # Design Goals
