@@ -91,5 +91,34 @@ namespace Test
             var decrypted = PublicKeyBox.Open(cipherText, nonce, kp.Secret, kp.Public);
             Assert.AreEqual(decrypted.ToString(), byteMessage.ToString());
         }
+
+        [TestCategory("Detached PublicKeyBox")]
+        [TestMethod]
+        public void DetachedBoxTest()
+        {
+            var alice = PublicKeyBox.GenerateKeyPair();
+            var bob = PublicKeyBox.GenerateKeyPair();
+            var nonce = PublicKeyBox.GenerateNonce();
+            String message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
+
+            var e1 = PublicKeyBox.CreateDetached(message, nonce, bob.Secret, alice.Public);
+            var e2 = PublicKeyBox.CreateDetached(message, nonce, bob.Secret, alice.Public);
+
+            Assert.AreEqual(Convert.ToBase64String(e1.Cipher), Convert.ToBase64String(e2.Cipher));
+            Assert.AreEqual(Convert.ToBase64String(e1.Mac), Convert.ToBase64String(e2.Mac));
+
+            var d1 = PublicKeyBox.OpenDetached(e1, nonce, alice.Secret, bob.Public);
+            var d2 = PublicKeyBox.OpenDetached(e2, nonce, alice.Secret, bob.Public);
+
+            Assert.AreEqual(message, System.Text.Encoding.UTF8.GetString(d1));
+            Assert.AreEqual(message, System.Text.Encoding.UTF8.GetString(d2));
+
+            d1 = PublicKeyBox.OpenDetached(e1.Cipher, e1.Mac, nonce, alice.Secret, bob.Public);
+            d2 = PublicKeyBox.OpenDetached(e2.Cipher, e2.Mac, nonce, alice.Secret, bob.Public);
+
+            Assert.AreEqual(message, System.Text.Encoding.UTF8.GetString(d1));
+            Assert.AreEqual(message, System.Text.Encoding.UTF8.GetString(d2));
+        }
     }
 }

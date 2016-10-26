@@ -667,6 +667,108 @@ Array<unsigned char>^ Sodium::PublicKeyBox::Open(const Array<unsigned char>^ cip
 	throw ref new Platform::Exception(result, "Unable to open PublicKeyBox");
 }
 
+DetachedBox ^ Sodium::PublicKeyBox::CreateDetached(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
+{
+	if (secretKey->Length != crypto_box_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Private key must " + crypto_box_SECRETKEYBYTES + " bytes in length");
+	}
+
+	if (publicKey->Length != crypto_box_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Public key must " + crypto_box_PUBLICKEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_box_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_box_NONCEBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ cipher = ref new Array<unsigned char>(message->Length);
+	Array<unsigned char>^ mac = ref new Array<unsigned char>(crypto_box_MACBYTES);
+
+	int result = crypto_box_detached(
+		cipher->Data,
+		mac->Data,
+		message->Data,
+		message->Length,
+		nonce->Data,
+		publicKey->Data,
+		secretKey->Data
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Failed to create public detached box");
+	}
+
+	return ref new DetachedBox(cipher, mac);
+}
+
+DetachedBox ^ Sodium::PublicKeyBox::CreateDetached(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
+{
+	return Sodium::PublicKeyBox::CreateDetached(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		nonce,
+		secretKey,
+		publicKey
+	);
+}
+
+Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
+{
+	if (secretKey->Length != crypto_box_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Private key must " + crypto_box_SECRETKEYBYTES + " bytes in length");
+	}
+
+	if (publicKey->Length != crypto_box_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("Public key must " + crypto_box_PUBLICKEYBYTES + " bytes in length");
+	}
+
+	if (nonce->Length != crypto_box_NONCEBYTES) {
+		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_box_NONCEBYTES + " bytes in length");
+	}
+
+	if (mac->Length != crypto_box_MACBYTES) {
+		throw ref new Platform::InvalidArgumentException("Mac must be " + crypto_box_MACBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(cipherText->Length);
+	int result = crypto_box_open_detached(
+		buffer->Data,
+		cipherText->Data,
+		mac->Data,
+		cipherText->Length,
+		nonce->Data,
+		publicKey->Data,
+		secretKey->Data
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Failed to open public detached box");
+	}
+
+	return buffer;
+}
+
+Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(String^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
+{
+	return Sodium::PublicKeyBox::OpenDetached(
+		Sodium::internal::StringToUnsignedCharArray(cipherText),
+		mac,
+		nonce,
+		secretKey,
+		publicKey
+	);
+}
+
+Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(DetachedBox^ detached, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
+{
+	return Sodium::PublicKeyBox::OpenDetached(
+		detached->Cipher,
+		detached->Mac,
+		nonce,
+		secretKey,
+		publicKey
+	);
+}
+
 // Generates a PublicKeyAuth KeyPair
 KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair()
 {
