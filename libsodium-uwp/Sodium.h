@@ -183,20 +183,29 @@ namespace Sodium
 		static bool Verify(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key);
 	};
 
+	public ref class ShortHash sealed
+	{
+	public:
+		static Array<unsigned char>^ GenerateKey();
+		static Array<unsigned char>^ Hash(const Array<unsigned char>^ message, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ Hash(String^ message, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ Hash(String^ message, String^ key);
+	};
+
 	public ref class StreamEncryption sealed
 	{
 	private:
 		static Array<unsigned char>^ ProcessInternal(const Array<unsigned char>^ data, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, int method);
-		
 	public:
 		static Array<unsigned char>^ GenerateKey();
+
 		static Array<unsigned char>^ GenerateNonce();
-		static Array<unsigned char>^ GenerateNonceXSalsa20();
 		static Array<unsigned char>^ Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Encrypt(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Decrypt(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Decrypt(String^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 
+		static Array<unsigned char>^ GenerateNonceXSalsa20();
 		static Array<unsigned char>^ EncryptXSalsa20(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ EncryptXSalsa20(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ DecryptXSalsa20(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);

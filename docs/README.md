@@ -10,11 +10,12 @@
 | [OneTimeAuth](OneTimeAuth.md) | One Time Authentication |
 | [PublicKeyAuth](PublicKeyAuth.md) | Authenticated encryption with a public key |
 | [PublicKeyBox](PublicKeyAuth.md) | Encryption with a public key |
-| [SealedPublicKeyBox](SealedPublicKeyBox.md) | Anonymous public key encryption |
 | [ScalarMult](ScalarMult.md) | Scalar Multiplication |
+| [SealedPublicKeyBox](SealedPublicKeyBox.md) | Anonymous public key encryption |
 | [SecretAead](SecretAead.md) | Secret authenticated encryption with additional data |
 | [SecretBox](SecretBox.md) | Secret key cryptography |
 | [SecretKeyAuth](SecretKeyAuth.md) | Authenticated secret key cryptography |
+| [ShortHash](ShortHash.md) | SigHash-2-4 Short Hashing |
 | [StreamEncryption](StreamEncryption.md) | Streaming encryption with Salsa20, ChaCha20, and XSalsa20 |
 | [Utilities](Utilities.md) | libsodium utilities |
 

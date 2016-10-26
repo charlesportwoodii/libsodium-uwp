@@ -1618,3 +1618,42 @@ Array<unsigned char>^ Sodium::StreamEncryption::DecryptSalsa20(String^ cipherTex
 		key
 	);
 }
+
+Array<unsigned char>^ Sodium::ShortHash::GenerateKey()
+{
+	return Sodium::Core::GetRandomBytes(crypto_shorthash_KEYBYTES);
+}
+
+Array<unsigned char>^ Sodium::ShortHash::Hash(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
+{
+	if (key->Length != crypto_shorthash_KEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("key mus be " + crypto_shorthash_KEYBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_shorthash_BYTES);
+
+	int result = crypto_shorthash(
+		buffer->Data,
+		message->Data,
+		message->Length,
+		key->Data
+	);
+
+	return buffer;
+}
+
+Array<unsigned char>^ Sodium::ShortHash::Hash(String^ message, const Array<unsigned char>^ key)
+{
+	return Sodium::ShortHash::Hash(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		key
+	);
+}
+
+Array<unsigned char>^ Sodium::ShortHash::Hash(String^ message, String^ key)
+{
+	return Sodium::ShortHash::Hash(
+		message,
+		Sodium::internal::StringToUnsignedCharArray(key)
+	);
+}

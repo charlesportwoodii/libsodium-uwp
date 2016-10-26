@@ -7,36 +7,44 @@ namespace Test
     [TestClass]
     public class StreamEncryptionTest
     {
+        [TestCategory("StreamEncryption")]
         [TestMethod]
         public void GenerateKeyTest()
         {
             Assert.AreEqual(32, StreamEncryption.GenerateKey().Length);
         }
 
+        [TestCategory("StreamEncryption")]
         [TestMethod]
         public void GenerateNonceTest()
         {
             Assert.AreEqual(24, StreamEncryption.GenerateNonce().Length);
         }
 
+        [TestCategory("StreamEncryption :: XSalsa20")]
         [TestMethod]
         public void GenerateNonceXSalsa20Test()
         {
             Assert.AreEqual(24, StreamEncryption.GenerateNonceXSalsa20().Length);
         }
 
+        [TestCategory("StreamEncryption :: ChaCha20")]
         [TestMethod]
         public void GenerateNonceChaCha20Test()
         {
             Assert.AreEqual(8, StreamEncryption.GenerateNonceChaCha20().Length);
         }
 
+
+        [TestCategory("StreamEncryption :: Salsa20")]
         [TestMethod]
         public void GenerateNonceSalsa20Test()
         {
             Assert.AreEqual(8, StreamEncryption.GenerateNonceSalsa20().Length);
         }
 
+
+        [TestCategory("StreamEncryption :: XSalsa20")]
         [TestMethod]
         public void XSalsa20Test()
         {
@@ -63,6 +71,8 @@ namespace Test
             Assert.AreEqual(Convert.ToBase64String(byteMessage), Convert.ToBase64String(decrypted));
         }
 
+
+        [TestCategory("StreamEncryption :: Salsa20")]
         [TestMethod]
         public void Salsa20Test()
         {
@@ -80,6 +90,8 @@ namespace Test
             Assert.AreEqual(Convert.ToBase64String(byteMessage), Convert.ToBase64String(decrypted));
         }
 
+
+        [TestCategory("StreamEncryption :: ChaCha20")]
         [TestMethod]
         public void ChaCha20Test()
         {
@@ -97,6 +109,8 @@ namespace Test
             Assert.AreEqual(Convert.ToBase64String(byteMessage), Convert.ToBase64String(decrypted));
         }
 
+
+        [TestCategory("StreamEncryption :: XSalsa20")]
         [TestMethod]
         public void XSalsa20SodiumTest()
         {
