@@ -41,7 +41,7 @@ __Namespace:__ _Sodium.StreamEncryption_
 public static byte[] Encrypt(byte[] message, byte[] nonce, byte[] key)
 public static byte[] Encrypt(String message, byte[] nonce, byte[] key)
 public static byte[] EncryptXSalsa20(byte[] message, byte[] nonce, byte[] key)
-public static byte[] EncryptXSalsa20(byte[] message, byte[] nonce, byte[] key)
+public static byte[] EncryptXSalsa20(String message, byte[] nonce, byte[] key)
 ```
 
 Encrypt expects a `message`, a 24 byte `nonce`, and a 32 byte `key`, and will return a ciphertext (which is the message combined with the output of the stream cipher using the XOR operation, and does not include an authentication tag).
@@ -55,10 +55,10 @@ _Internally this method used `crypto_stream_xsalsa20_xor`._
 __Namespace:__ _Sodium.StreamEncryption_
 
 ```C#
-public static byte[] Decrypt(byte[] message, byte[] nonce, byte[] key)
-public static byte[] Decrypt(String message, byte[] nonce, byte[] key)
-public static byte[] DecryptXSalsa20(byte[] message, byte[] nonce, byte[] key)
-public static byte[] DecryptXSalsa20(byte[] message, byte[] nonce, byte[] key)
+public static byte[] Decrypt(byte[] cipherText, byte[] nonce, byte[] key)
+public static byte[] Decrypt(String cipherText, byte[] nonce, byte[] key)
+public static byte[] DecryptXSalsa20(byte[] cipherText, byte[] nonce, byte[] key)
+public static byte[] DecryptXSalsa20(String cipherText, byte[] nonce, byte[] key)
 ```
 
 Decrypt expects a `ciphertext`, a 24 byte `nonce`, and a 32 byte `key`, and will return a decrypted byte array message.
@@ -89,7 +89,7 @@ __Namespace:__ _Sodium.StreamEncryption_
 
 ```C#
 public static byte[] EncryptChaCha20(byte[] message, byte[] nonce, byte[] key)
-public static byte[] EncryptChaCha20(byte[] message, byte[] nonce, byte[] key)
+public static byte[] EncryptChaCha20(String message, byte[] nonce, byte[] key)
 ```
 
 Encrypt expects a `message`, a 8 byte `nonce`, and a 32 byte `key`, and will return a ciphertext (which is the message combined with the output of the stream cipher using the XOR operation, and does not include an authentication tag).
@@ -101,8 +101,8 @@ _Internally this method used `crypto_stream_chacha20_xor`._
 __Namespace:__ _Sodium.StreamEncryption_
 
 ```C#
-public static byte[] DecryptChaCha20(byte[] message, byte[] nonce, byte[] key)
-public static byte[] DecryptChaCha20(byte[] message, byte[] nonce, byte[] key)
+public static byte[] DecryptChaCha20(byte[] cipherText, byte[] nonce, byte[] key)
+public static byte[] DecryptChaCha20(String cipherText, byte[] nonce, byte[] key)
 ```
 
 Decrypt expects a `ciphertext`, a 8 byte `nonce`, and a 32 byte `key`, and will return a decrypted byte array message.
@@ -110,6 +110,10 @@ Decrypt expects a `ciphertext`, a 8 byte `nonce`, and a 32 byte `key`, and will 
 _Internally this method used `crypto_stream_chacha20_xor`._
 
 ## Salsa20
+
+Salsa20 is a stream cipher developed by Daniel J.Bernstein. Salsa20 expands a 256 bit key int 2^64 randomly accessible streams, each containing 2^64 randomly accessible 64 byte blocks.
+
+Salsa20 doesn't require any lookup tables, and avoids the possibility of timing attacks. Salsa20 works like a block cipher used in counter mode. It has a dedicated 64 bit block counter to avoid incrementing the nonce after each block.
 
 ### Generate nonce
 
@@ -127,22 +131,22 @@ __Namespace:__ _Sodium.StreamEncryption_
 
 ```C#
 public static byte[] EncryptSalsa20(byte[] message, byte[] nonce, byte[] key)
-public static byte[] EncryptSalsa20(byte[] message, byte[] nonce, byte[] key)
+public static byte[] EncryptSalsa20(String message, byte[] nonce, byte[] key)
 ```
 
 Encrypt expects a `message`, a 24 byte `nonce`, and a 32 byte `key`, and will return a ciphertext (which is the message combined with the output of the stream cipher using the XOR operation, and does not include an authentication tag).
 
-_Internally this method used `crypto_stream_Salsa20_xor`._
+_Internally this method used `crypto_stream_salsa20_xor`._
 
 ### Decrypt
 
 __Namespace:__ _Sodium.StreamEncryption_
 
 ```C#
-public static byte[] DecryptSalsa20(byte[] message, byte[] nonce, byte[] key)
-public static byte[] DecryptSalsa20(byte[] message, byte[] nonce, byte[] key)
+public static byte[] DecryptSalsa20(byte[] cipherText, byte[] nonce, byte[] key)
+public static byte[] DecryptSalsa20(String cipherText, byte[] nonce, byte[] key)
 ```
 
 Decrypt expects a `ciphertext`, a 24 byte `nonce`, and a 32 byte `key`, and will return a decrypted byte array message.
 
-_Internally this method used `crypto_stream_Salsa20_xor`._
+_Internally this method used `crypto_stream_salsa20_xor`._
