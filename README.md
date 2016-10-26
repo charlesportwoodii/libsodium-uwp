@@ -57,6 +57,7 @@ Cryptography is hard. This library was written to make libsodium available to th
         </Extension>
     </Extensions>
     ```
+
 ## Documentation
 See the [docs](docs/) folder for complete documentation on how to use this library.
 
