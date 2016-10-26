@@ -57,7 +57,7 @@ namespace Test
             Assert.AreEqual(message.ToString(), verification.ToString());
         }
 
-        [TestCategory("PublicKeyAuth")]
+        [TestCategory("Curve25519 Key Extraction")]
         [TestMethod]
         public void ConvertToCurve25519Test()
         {
@@ -91,6 +91,52 @@ namespace Test
 
                 CollectionAssert.AreEqual(curve25519Pk, curve25519Pk2);
             }
+        }
+
+        [TestCategory("Detached PublicKeyAuth")]
+        [TestMethod]
+        public void DetachedSignTest()
+        {
+            var kp = PublicKeyAuth.GenerateKeyPair();
+            string message = "Hello, World!";
+            byte[] byteMessage = System.Text.Encoding.UTF8.GetBytes(message);
+
+            var sig1 = PublicKeyAuth.SignDetached(message, kp.Secret);
+            var sig2 = PublicKeyAuth.SignDetached(byteMessage, kp.Secret);
+
+            Assert.AreEqual(Convert.ToBase64String(sig1), Convert.ToBase64String(sig2));
+            Assert.AreEqual(64, sig1.Length);
+            Assert.AreEqual(64, sig2.Length);
+
+            Assert.IsTrue(PublicKeyAuth.VerifyDetached(sig1, byteMessage, kp.Public));
+            Assert.IsTrue(PublicKeyAuth.VerifyDetached(sig1, message, kp.Public));
+            Assert.IsTrue(PublicKeyAuth.VerifyDetached(sig2, byteMessage, kp.Public));
+            Assert.IsTrue(PublicKeyAuth.VerifyDetached(sig2, message, kp.Public));
+
+            var kp2 = PublicKeyAuth.GenerateKeyPair();
+            Assert.IsFalse(PublicKeyAuth.VerifyDetached(sig2, message, kp2.Public));
+            Assert.IsFalse(PublicKeyAuth.VerifyDetached(sig2, "Invalid message test", kp.Public));
+        }
+
+        [TestCategory("Ed25519 Key Extraction")]
+        [TestMethod]
+        public void ExtractEd25519SeedFromEd25519SecretKeyTest()
+        {
+            var kp1 = PublicKeyAuth.GenerateKeyPair();
+            var seed = PublicKeyAuth.ExtractEd25519SeedFromEd25519SecretKey(kp1.Secret);
+            var kp2 = PublicKeyAuth.GenerateKeyPair(seed);
+
+            Assert.AreEqual(Convert.ToBase64String(kp1.Public), Convert.ToBase64String(kp2.Public));
+            Assert.AreEqual(Convert.ToBase64String(kp1.Secret), Convert.ToBase64String(kp2.Secret));
+        }
+
+        [TestCategory("Ed25519 Key Extraction")]
+        [TestMethod]
+        public void ExtractEd25519PublicKeyFromEd25519SecretKeyTest()
+        {
+            var kp = PublicKeyAuth.GenerateKeyPair();
+            var pub = PublicKeyAuth.ExtractEd25519PublicKeyFromEd25519SecretKey(kp.Secret);
+            Assert.AreEqual(Convert.ToBase64String(kp.Public), Convert.ToBase64String(pub));
         }
     }
 }

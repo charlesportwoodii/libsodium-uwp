@@ -900,6 +900,103 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519SecretKeyToCurve25519
 	throw ref new Platform::Exception(result, "Failed to convert private key");
 }
 
+Array<unsigned char>^ Sodium::PublicKeyAuth::SignDetached(const Array<unsigned char>^ message, const Array<unsigned char>^ secretKey)
+{
+	if (secretKey->Length != crypto_sign_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("secretKey must be " + crypto_sign_SECRETKEYBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ signature = ref new Array<unsigned char>(crypto_sign_BYTES);
+	unsigned long long signatureLength = 0;
+
+	int result = crypto_sign_detached(
+		signature->Data,
+		&signatureLength,
+		message->Data,
+		message->Length,
+		secretKey->Data
+	);
+
+	return signature;
+}
+
+Array<unsigned char>^ Sodium::PublicKeyAuth::SignDetached(String^ message, const Array<unsigned char>^ secretKey)
+{
+	return Sodium::PublicKeyAuth::SignDetached(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		secretKey
+	);
+}
+
+bool Sodium::PublicKeyAuth::VerifyDetached(const Array<unsigned char>^ signature, const Array<unsigned char>^ message, const Array<unsigned char>^ publicKey)
+{
+	if (signature->Length != crypto_sign_BYTES) {
+		throw ref new Platform::InvalidArgumentException("Signature must be " + crypto_sign_BYTES + " bytes in length");
+	}
+
+	if (publicKey->Length != crypto_sign_PUBLICKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("publicKey must be " + crypto_sign_PUBLICKEYBYTES + " bytes in length");
+	}
+
+	int result = crypto_sign_verify_detached(
+		signature->Data,
+		message->Data,
+		message->Length,
+		publicKey->Data
+	);
+
+	return result == 0;
+}
+
+bool Sodium::PublicKeyAuth::VerifyDetached(const Array<unsigned char>^ signature, String ^ message, const Array<unsigned char>^ publicKey)
+{
+	return Sodium::PublicKeyAuth::VerifyDetached(
+		signature,
+		Sodium::internal::StringToUnsignedCharArray(message),
+		publicKey
+	);
+}
+
+Array<unsigned char>^ Sodium::PublicKeyAuth::ExtractEd25519SeedFromEd25519SecretKey(const Array<unsigned char>^ ed25519SecretKey)
+{
+	if (ed25519SecretKey->Length != crypto_sign_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("ed25519SecretKey must be " + crypto_sign_PUBLICKEYBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_sign_SEEDBYTES);
+
+	int result = crypto_sign_ed25519_sk_to_seed(
+		buffer->Data,
+		ed25519SecretKey->Data
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Failed to extract seed from secret key");
+	}
+
+	return buffer;
+}
+
+Array<unsigned char>^ Sodium::PublicKeyAuth::ExtractEd25519PublicKeyFromEd25519SecretKey(const Array<unsigned char>^ ed25519SecretKey)
+{
+	if (ed25519SecretKey->Length != crypto_sign_SECRETKEYBYTES) {
+		throw ref new Platform::InvalidArgumentException("ed25519SecretKey must be " + crypto_sign_PUBLICKEYBYTES + " bytes in length");
+	}
+
+	Array<unsigned char>^ buffer = ref new Array<unsigned char>(crypto_sign_PUBLICKEYBYTES);
+
+	int result = crypto_sign_ed25519_sk_to_pk(
+		buffer->Data,
+		ed25519SecretKey->Data
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Failed to extract public key from secret key");
+	}
+
+	return buffer;
+}
+
 // Creates a Sha256 hash
 Array<unsigned char>^ Sodium::CryptoHash::Sha256(const Array<unsigned char>^ message)
 {
