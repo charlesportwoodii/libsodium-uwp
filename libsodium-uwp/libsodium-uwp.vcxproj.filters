@@ -5,6 +5,15 @@
       <UniqueIdentifier>092057cc-db04-4dcd-87d2-4a9283b60b76</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{c55e06c5-ebf7-4dfe-83c5-d10863c49593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{9af6b57d-3640-44e0-b6a5-1de07896b7c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sodium">
+      <UniqueIdentifier>{9e436bbb-1b87-43e3-b15c-a34cb1612990}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libsodium\src\libsodium\crypto_aead\aes256gcm\aesni\aead_aes256gcm_aesni.c">
@@ -356,10 +365,56 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Sodium.cpp" />
-    <ClCompile Include="Extern.cpp" />
     <ClCompile Include="randombytes_uwp.c">
       <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Extern.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="internal.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="SodiumCore.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamEncryption.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortHash.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="SecretKeyAuth.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="SecretAead.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="SealedPublicKeyBox.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="ScalarMult.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="PublicKeyBox.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="PublicKeyAuth.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="OneTimeAuth.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="KDF.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="CryptoHash.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="SecretBox.cpp">
+      <Filter>src\Sodium</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -670,13 +725,65 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Sodium.h" />
-    <ClInclude Include="Extern.h" />
     <ClInclude Include="include\randombytes_uwp.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\randombytes_default.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="DetachedBox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="internal.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="KDF.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyPair.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="OneTimeAuth.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="PublicKeyAuth.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="PublicKeyBox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ScalarMult.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="SealedPublicKeyBox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="SecretAead.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="SecretBox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="SecretKeyAuth.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortHash.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamEncryption.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptoHash.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Extern.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="SodiumCore.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
