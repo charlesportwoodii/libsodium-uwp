@@ -297,9 +297,26 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SodiumCore.h" />
+    <ClInclude Include="CryptoHash.h" />
+    <ClInclude Include="DetachedBox.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="include\randombytes_default.h" />
     <ClInclude Include="include\randombytes_uwp.h" />
+    <ClInclude Include="internal.h" />
+    <ClInclude Include="KDF.h" />
+    <ClInclude Include="KeyPair.h" />
+    <ClInclude Include="OneTimeAuth.h" />
+    <ClInclude Include="PublicKeyAuth.h" />
+    <ClInclude Include="PublicKeyBox.h" />
+    <ClInclude Include="ScalarMult.h" />
+    <ClInclude Include="SealedPublicKeyBox.h" />
+    <ClInclude Include="SecretAead.h" />
+    <ClInclude Include="SecretBox.h" />
+    <ClInclude Include="SecretKeyAuth.h" />
+    <ClInclude Include="ShortHash.h" />
+    <ClInclude Include="StreamEncryption.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base2.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\hchacha20\core_hchacha20.h" />
@@ -403,11 +420,22 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\runtime.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\utils.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Sodium.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CryptoHash.cpp" />
+    <ClCompile Include="KDF.cpp" />
+    <ClCompile Include="OneTimeAuth.cpp" />
+    <ClCompile Include="PublicKeyAuth.cpp" />
+    <ClCompile Include="PublicKeyBox.cpp" />
+    <ClCompile Include="ScalarMult.cpp" />
+    <ClCompile Include="SealedPublicKeyBox.cpp" />
+    <ClCompile Include="SecretAead.cpp" />
+    <ClCompile Include="SecretBox.cpp" />
+    <ClCompile Include="SecretKeyAuth.cpp" />
+    <ClCompile Include="ShortHash.cpp" />
+    <ClCompile Include="SodiumCore.cpp" />
     <ClCompile Include="Extern.cpp" />
-    <ClCompile Include="Sodium.cpp" />
+    <ClCompile Include="internal.cpp" />
     <ClCompile Include="randombytes_uwp.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -884,6 +912,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StreamEncryption.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
