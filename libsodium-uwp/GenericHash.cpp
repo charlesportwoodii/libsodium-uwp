@@ -10,6 +10,42 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
+void Sodium::GenericHash::Append(IBuffer^ data)
+{	
+	Array<unsigned char>^ d = ref new Array<unsigned char>(data->Length);
+	CryptographicBuffer::CopyToByteArray(data, &d);
+
+	crypto_generichash_state state;
+	memcpy(&state, this->state->Data, this->state_len);
+
+	int result = crypto_generichash_update(
+		&state,
+		d->Data,
+		d->Length
+	);
+
+	Array<unsigned char>^ s = ref new Array<unsigned char>(state_len);
+	memcpy(s->Data, &state, state_len);
+
+	this->state = s;
+}
+
+Array<unsigned char>^ Sodium::GenericHash::GetValueAndReset()
+{
+	Array<unsigned char>^ hash = ref new Array<unsigned char>(this->bytes);
+
+	crypto_generichash_state state;
+	memcpy(&state, this->state->Data, this->state_len);
+
+	int result = crypto_generichash_final(
+		&state,
+		hash->Data,
+		hash->Length
+	);
+
+	return hash;
+}
+
 Array<unsigned char>^ Sodium::GenericHash::GenerateKey()
 {
 	return Sodium::Core::GetRandomBytes(crypto_generichash_KEYBYTES_MAX);
@@ -86,4 +122,24 @@ Array<unsigned char>^ Sodium::GenericHash::Hash(String^ message)
 		nullptr,
 		crypto_generichash_BYTES
 	);
+}
+
+GenericHashAlgorithmProvider^ Sodium::GenericHashAlgorithmProvider::OpenAlgorithm(String^ algorithm)
+{
+	return ref new GenericHashAlgorithmProvider(algorithm);
+}
+
+GenericHash^ Sodium::GenericHashAlgorithmProvider::CreateHash()
+{
+	return this->CreateHash(nullptr, crypto_generichash_BYTES);
+}
+
+GenericHash^ Sodium::GenericHashAlgorithmProvider::CreateHash(const Array<unsigned char>^ key)
+{
+	return this->CreateHash(key, crypto_generichash_BYTES);
+}
+
+GenericHash^ Sodium::GenericHashAlgorithmProvider::CreateHash(const Array<unsigned char>^ key, int bytes)
+{
+	return ref new GenericHash(key, bytes);
 }
