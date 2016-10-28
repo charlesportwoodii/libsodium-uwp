@@ -40,6 +40,7 @@ Cryptography is hard. This library was written to make libsodium available to th
                 <Path>libsodium-uwp.dll</Path>
                 <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.CryptoHash" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.GenericHash" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.KDF" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.OneTimeAuth" ThreadingModel="both" />

@@ -4,7 +4,8 @@
 |-------|--------------|
 | [Core](Core.md) | Core cryptographic functions |
 | [CryptoHash](CryptoHash.md) | Hashing functions |
-| [HMAC-SHA2](HMAC-SHA2.md) | HMAC-SHA2 keyhed message authentication |
+| [HMAC-SHA2](HMAC-SHA2.md) | HMAC-SHA2 message authentication |
+| [GenericHash](GenericHash.md) | Generic hash |
 | [KDF](KDF.md) | Useful Key Derivation Functions (KDF) implementations (non-libsodium) |
 | [KeyPair](KeyPair.md) | Curve25519/Ed25519 helpers for managing key pairs |
 | [OneTimeAuth](OneTimeAuth.md) | One Time Authentication |

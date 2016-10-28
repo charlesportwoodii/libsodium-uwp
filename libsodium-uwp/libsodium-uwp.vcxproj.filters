@@ -416,6 +416,9 @@
     <ClCompile Include="SecretBox.cpp">
       <Filter>src\Sodium</Filter>
     </ClCompile>
+    <ClCompile Include="GenericHash.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2.h">
@@ -783,6 +786,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="SodiumCore.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericHash.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

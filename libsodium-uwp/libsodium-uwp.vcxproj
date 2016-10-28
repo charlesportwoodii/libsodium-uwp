@@ -297,6 +297,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GenericHash.h" />
     <ClInclude Include="SodiumCore.h" />
     <ClInclude Include="CryptoHash.h" />
     <ClInclude Include="DetachedBox.h" />
@@ -423,6 +424,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CryptoHash.cpp" />
+    <ClCompile Include="GenericHash.cpp" />
     <ClCompile Include="KDF.cpp" />
     <ClCompile Include="OneTimeAuth.cpp" />
     <ClCompile Include="PublicKeyAuth.cpp" />

@@ -17,6 +17,10 @@ String^ Sodium::Core::SodiumVersionString()
 // Returns count number of random bytes
 Array<unsigned char>^ Sodium::Core::GetRandomBytes(int count)
 {
+	if (count <= 0) {
+		throw ref new Platform::InvalidArgumentException("count must be greater than 0");
+	}
+
 	Array<unsigned char>^ nonce = ref new Array<unsigned char>(count);
 	randombytes_buf(nonce->Data, nonce->Length);
 	return nonce;
