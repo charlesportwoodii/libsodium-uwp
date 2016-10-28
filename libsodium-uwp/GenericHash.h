@@ -87,8 +87,9 @@ namespace Sodium
 	public:
 		GenericHashAlgorithmProvider(String^ algorithm) {
 			if (algorithm != GenericHashAlgorithmNames::Blake2) {
-
+				throw ref new Platform::InvalidArgumentException("GenericHashAlgorithmProvider expects the algorithm to be 'Blake2'");
 			}
+
 			this->algorithm = algorithm;
 		}
 
