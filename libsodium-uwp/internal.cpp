@@ -8,7 +8,9 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
-// Internal helper method to convert String^ to Array<unsigned char>^
+/// <summary>Internal helper method to convert a string to a byte array</summary>
+/// <param name="str">The string to convert to a byte array</param>
+/// <returns>Byte array</returns>
 Array<unsigned char>^ Sodium::internal::StringToUnsignedCharArray(String^ str)
 {
 	BinaryStringEncoding encoding = BinaryStringEncoding::Utf8;

@@ -8,13 +8,14 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
-// Returns the libsodium version string
+/// <returns>Returns the current version string of libsodium</returns>
 String^ Sodium::Core::SodiumVersionString()
 {
 	return SODIUM_VERSION_STRING;
 }
 
-// Returns count number of random bytes
+/// <param name="count">The number of bytes to randomly generate</param>
+/// <returns>Returns "count" random bytes</returns>
 Array<unsigned char>^ Sodium::Core::GetRandomBytes(int count)
 {
 	if (count <= 0) {
@@ -26,7 +27,8 @@ Array<unsigned char>^ Sodium::Core::GetRandomBytes(int count)
 	return nonce;
 }
 
-// Returns a random number with an upper bound of upper_count
+/// <param name="upper_count">The upper bound of the random number to generate</param>
+/// <returns>Returns a random numbet between 0 and upper_count</returns>
 int Sodium::Core::GetRandomNumber(int upper_count)
 {
 	return randombytes_uniform(upper_count);

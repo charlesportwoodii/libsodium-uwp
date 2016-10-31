@@ -13,6 +13,9 @@ namespace Sodium
 	{
 	public:
 		static Array<unsigned char>^ Increment(const Array<unsigned char>^ value);
+
+		[Windows::Foundation::Metadata::DefaultOverloadAttribute]
 		static bool Compare(const Array<unsigned char>^ a, const Array<unsigned char>^ b);
+		static bool Compare(String^ a, String^ b);
 	};
 }

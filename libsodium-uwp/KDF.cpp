@@ -54,7 +54,14 @@ IBuffer^ Sodium::KDF::HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider^
 	return data;
 }
 
-// Standard PBKDF2 implementation 
+/// <summary>RFC 2898 Password-Based Key Derivation Function 2</summary>
+/// <remarks>https://tools.ietf.org/html/rfc2898</remarks>
+/// <param name="algorithm">A KeyDerivationAlgorithmNames algorithm</param>
+/// <param name="password">The password to stretch</param>
+/// <param name="salt">A byte salt</param>
+/// <param name="iterationCount">The number of iterations</param>
+/// <param name="targetSize">The output length</param>
+/// <returns>targetSize PBKDF2 bytes</returns>
 Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ algorithm, String^ password, const Array<unsigned char>^ salt, int iterationCount, int targetSize)
 {
 	Array<String^>^ algorithms = {
@@ -95,6 +102,14 @@ Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ algorithm, String^ password, c
 	return hash;
 }
 
+/// <summary>RFC 2898 Password-Based Key Derivation Function 2</summary>
+/// <remarks>https://tools.ietf.org/html/rfc2898</remarks>
+/// <param name="algorithm">A KeyDerivationAlgorithmNames algorithm</param>
+/// <param name="password">The password to stretch</param>
+/// <param name="salt">A string salt</param>
+/// <param name="iterationCount">The number of iterations</param>
+/// <param name="targetSize">The output length</param>
+/// <returns>targetSize PBKDF2 bytes</returns>
 Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ algorithm, String^ password, String^ salt, int iterationCount, int targetSize)
 {
 	return Sodium::KDF::PBKDF2(
@@ -106,7 +121,13 @@ Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ algorithm, String^ password, S
 	);
 }
 
-// RFC 5869 HKDF implementation
+/// <summary>RFC 5869 HMAC-based Extract-and-Expand Key Derivation Function (HKDF)</summary>
+/// <remarks>https://tools.ietf.org/html/rfc5869</remarks>
+/// <param name="algorithm">A MacAlgorithmNames algorithm</param>
+/// <param name="ikm">The initial key material</param>
+/// <param name="info">Additional authentication info</param>
+/// <param name="outputLength">The desired output length</param>
+/// <returns>The expanded key</returns>
 Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, const Array<unsigned char>^ info, int outputLength)
 {
 	Array<String^>^ algorithms = {
@@ -135,8 +156,7 @@ Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned 
 	IBuffer^ s;
 	if (salt->Length == 0) {
 		s = CryptographicBuffer::CreateFromByteArray(ref new Array<unsigned char>(digestLength));
-	}
-	else {
+	} else {
 		s = CryptographicBuffer::CreateFromByteArray(salt);
 	}
 
@@ -164,6 +184,13 @@ Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned 
 	return hkdf;
 }
 
+/// <summary>RFC 5869 HMAC-based Extract-and-Expand Key Derivation Function (HKDF)</summary>
+/// <remarks>https://tools.ietf.org/html/rfc5869</remarks>
+/// <param name="algorithm">A MacAlgorithmNames algorithm</param>
+/// <param name="ikm">The initial key material</param>
+/// <param name="info">Additional authentication info</param>
+/// <param name="outputLength">The desired output length</param>
+/// <returns>The expanded key</returns>
 Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned char>^ ikm, const Array<unsigned char>^ salt, String^ info, int outputLength)
 {
 	return Sodium::KDF::HKDF(
@@ -175,6 +202,11 @@ Array<unsigned char>^ Sodium::KDF::HKDF(String^ algorithm, const Array<unsigned 
 	);
 }
 
+/// <summary>crypto_core_hsalsa20 intermediate key</summary>
+/// <param name="in">Input data</param>
+/// <param name="k">The key</param>
+/// <param name="c"></param>
+/// <returns>crypto_core_hsalsa20 intermediate key</returns>
 Array<unsigned char>^ Sodium::KDF::HSalsa20(const Array<unsigned char>^ in, const Array<unsigned char>^ k, const Array<unsigned char>^ c)
 {
 	if (k->Length != crypto_core_hsalsa20_KEYBYTES) {

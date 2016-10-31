@@ -19,7 +19,9 @@ int Sodium::ScalarMult::ScalarBytes()
 	return crypto_scalarmult_scalarbytes();
 }
 
-// Extracts the public key from a secret key
+/// <summary>Extracts the public key from the secret key</summary>
+/// <param name="secretKey">The secret key</param>
+/// <returns>32 byte public key</returns>
 Array<unsigned char>^ Sodium::ScalarMult::Base(const Array<unsigned char>^ secretKey)
 {
 	if (secretKey->Length != crypto_scalarmult_SCALARBYTES) {
@@ -39,7 +41,10 @@ Array<unsigned char>^ Sodium::ScalarMult::Base(const Array<unsigned char>^ secre
 	throw ref new Platform::Exception(result, "Failed to compute public key");
 }
 
-// Computes a shared secret
+/// <summary>Computes a shared secret between a secret and public key</summary>
+/// <param name="secretKey">The secret key</param>
+/// <param name="publicKey">The public key</param>
+/// <returns>32 byte shared secret</returns>
 Array<unsigned char>^ Sodium::ScalarMult::Mult(const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
 {
 	if (secretKey->Length != crypto_scalarmult_SCALARBYTES) {

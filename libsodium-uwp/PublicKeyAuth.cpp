@@ -11,7 +11,8 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
-// Generates a PublicKeyAuth KeyPair
+/// <summary>Generates a KeyPair</summary>
+/// <returns>A KeyPair object</returns>
 KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair()
 {
 	KeyPair^ kp = ref new KeyPair();
@@ -23,7 +24,9 @@ KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair()
 	return kp;
 }
 
-// Generates a PublicKeyAuth KeyPair from a seed.
+/// <summary>Generates a PublicKeyAuth KeyPair from a seed</summary>
+/// <param name="seed">A 32 byte seed</param>
+/// <returns>A KeyPair object</returns>
 KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair(const Array<unsigned char>^ seed)
 {
 	KeyPair^ kp = ref new KeyPair();
@@ -38,7 +41,10 @@ KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair(const Array<unsigned char>^ see
 	return kp;
 }
 
-// Signs a message given a private key
+/// <summary>Signs a message given a private key</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="privateKey">64 byte ed25519 private key</param>
+/// <returns>A signed message</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ privateKey)
 {
 	if (privateKey->Length != crypto_sign_SECRETKEYBYTES) {
@@ -65,6 +71,10 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::Sign(const Array<unsigned char>^ me
 	throw ref new Platform::Exception(result, "Failed to sign message");
 }
 
+/// <summary>Signs a message given a private key</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="privateKey">64 byte ed25519 private key</param>
+/// <returns>A signed message</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::Sign(String ^ message, const Array<unsigned char>^ privateKey)
 {
 	return Sodium::PublicKeyAuth::Sign(
@@ -73,7 +83,10 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::Sign(String ^ message, const Array<
 	);
 }
 
-// Verifies a signature with a public key
+/// <summary>Verifies a message signed by Sodium.PublicKeyAuth.Verify</summary>
+/// <param name="signedMessage">The message to verify</param>
+/// <param name="privateKey">32 byte ed25519 private key</param>
+/// <returns>The original message</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::Verify(const Array<unsigned char>^ signedMessage, const Array<unsigned char>^ publicKey)
 {
 	if (publicKey->Length != crypto_sign_PUBLICKEYBYTES) {
@@ -100,7 +113,9 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::Verify(const Array<unsigned char>^ 
 	throw ref new Platform::Exception(result, "Failed to verify signature");
 }
 
-// Converts an ED25519 Public Key to a Curve25519 Public Key
+/// <summary>Converts an ED25519 Public Key to a Curve25519 Public Key</summary>
+/// <param name="publicKey">32 byte ed25519 public key</param>
+/// <returns>32 byte Curve25519 public key</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519PublicKeyToCurve25519PublicKey(const Array<unsigned char>^ publicKey)
 {
 	if (publicKey->Length != crypto_sign_PUBLICKEYBYTES) {
@@ -121,7 +136,9 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519PublicKeyToCurve25519
 	throw ref new Platform::Exception(result, "Failed to convert public key");
 }
 
-// Converts a Ed25519 Private Key to a Curve25519 Private Key
+/// <summary>Converts a Ed25519 Private Key to a Curve25519 Private Key</summary>
+/// <param name="privateKey">64 byte ed25519 private key</param>
+/// <returns>32 byte Curve25519 private key</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519SecretKeyToCurve25519SecretKey(const Array<unsigned char>^ privateKey)
 {
 	if (privateKey->Length != crypto_sign_PUBLICKEYBYTES && privateKey->Length != crypto_sign_SECRETKEYBYTES) {
@@ -142,6 +159,10 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::ConvertEd25519SecretKeyToCurve25519
 	throw ref new Platform::Exception(result, "Failed to convert private key");
 }
 
+/// <summary>Signs a message given a private key in detached mode</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="secretKey">64 byte ed25519 private key</param>
+/// <returns>A signed message</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::SignDetached(const Array<unsigned char>^ message, const Array<unsigned char>^ secretKey)
 {
 	if (secretKey->Length != crypto_sign_SECRETKEYBYTES) {
@@ -162,6 +183,10 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::SignDetached(const Array<unsigned c
 	return signature;
 }
 
+/// <summary>Signs a message given a private key in detached mode</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="secretKey">64 byte ed25519 private key</param>
+/// <returns>A signed message</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::SignDetached(String^ message, const Array<unsigned char>^ secretKey)
 {
 	return Sodium::PublicKeyAuth::SignDetached(
@@ -170,6 +195,11 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::SignDetached(String^ message, const
 	);
 }
 
+/// <summary>Verifies a message signed by Sodium.PublicKeyAuth.CreateDetached</summary>
+/// <param name="signature">A 16 byte signature</param>
+/// <param name="message">The message to verify</param>
+/// <param name="privateKey">32 byte public key</param>
+/// <returns>Returns true of the message is valid</returns>
 bool Sodium::PublicKeyAuth::VerifyDetached(const Array<unsigned char>^ signature, const Array<unsigned char>^ message, const Array<unsigned char>^ publicKey)
 {
 	if (signature->Length != crypto_sign_BYTES) {
@@ -190,7 +220,12 @@ bool Sodium::PublicKeyAuth::VerifyDetached(const Array<unsigned char>^ signature
 	return result == 0;
 }
 
-bool Sodium::PublicKeyAuth::VerifyDetached(const Array<unsigned char>^ signature, String ^ message, const Array<unsigned char>^ publicKey)
+/// <summary>Verifies a message signed by Sodium.PublicKeyAuth.CreateDetached</summary>
+/// <param name="signature">A 16 byte signature</param>
+/// <param name="message">The message to verify</param>
+/// <param name="privateKey">32 byte public key</param>
+/// <returns>Returns true of the message is valid</returns>
+bool Sodium::PublicKeyAuth::VerifyDetached(const Array<unsigned char>^ signature, String^ message, const Array<unsigned char>^ publicKey)
 {
 	return Sodium::PublicKeyAuth::VerifyDetached(
 		signature,
@@ -199,6 +234,9 @@ bool Sodium::PublicKeyAuth::VerifyDetached(const Array<unsigned char>^ signature
 	);
 }
 
+/// <summary>Extracts an ed25519 seed from an ed25519 secret key</summary>
+/// <param name="ed25519SecretKey">64 byte ed25519 private key</param>
+/// <returns>32 byte seed</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::ExtractEd25519SeedFromEd25519SecretKey(const Array<unsigned char>^ ed25519SecretKey)
 {
 	if (ed25519SecretKey->Length != crypto_sign_SECRETKEYBYTES) {
@@ -219,6 +257,9 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::ExtractEd25519SeedFromEd25519Secret
 	return buffer;
 }
 
+/// <summary>Extracts an ed25519 public key from an ed25519 secret key</summary>
+/// <param name="ed25519SecretKey">64 byte ed25519 private key</param>
+/// <returns>32 byte public key</returns>
 Array<unsigned char>^ Sodium::PublicKeyAuth::ExtractEd25519PublicKeyFromEd25519SecretKey(const Array<unsigned char>^ ed25519SecretKey)
 {
 	if (ed25519SecretKey->Length != crypto_sign_SECRETKEYBYTES) {

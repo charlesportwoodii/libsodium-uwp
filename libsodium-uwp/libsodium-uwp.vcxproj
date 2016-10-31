@@ -141,11 +141,11 @@
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
+      <DisableSpecificWarnings>28204;4146;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,10 +169,10 @@
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
+      <DisableSpecificWarnings>28204;4146;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -196,10 +196,10 @@
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
+      <DisableSpecificWarnings>28204;4146;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -223,10 +223,10 @@
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
+      <DisableSpecificWarnings>28204;4146;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -250,10 +250,10 @@
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
+      <DisableSpecificWarnings>28204;4146;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -277,10 +277,10 @@
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <DisableSpecificWarnings>28204;4146</DisableSpecificWarnings>
+      <DisableSpecificWarnings>28204;4146;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

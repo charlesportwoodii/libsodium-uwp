@@ -10,11 +10,16 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
+/// <returns>Returns a 32 byte key for One-Time Authentication</returns>
 Array<unsigned char>^ Sodium::OneTimeAuth::GenerateKey()
 {
 	return Sodium::Core::GetRandomBytes(crypto_onetimeauth_KEYBYTES);
 }
 
+/// <summary>Signs a message with a 32 byte key</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">A 32 byte key to sign the message with</param>
+/// <returns>Returns a 16 byte signature</returns>
 Array<unsigned char>^ Sodium::OneTimeAuth::Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_onetimeauth_KEYBYTES) {
@@ -32,6 +37,10 @@ Array<unsigned char>^ Sodium::OneTimeAuth::Sign(const Array<unsigned char>^ mess
 	return buffer;
 }
 
+/// <summary>Signs a message with a 32 byte key</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">A 32 byte key to sign the message with</param>
+/// <returns>Returns a 16 byte signature</returns>
 Array<unsigned char>^ Sodium::OneTimeAuth::Sign(String^ message, const Array<unsigned char>^ key)
 {
 	return Sodium::OneTimeAuth::Sign(
@@ -40,6 +49,11 @@ Array<unsigned char>^ Sodium::OneTimeAuth::Sign(String^ message, const Array<uns
 	);
 }
 
+/// <summary>Verifies a signature created by Sodoium.OneTimeAuth.Sign</summary>
+/// <param name="message">The message to verify</param>
+/// <param name=" signature">The 16 byte signature</param>
+/// <param name="key">A 32 byte key to sign the message with</param>
+/// <returns>Returns true of the signature is valid</returns>
 bool Sodium::OneTimeAuth::Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_onetimeauth_KEYBYTES) {
@@ -60,6 +74,11 @@ bool Sodium::OneTimeAuth::Verify(const Array<unsigned char>^ message, const Arra
 	return result == 0;
 }
 
+/// <summary>Verifies a signature created by Sodoium.OneTimeAuth.Sign</summary>
+/// <param name="message">The message to verify</param>
+/// <param name=" signature">The 16 byte signature</param>
+/// <param name="key">A 32 byte key to sign the message with</param>
+/// <returns>Returns true of the signature is valid</returns>
 bool Sodium::OneTimeAuth::Verify(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	return Sodium::OneTimeAuth::Verify(
