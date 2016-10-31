@@ -12,7 +12,7 @@
     <releaseNotes>Initial release. Please see README.md for full installation instructions.</releaseNotes>
     <copyright>Copyright (c) 2016 Charles R. Portwood II &amp; Contributors</copyright>
     <language>en-US</language>
-    <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash kdf pbdfk2 hkdf</tags>
+    <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash kdf pbdfk2 hkdf Agon2i Scrypt Bcrypt</tags>
   </metadata>
   <files>
     <file src="..\README.md" target="" />
