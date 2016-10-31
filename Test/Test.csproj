@@ -108,6 +108,7 @@
     <Compile Include="GenericHashTest.cs" />
     <Compile Include="KDFTest.cs" />
     <Compile Include="OneTimeAuthTest.cs" />
+    <Compile Include="PasswordHashTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicKeyAuthTest.cs" />
     <Compile Include="PublicKeyBoxTest.cs" />

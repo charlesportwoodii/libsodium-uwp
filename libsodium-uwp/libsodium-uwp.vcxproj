@@ -298,6 +298,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GenericHash.h" />
+    <ClInclude Include="PasswordHash.h" />
     <ClInclude Include="SodiumCore.h" />
     <ClInclude Include="CryptoHash.h" />
     <ClInclude Include="DetachedBox.h" />
@@ -427,6 +428,7 @@
     <ClCompile Include="GenericHash.cpp" />
     <ClCompile Include="KDF.cpp" />
     <ClCompile Include="OneTimeAuth.cpp" />
+    <ClCompile Include="PasswordHash.cpp" />
     <ClCompile Include="PublicKeyAuth.cpp" />
     <ClCompile Include="PublicKeyBox.cpp" />
     <ClCompile Include="ScalarMult.cpp" />
