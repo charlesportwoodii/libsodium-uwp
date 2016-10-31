@@ -28,6 +28,11 @@ namespace Sodium
 			int get() { return 1; }
 		};
 
+		static property int Scrypt
+		{
+			int get() { return 2; }
+		};
+
 		static String^ Hash(String^ password, int algorithm, PasswordHashOptions options);
 		static bool Verify(String^ hash, String^ password);
 	};

@@ -21,6 +21,9 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		throw ref new Platform::InvalidArgumentException("Password must not be null");
 	}
 
+	char hash;
+	std::string sPassword(password->Begin(), password->End());
+
 	// Argon2i
 	if (algorithm == PasswordHash::Argon2i) {
 		if (options.memory_cost <= 0) {
@@ -32,7 +35,6 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		}
 		
 		char hash[crypto_pwhash_STRBYTES];
-		std::string sPassword(password->Begin(), password->End());
 
 		int result = crypto_pwhash_str(
 			hash,
@@ -49,6 +51,23 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		std::string hash_str = std::string(hash);
 		std::wstring whash_str = std::wstring(hash_str.begin(), hash_str.end());
 		return ref new Platform::String(whash_str.c_str());
+	} else if (algorithm == PasswordHash::Scrypt) { // Scrypt
+		char hash[crypto_pwhash_scryptsalsa208sha256_STRBYTES];
+		int result = crypto_pwhash_scryptsalsa208sha256_str(
+			hash,
+			sPassword.c_str(),
+			strlen(sPassword.c_str()),
+			options.time_cost,
+			(options.memory_cost * 1024U)
+		);
+
+		if (result != 0) {
+			throw ref new Platform::InvalidArgumentException("Out of memory");
+		}
+
+		std::string hash_str = std::string(hash);
+		std::wstring whash_str = std::wstring(hash_str.begin(), hash_str.end());
+		return ref new Platform::String(whash_str.c_str());
 	} else {
 		throw ref new Platform::InvalidArgumentException("Algorithm must be defined");
 	}
@@ -61,11 +80,20 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 bool Sodium::PasswordHash::Verify(String^ hash, String^ password)
 {
 	int algorithm = PasswordHash::DetermineAlgorithm(hash);
-
+	std::string sHash(hash->Begin(), hash->End());
+	std::string sPassword(password->Begin(), password->End());
+	
+	// Argon2i
 	if (algorithm == PasswordHash::Argon2i) {
-		std::string sHash(hash->Begin(), hash->End());
-		std::string sPassword(password->Begin(), password->End());
 		int result = crypto_pwhash_str_verify(
+			sHash.c_str(),
+			sPassword.c_str(),
+			strlen(sPassword.c_str())
+		);
+
+		return result == 0;
+	} else if (algorithm == PasswordHash::Scrypt) { // Scrypt
+		int result = crypto_pwhash_scryptsalsa208sha256_str_verify(
 			sHash.c_str(),
 			sPassword.c_str(),
 			strlen(sPassword.c_str())
@@ -87,6 +115,8 @@ int Sodium::PasswordHash::DetermineAlgorithm(String^ hash)
 
 	if (len >= sizeof("$argon2i$") - 1 && !memcmp(sHash.c_str(), "$argon2i$", sizeof("$argon2i$") - 1)) {
 		return PasswordHash::Argon2i;
+	} else if (len >= sizeof("$7") - 1 && !memcmp(sHash.c_str(), "$7", sizeof("$7") - 1)) {
+		return PasswordHash::Scrypt;
 	} else {
 		return -1;
 	}

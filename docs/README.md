@@ -9,6 +9,7 @@
 | [KDF](KDF.md) | Useful Key Derivation Functions (KDF) implementations (non-libsodium) |
 | [KeyPair](KeyPair.md) | Curve25519/Ed25519 helpers for managing key pairs |
 | [OneTimeAuth](OneTimeAuth.md) | One Time Authentication |
+| [PasswordHash](PasswordHash.md) | Hash password |
 | [PublicKeyAuth](PublicKeyAuth.md) | Authenticated encryption with a public key |
 | [PublicKeyBox](PublicKeyAuth.md) | Encryption with a public key |
 | [ScalarMult](ScalarMult.md) | Scalar Multiplication |

@@ -44,6 +44,7 @@ Cryptography is hard. This library was written to make libsodium available to th
                 <ActivatableClass ActivatableClassId="Sodium.KDF" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.OneTimeAuth" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.PasswordHash" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.PublicKeyAuth" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.PublicKeyBox" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.ScalarMult" ThreadingModel="both" />
