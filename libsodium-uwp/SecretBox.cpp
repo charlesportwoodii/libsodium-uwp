@@ -11,19 +11,24 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
-// Generates a SecretBox Nonce
+/// <returns>24 byte nonce</returns>
 Array<unsigned char>^ Sodium::SecretBox::GenerateNonce()
 {
 	return Sodium::Core::GetRandomBytes(crypto_secretbox_NONCEBYTES);
 }
 
-// Returns a SecretBox key
+/// <returns>32 byte key</returns>
 Array<unsigned char>^ Sodium::SecretBox::GenerateKey()
 {
 	return Sodium::Core::GetRandomBytes(crypto_secretbox_KEYBYTES);
 }
 
-Array<unsigned char>^ Sodium::SecretBox::Create(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+/// <summary>Encrypts a message using a disposable keypair</summary>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The encrypted message</returns>
+Array<unsigned char>^ Sodium::SecretBox::Create(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretBox::Create(
 		Sodium::internal::StringToUnsignedCharArray(message),
@@ -32,7 +37,11 @@ Array<unsigned char>^ Sodium::SecretBox::Create(String ^ message, const Array<un
 	);
 }
 
-// Generates an encrypted message using a key and nonce
+/// <summary>Encrypts a message using a disposable keypair</summary>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The encrypted message</returns>
 Array<unsigned char>^ Sodium::SecretBox::Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_secretbox_KEYBYTES) {
@@ -42,9 +51,8 @@ Array<unsigned char>^ Sodium::SecretBox::Create(const Array<unsigned char>^ mess
 	if (nonce->Length != crypto_secretbox_NONCEBYTES) {
 		throw ref new Platform::InvalidArgumentException("Nonce must be " + crypto_secretbox_NONCEBYTES + " bytes in length");
 	}
-
-	int cipherLength = crypto_secretbox_MACBYTES + message->Length;
-	Array<unsigned char>^ cipherText = ref new Array<unsigned char>(cipherLength);
+	
+	Array<unsigned char>^ cipherText = ref new Array<unsigned char>(message->Length + crypto_secretbox_MACBYTES);
 	int result = crypto_secretbox_easy(
 		cipherText->Data,
 		message->Data,
@@ -60,7 +68,11 @@ Array<unsigned char>^ Sodium::SecretBox::Create(const Array<unsigned char>^ mess
 	throw ref new Platform::Exception(result, "Unable to create SecretBox");
 }
 
-// Decrypts an encrypted string using a key and nonce
+/// <summary>Decrypts a encrypted SecretBox message</summary>
+/// <param name="cipherText">The encrypted ciphertext</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::SecretBox::Open(const Array<unsigned char>^ ciphertext, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_secretbox_KEYBYTES) {
@@ -88,6 +100,11 @@ Array<unsigned char>^ Sodium::SecretBox::Open(const Array<unsigned char>^ cipher
 	throw ref new Platform::Exception(result, "Unable to open SecretBox.");
 }
 
+/// <summary>Encrypts a message using a disposable keypair in detached mode</summary>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>A DetachedBox object containing the cipherText and MAC</returns>
 DetachedBox^ Sodium::SecretBox::CreateDetached(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_secretbox_KEYBYTES) {
@@ -117,6 +134,11 @@ DetachedBox^ Sodium::SecretBox::CreateDetached(const Array<unsigned char>^ messa
 	return ref new DetachedBox(cipher, mac);
 }
 
+/// <summary>Encrypts a message using a disposable keypair in detached mode</summary>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>A DetachedBox object containing the cipherText and MAC</returns>
 DetachedBox^ Sodium::SecretBox::CreateDetached(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretBox::CreateDetached(
@@ -126,6 +148,12 @@ DetachedBox^ Sodium::SecretBox::CreateDetached(String^ message, const Array<unsi
 	);
 }
 
+/// <summary>Decrypts a encrypted SecretBox message in detached mode</summary>
+/// <param name="cipherText">The encrypted ciphertext</param>
+/// <param name="mac">16 byte message authentication code</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::SecretBox::OpenDetached(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_secretbox_KEYBYTES) {
@@ -157,6 +185,12 @@ Array<unsigned char>^ Sodium::SecretBox::OpenDetached(const Array<unsigned char>
 	return buffer;
 }
 
+/// <summary>Decrypts a encrypted SecretBox message in detached mode</summary>
+/// <param name="cipherText">The encrypted ciphertext</param>
+/// <param name="mac">16 byte message authentication code</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::SecretBox::OpenDetached(String^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretBox::OpenDetached(
@@ -167,6 +201,11 @@ Array<unsigned char>^ Sodium::SecretBox::OpenDetached(String^ cipherText, const 
 	);
 }
 
+/// <summary>Decrypts a encrypted SecretBox message in detached mode</summary>
+/// <param name="detached">A DetachedBox object containing the cipherText and MAC</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::SecretBox::OpenDetached(DetachedBox^ detached, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretBox::OpenDetached(

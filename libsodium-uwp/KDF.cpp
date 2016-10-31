@@ -10,13 +10,22 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
-// HKDF extract
+/// <summary>HKDF extract</summary>
+/// <param name="salt">The salt buffer</param>
+/// <param name="ikm">The initial key provider buffer</param>
+/// <param name="provider">The MacAlgorithmProvider</param>
+/// <returns>HMAC buffer</returns>
 IBuffer^ Sodium::KDF::extract(IBuffer^ salt, IBuffer^ ikm, MacAlgorithmProvider^ provider)
 {
 	return Sodium::KDF::HMAC(salt, ikm, provider);
 }
 
-// HKDF expand
+/// <summary>HKDF Expand</summary>
+/// <param name="prk">The Psuedo-Random key</param>
+/// <param name="info">The authentication info</param>
+/// <param name="l">The output length</param>
+/// <param name="provider">The MacAlgorithmProvider</param>
+/// <returns></returns>
 IBuffer^ Sodium::KDF::expand(IBuffer^ prk, const Array<unsigned char>^ info, int l, MacAlgorithmProvider^ provider)
 {
 	Array<unsigned char>^ resultBlock = ref new Array<unsigned char>(0);
@@ -41,7 +50,11 @@ IBuffer^ Sodium::KDF::expand(IBuffer^ prk, const Array<unsigned char>^ info, int
 	return CryptographicBuffer::CreateFromByteArray(result);
 }
 
-// HKDF HMAC
+/// <summary>HKDF HMAC</summary>
+/// <param name="key">The key</param>
+/// <param name="message">The message</param>
+/// <param name="provider">The MacAlgorithmProvider</param>
+/// <returns>IBuffer containing the HMAC of the message</returns>
 IBuffer^ Sodium::KDF::HMAC(IBuffer^ key, IBuffer^ message, MacAlgorithmProvider^ provider)
 {
 	CryptographicKey^ saltKey = provider->CreateKey(key);

@@ -10,6 +10,12 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
+/// <summary>Private method used to encrypt a message using the selected method</summary>
+/// <param name="data">The data to encrypt or decrypt</param>
+/// <param name="nonce">The 24 or 8 byte nonce</param>
+/// <param name="key">The 32 byte key</param>
+/// <param name="method">The stream cipher to use (1=XSalsa20, 2=ChaCha20, 3=Salsa20)</param>
+/// <returns>CipherText or plainText data</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::ProcessInternal(const Array<unsigned char>^ data, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, int method)
 {
 	Array<unsigned char>^ buffer = ref new Array<unsigned char>(data->Length);
@@ -53,21 +59,29 @@ Array<unsigned char>^ Sodium::StreamEncryption::ProcessInternal(const Array<unsi
 	return buffer;
 }
 
+/// <returns>32 byte key</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::GenerateKey()
 {
 	return Sodium::Core::GetRandomBytes(crypto_stream_KEYBYTES);
 }
 
+/// <returns>24 byte nonce</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonce()
 {
 	return Sodium::Core::GetRandomBytes(crypto_stream_NONCEBYTES);
 }
 
+/// <returns>24 byte nonce</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonceXSalsa20()
 {
 	return Sodium::Core::GetRandomBytes(crypto_stream_xsalsa20_NONCEBYTES);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_stream_xsalsa20_KEYBYTES) {
@@ -81,6 +95,11 @@ Array<unsigned char>^ Sodium::StreamEncryption::Encrypt(const Array<unsigned cha
 	return Sodium::StreamEncryption::ProcessInternal(message, nonce, key, 1);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::Encrypt(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::Encrypt(
@@ -90,6 +109,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::Encrypt(String^ message, const A
 	);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses Xsalsa20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::Decrypt(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_stream_xsalsa20_KEYBYTES) {
@@ -103,6 +128,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::Decrypt(const Array<unsigned cha
 	return Sodium::StreamEncryption::ProcessInternal(cipherText, nonce, key, 1);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses Xsalsa20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::Decrypt(String^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::Decrypt(
@@ -112,6 +143,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::Decrypt(String^ cipherText, cons
 	);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <remarks>Uses XSalsa20 streaming cipher</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::EncryptXSalsa20(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::Encrypt(
@@ -121,6 +158,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::EncryptXSalsa20(const Array<unsi
 	);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <remarks>Uses XSalsa20 streaming cipher</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::EncryptXSalsa20(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::Encrypt(
@@ -130,6 +173,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::EncryptXSalsa20(String ^ message
 	);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses Xsalsa20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::DecryptXSalsa20(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::Decrypt(
@@ -139,6 +188,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::DecryptXSalsa20(const Array<unsi
 	);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses Xsalsa20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">24 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::DecryptXSalsa20(String ^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::Decrypt(
@@ -148,11 +203,18 @@ Array<unsigned char>^ Sodium::StreamEncryption::DecryptXSalsa20(String ^ cipherT
 	);
 }
 
+/// <return>8 byte nonce</return>
 Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonceChaCha20()
 {
 	return Sodium::Core::GetRandomBytes(crypto_stream_chacha20_NONCEBYTES);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <remarks>Uses ChaCha20 streaming cipher</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::EncryptChaCha20(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_stream_chacha20_KEYBYTES) {
@@ -166,6 +228,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::EncryptChaCha20(const Array<unsi
 	return Sodium::StreamEncryption::ProcessInternal(message, nonce, key, 2);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <remarks>Uses ChaCha20 streaming cipher</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::EncryptChaCha20(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::EncryptChaCha20(
@@ -175,6 +243,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::EncryptChaCha20(String^ message,
 	);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses ChaCha20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::DecryptChaCha20(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_stream_chacha20_KEYBYTES) {
@@ -188,6 +262,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::DecryptChaCha20(const Array<unsi
 	return Sodium::StreamEncryption::ProcessInternal(cipherText, nonce, key, 2);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses ChaCha20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::DecryptChaCha20(String^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::DecryptChaCha20(
@@ -197,11 +277,18 @@ Array<unsigned char>^ Sodium::StreamEncryption::DecryptChaCha20(String^ cipherTe
 	);
 }
 
+/// <return>8 byte nonce</return>
 Array<unsigned char>^ Sodium::StreamEncryption::GenerateNonceSalsa20()
 {
 	return Sodium::Core::GetRandomBytes(crypto_stream_salsa20_NONCEBYTES);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <remarks>Uses Salsa20 streaming cipher</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::EncryptSalsa20(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_stream_salsa20_KEYBYTES) {
@@ -215,6 +302,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::EncryptSalsa20(const Array<unsig
 	return Sodium::StreamEncryption::ProcessInternal(message, nonce, key, 3);
 }
 
+/// <summary>Encrypts a message with a nonce and key</summary>
+/// <remarks>Uses Salsa20 streaming cipher</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>An encrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::EncryptSalsa20(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::EncryptSalsa20(
@@ -224,6 +317,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::EncryptSalsa20(String^ message, 
 	);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses Salsa20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::DecryptSalsa20(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_stream_salsa20_KEYBYTES) {
@@ -237,6 +336,12 @@ Array<unsigned char>^ Sodium::StreamEncryption::DecryptSalsa20(const Array<unsig
 	return Sodium::StreamEncryption::ProcessInternal(cipherText, nonce, key, 3);
 }
 
+/// <summary>Dencrypts a cipherText with a nonce and key</summary>
+/// <remarks>Uses Salsa20 streaming cipher</remarks>
+/// <param name="cipherText">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">32 byte key</param>
+/// <returns>The decrypted message</returns>
 Array<unsigned char>^ Sodium::StreamEncryption::DecryptSalsa20(String^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	return Sodium::StreamEncryption::DecryptSalsa20(

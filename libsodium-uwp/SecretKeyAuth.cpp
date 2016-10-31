@@ -10,13 +10,16 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
-// Generates a 32 byte SecretKeyAuth key
+/// <returns>32 byte key</returns>
 Array<unsigned char>^ Sodium::SecretKeyAuth::GenerateKey()
 {
 	return Sodium::Core::GetRandomBytes(crypto_auth_KEYBYTES);
 }
 
-// Creates a secret key auth signature
+/// <summary>Signs a message with a 32 byte key</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">32 byte key</param>
+/// <returns>32 byte signature</returns>
 Array<unsigned char>^ Sodium::SecretKeyAuth::Sign(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_auth_KEYBYTES) {
@@ -38,6 +41,10 @@ Array<unsigned char>^ Sodium::SecretKeyAuth::Sign(const Array<unsigned char>^ me
 	throw ref new Platform::Exception(result, "Unable to generate signature");
 }
 
+/// <summary>Signs a message with a 32 byte key</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">32 byte key</param>
+/// <returns>32 byte signature</returns>
 Array<unsigned char>^ Sodium::SecretKeyAuth::Sign(String ^ message, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretKeyAuth::Sign(
@@ -46,7 +53,11 @@ Array<unsigned char>^ Sodium::SecretKeyAuth::Sign(String ^ message, const Array<
 	);
 }
 
-// Verifies a secret key auth signature
+/// <summary>Verifies a signature</summary>
+/// <param name="message">The message to verify</param>
+/// <param name="signature">The message signature</param>
+/// <param name="key">32 byte key</param>
+/// <returns>Returns true if the signature is valid for the key and message pair</returns>
 bool Sodium::SecretKeyAuth::Verify(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_auth_KEYBYTES) {
@@ -67,6 +78,11 @@ bool Sodium::SecretKeyAuth::Verify(const Array<unsigned char>^ message, const Ar
 	return result == 0;
 }
 
+/// <summary>Verifies a signature</summary>
+/// <param name="message">The message to verify</param>
+/// <param name="signature">The message signature</param>
+/// <param name="key">32 byte key</param>
+/// <returns>Returns true if the signature is valid for the key and message pair</returns>
 bool Sodium::SecretKeyAuth::Verify(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretKeyAuth::Verify(
@@ -76,6 +92,10 @@ bool Sodium::SecretKeyAuth::Verify(String^ message, const Array<unsigned char>^ 
 	);
 }
 
+/// <summary>Signs a message with HMAC-SHA-256</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">32 byte key</param>
+/// <returns>32 byte signature</returns>
 Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha256(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_auth_hmacsha256_KEYBYTES) {
@@ -93,6 +113,10 @@ Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha256(const Array<unsigned
 	return buffer;
 }
 
+/// <summary>Signs a message with HMAC-SHA-256</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">32 byte key</param>
+/// <returns>32 byte signature</returns>
 Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha256(String^ message, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretKeyAuth::SignHmacSha256(
@@ -101,6 +125,12 @@ Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha256(String^ message, con
 	);
 }
 
+
+/// <summary>Verifies a message with HMAC-SHA-256</summary>
+/// <param name="message">The message to verify</param>
+/// <param name="signature">The 32 byte signature</param>
+/// <param name="key">32 byte key</param>
+/// <returns>Returns true if the signature is valid for the message and key</returns>
 bool Sodium::SecretKeyAuth::VerifyHmacSha256(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_auth_hmacsha256_KEYBYTES) {
@@ -121,6 +151,11 @@ bool Sodium::SecretKeyAuth::VerifyHmacSha256(const Array<unsigned char>^ message
 	return result == 0;
 }
 
+/// <summary>Verifies a message with HMAC-SHA-256</summary>
+/// <param name="message">The message to verify</param>
+/// <param name="signature">The 32 byte signature</param>
+/// <param name="key">32 byte key</param>
+/// <returns>Returns true if the signature is valid for the message and key</returns>
 bool Sodium::SecretKeyAuth::VerifyHmacSha256(String^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretKeyAuth::VerifyHmacSha256(
@@ -130,6 +165,10 @@ bool Sodium::SecretKeyAuth::VerifyHmacSha256(String^ message, const Array<unsign
 	);
 }
 
+/// <summary>Signs a message with HMAC-SHA-512</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">32 byte key</param>
+/// <returns>32 byte signature</returns>
 Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha512(const Array<unsigned char>^ message, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_auth_hmacsha256_KEYBYTES) {
@@ -147,6 +186,10 @@ Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha512(const Array<unsigned
 	return buffer;
 }
 
+/// <summary>Signs a message with HMAC-SHA-512</summary>
+/// <param name="message">The message to sign</param>
+/// <param name="key">32 byte key</param>
+/// <returns>32 byte signature</returns>
 Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha512(String ^ message, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretKeyAuth::SignHmacSha512(
@@ -155,6 +198,11 @@ Array<unsigned char>^ Sodium::SecretKeyAuth::SignHmacSha512(String ^ message, co
 	);
 }
 
+/// <summary>Verifies a message with HMAC-SHA-512</summary>
+/// <param name="message">The message to verify</param>
+/// <param name="signature">The 32 byte signature</param>
+/// <param name="key">32 byte key</param>
+/// <returns>Returns true if the signature is valid for the message and key</returns>
 bool Sodium::SecretKeyAuth::VerifyHmacSha512(const Array<unsigned char>^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	if (key->Length != crypto_auth_hmacsha512_KEYBYTES) {
@@ -175,6 +223,11 @@ bool Sodium::SecretKeyAuth::VerifyHmacSha512(const Array<unsigned char>^ message
 	return result == 0;
 }
 
+/// <summary>Verifies a message with HMAC-SHA-512</summary>
+/// <param name="message">The message to verify</param>
+/// <param name="signature">The 32 byte signature</param>
+/// <param name="key">32 byte key</param>
+/// <returns>Returns true if the signature is valid for the message and key</returns>
 bool Sodium::SecretKeyAuth::VerifyHmacSha512(String ^ message, const Array<unsigned char>^ signature, const Array<unsigned char>^ key)
 {
 	return Sodium::SecretKeyAuth::VerifyHmacSha512(

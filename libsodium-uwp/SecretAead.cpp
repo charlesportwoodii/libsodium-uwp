@@ -10,25 +10,53 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
-// Generates a SecretAEAD Nonce
+/// <returns>Returns an 8 byte nonce</returns>
 Array<unsigned char>^ Sodium::SecretAead::GenerateNonce()
 {
 	return Sodium::Core::GetRandomBytes(crypto_aead_chacha20poly1305_NPUBBYTES);
 }
 
+/// <summary>Encrypts a message with nonce and key</summary>
+/// <remarks>Authenticated encryption with additional data (ChaCha20-Pol1305)</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">The key to encrypt the message with</param>
+/// <returns>Byte array containing the encrypted message</returns>
 Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	Array<unsigned char>^ ad = ref new Array<unsigned char>(1);
 	ad[0] = 0x00;
 
-	return Sodium::SecretAead::Encrypt(message, nonce, key, ad);
+	return Sodium::SecretAead::Encrypt(
+		message,
+		nonce,
+		key,
+		ad
+	);
 }
 
-Array<unsigned char>^ Sodium::SecretAead::Encrypt(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
+/// <summary>Encrypts a message with nonce and key</summary>
+/// <remarks>Authenticated encryption with additional data (ChaCha20-Pol1305)</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">The key to encrypt the message with</param>
+/// <returns>Byte array containing the encrypted message</returns>
+Array<unsigned char>^ Sodium::SecretAead::Encrypt(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
-	return Sodium::SecretAead::Encrypt(Sodium::internal::StringToUnsignedCharArray(message), nonce, key);
+	return Sodium::SecretAead::Encrypt(
+		Sodium::internal::StringToUnsignedCharArray(message),
+		nonce,
+		key
+	);
 }
 
+/// <summary>Encrypts a message with nonce and key</summary>
+/// <remarks>Authenticated encryption with additional data (ChaCha20-Pol1305)</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">The key to encrypt the message with</param>
+/// <param name="additionalData">Additional data to encrypt the message with</param>
+/// <returns>Byte array containing the encrypted message</returns>
 Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData)
 {
 	if (key->Length != crypto_aead_chacha20poly1305_KEYBYTES) {
@@ -70,8 +98,14 @@ Array<unsigned char>^ Sodium::SecretAead::Encrypt(const Array<unsigned char>^ me
 	memcpy(final->Data, cipher->Data, cipherLength);
 	return final;
 }
-
-Array<unsigned char>^ Sodium::SecretAead::Encrypt(String ^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData)
+/// <summary>Encrypts a message with nonce and key</summary>
+/// <remarks>Authenticated encryption with additional data (ChaCha20-Pol1305)</remarks>
+/// <param name="message">The message to encrypt</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">The key to encrypt the message with</param>
+/// <param name="additionalData">Additional data to encrypt the message with</param>
+/// <returns>Byte array containing the encrypted message</returns>
+Array<unsigned char>^ Sodium::SecretAead::Encrypt(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData)
 {
 	return Sodium::SecretAead::Encrypt(
 		Sodium::internal::StringToUnsignedCharArray(message),
@@ -81,6 +115,12 @@ Array<unsigned char>^ Sodium::SecretAead::Encrypt(String ^ message, const Array<
 	);
 }
 
+/// <summary>Decrypts a cipherText with nonce and key</summary>
+/// <remarks>Authenticated encryption with additional data (ChaCha20-Pol1305)</remarks>
+/// <param name="encrypted">The cipherText</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">The key to encrypt the message with</param>
+/// <returns>Byte array containing the encrypted message</returns>
 Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key)
 {
 	Array<unsigned char>^ ad = ref new Array<unsigned char>(1);
@@ -89,6 +129,13 @@ Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ en
 	return Sodium::SecretAead::Decrypt(encrypted, nonce, key, ad);
 }
 
+/// <summary>Decrypts a cipherText with nonce and key</summary>
+/// <remarks>Authenticated encryption with additional data (ChaCha20-Pol1305)</remarks>
+/// <param name="encrypted">The cipherText</param>
+/// <param name="nonce">8 byte nonce</param>
+/// <param name="key">The key to encrypt the message with</param>
+/// <param name="additionalData">Additional data to encrypt the message with</param>
+/// <returns>Byte array containing the encrypted message</returns>
 Array<unsigned char>^ Sodium::SecretAead::Decrypt(const Array<unsigned char>^ encrypted, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key, const Array<unsigned char>^ additionalData)
 {
 	if (key->Length != crypto_aead_chacha20poly1305_KEYBYTES) {
