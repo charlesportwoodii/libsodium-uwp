@@ -61,13 +61,14 @@ Cryptography is hard. This library was written to make libsodium available to th
     ```
 
 ## Documentation
+
 See the [docs](docs/) folder for complete documentation on how to use this library.
 
 ## Notes
 
 `libsodium` requires the [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
 
-This library is currently a work in progress. While many libsodium functions are implemented, not are all. See the [docs](docs/) folder for more information.
+This library is currently a work in progress. While many libsodium functions are implemented, not are all. See the [docs](docs/) folder for more information. Also see the [releases](/releases) page for more information and details as to what is available on Nuget, as the `master` branch may be ahead of what is available there.
 
 ## License
 
