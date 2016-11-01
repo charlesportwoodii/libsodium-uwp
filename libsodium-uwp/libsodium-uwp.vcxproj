@@ -192,7 +192,8 @@
       <Command>copy "$(ProjectDir)\libsodium\builds\msvc\version.h"  "$(ProjectDir)\libsodium\src\libsodium\include\sodium\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy "$(ProjectDir)..\Release\libsodium-uwp\libsodium-uwp.xml" "$(ProjectDir)..\Release\libsodium-uwp\Sodium.xml"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
