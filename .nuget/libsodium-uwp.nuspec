@@ -21,12 +21,14 @@
 
     <!-- WinMd and IntelliSense -->
     <file src="..\Release\libsodium-uwp\Sodium.winmd" target="lib\uap10.0"/>
-    <file src="..\Release\libsodium-uwp\Sodium.xml" target="lib\uap10.0"/>
+    <file src="..\Release\libsodium-uwp\libsodium-uwp.xml" target="lib\uap10.0"/>
 
     <!-- x86 runtime DLL, PRI -->
     <file src="..\Release\libsodium-uwp\*.dll" target="runtimes\win10-x86\native" />
     <file src="..\Release\libsodium-uwp\*.pri" target="runtimes\win10-x86\native" />
     <file src="..\Release\libsodium-uwp\*.lib" target="runtimes\win10-x86\native" />
+
+    <!-- x86 runtime DLL, PRI -->
 
     <!-- x64 runtime DLL, PRI -->
     <file src="..\x64\Release\libsodium-uwp\*.dll" target="runtimes\win10-x64\native" />

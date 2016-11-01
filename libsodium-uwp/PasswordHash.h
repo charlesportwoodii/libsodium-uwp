@@ -1,5 +1,5 @@
 #pragma once
-#include "pch.h";
+#include "pch.h"
 
 using namespace Platform;
 using namespace Platform::Collections;
