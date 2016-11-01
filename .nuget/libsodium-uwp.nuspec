@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>libsodium-uwp</id>
-    <version>1.0.0-alpha6</version>
+    <version>1.0.0-rc1</version>
     <title>libsodium for UWP</title>
     <authors>Charles R. Portwood II (charlesportwoodii)</authors>
     <licenseUrl>https://github.com/charlesportwoodii/libsodium-uwp/blob/master/LICENSE.md</licenseUrl>
@@ -12,23 +12,27 @@
     <releaseNotes>Initial release. Please see README.md for full installation instructions.</releaseNotes>
     <copyright>Copyright (c) 2016 Charles R. Portwood II &amp; Contributors</copyright>
     <language>en-US</language>
-    <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash kdf pbdfk2 hkdf Agon2i Scrypt Bcrypt</tags>
+    <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash kdf pbdfk2 hkdf Agon2i Scrypt</tags>
   </metadata>
   <files>
     <file src="..\README.md" target="" />
     <!-- Visual Studio Targets -->
     <file src="libsodium-uwp.targets" target="build\native" />
+
     <!-- WinMd and IntelliSense -->
     <file src="..\Release\libsodium-uwp\Sodium.winmd" target="lib\uap10.0"/>
+    <file src="..\Release\libsodium-uwp\Sodium.xml" target="lib\uap10.0"/>
 
     <!-- x86 runtime DLL, PRI -->
     <file src="..\Release\libsodium-uwp\*.dll" target="runtimes\win10-x86\native" />
     <file src="..\Release\libsodium-uwp\*.pri" target="runtimes\win10-x86\native" />
     <file src="..\Release\libsodium-uwp\*.lib" target="runtimes\win10-x86\native" />
+
     <!-- x64 runtime DLL, PRI -->
     <file src="..\x64\Release\libsodium-uwp\*.dll" target="runtimes\win10-x64\native" />
     <file src="..\x64\Release\libsodium-uwp\*.pri" target="runtimes\win10-x64\native" />
     <file src="..\x64\Release\libsodium-uwp\*.lib" target="runtimes\win10-x64\native" />
+
     <!-- ARM runtime DLL, PRI -->
     <file src="..\ARM\Release\libsodium-uwp\*.dll" target="runtimes\win10-arm\native" />
     <file src="..\ARM\Release\libsodium-uwp\*.pri" target="runtimes\win10-arm\native" />

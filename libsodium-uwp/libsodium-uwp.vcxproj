@@ -160,6 +160,10 @@
     <PreBuildEvent>
       <Command>copy "$(ProjectDir)\libsodium\builds\msvc\version.h"  "$(ProjectDir)\libsodium\src\libsodium\include\sodium\"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -187,6 +191,9 @@
     <PreBuildEvent>
       <Command>copy "$(ProjectDir)\libsodium\builds\msvc\version.h"  "$(ProjectDir)\libsodium\src\libsodium\include\sodium\"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)..\Release\libsodium-uwp\libsodium-uwp.xml" "$(ProjectDir)..\Release\libsodium-uwp\Sodium.xml"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -214,6 +221,10 @@
     <PreBuildEvent>
       <Command>copy "$(ProjectDir)\libsodium\builds\msvc\version.h"  "$(ProjectDir)\libsodium\src\libsodium\include\sodium\"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
@@ -241,6 +252,10 @@
     <PreBuildEvent>
       <Command>copy "$(ProjectDir)\libsodium\builds\msvc\version.h"  "$(ProjectDir)\libsodium\src\libsodium\include\sodium\"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -268,6 +283,10 @@
     <PreBuildEvent>
       <Command>copy "$(ProjectDir)\libsodium\builds\msvc\version.h"  "$(ProjectDir)\libsodium\src\libsodium\include\sodium\"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -295,6 +314,10 @@
     <PreBuildEvent>
       <Command>copy "$(ProjectDir)\libsodium\builds\msvc\version.h"  "$(ProjectDir)\libsodium\src\libsodium\include\sodium\"</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GenericHash.h" />

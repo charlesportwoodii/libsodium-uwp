@@ -95,3 +95,33 @@ public static byte[] Sodium.KDF.HSalsa20(byte[] in, byte[] k, byte[] c);
 ```
 
 _Internally this function uses `crypto_core_hsalsa20`._
+
+## Argon2i Key Derivation
+
+__Namespace:__ _Sodium.KDF_
+
+```C#
+public static byte[] Sodium.KDF.Argon2i(string password, PasswordHashOptions options)
+public static byte[] Sodium.KDF.Argon2i(string password, byte[] salt, PasswordHashOptions options)
+```
+
+This method will generate a 32 byte key using Argon2i provided a string `password` and `PasswordHashOptions` `options`. For more information about `PasswordHashOptions`, and acceptable parameters, see [PasswordHash](PasswordHash.md);
+
+If a salt is not provided, a 16 byte salt will be generated.
+
+_Internally this method uses `crypto_pwhash`._
+
+## Scrypt Key Derivation
+
+__Namespace:__ _Sodium.KDF_
+
+```C#
+public static byte[] Sodium.KDF.Scrypt(string password, PasswordHashOptions options)
+public static byte[] Sodium.KDF.Scrypt(string password, byte[] salt, PasswordHashOptions options)
+```
+
+This method will generate a 32 byte key using Scrypt provided a string `password` and `PasswordHashOptions` `options`. For more information about `PasswordHashOptions`, and acceptable parameters, see [PasswordHash](PasswordHash.md);
+
+If a salt is not provided, a 32 byte salt will be generated.
+
+_Internally this method uses `crypto_pwhash_scryptsalsa208sha256`._

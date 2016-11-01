@@ -240,3 +240,123 @@ Array<unsigned char>^ Sodium::KDF::HSalsa20(const Array<unsigned char>^ in, cons
 
 	return out;
 }
+
+/// <summary>Argon2i key derivation</summary>
+/// <param name="password">The string password</param>
+/// <param name="salt">A 32 byte salt</param>
+/// <param name="options">PasswordHash options</param>
+/// <returns>32 byte key</returns>
+Array<unsigned char>^ Sodium::KDF::Argon2i(String^ password, const Array<unsigned char>^ salt, PasswordHashOptions options)
+{
+	// If the salt isn't provided, generate a random salt value
+	if (salt->Length == 0 || salt == nullptr) {
+		salt = Sodium::Core::GetRandomBytes(crypto_pwhash_SALTBYTES);
+	}
+
+	if (salt->Length != crypto_pwhash_SALTBYTES) {
+		throw ref new Platform::InvalidArgumentException("Salt must be " + crypto_pwhash_SALTBYTES + " bytes in length");
+	}
+
+	if (options.memory_cost <= 0) {
+		throw ref new Platform::InvalidArgumentException("options.memory_cost must be greater than 0");
+	}
+
+	if (options.time_cost < 3) {
+		throw ref new Platform::InvalidArgumentException("options.time_cost must be greater than 3");
+	}
+
+	Array<unsigned char>^ key = ref new Array<unsigned char>(crypto_box_SEEDBYTES);
+	std::string sPassword(password->Begin(), password->End());
+	
+	int result = crypto_pwhash(
+		key->Data,
+		key->Length,
+		sPassword.c_str(),
+		strlen(sPassword.c_str()),
+		salt->Data,
+		options.time_cost,
+		(options.memory_cost * 1024U),
+		crypto_pwhash_ALG_DEFAULT
+	);
+	
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Out of memory");
+	}
+	
+
+	return key;
+}
+
+/// <summary>Argon2i key derivation</summary>
+/// <param name="password">The string password</param>
+/// <param name="options">PasswordHash options</param>
+/// <returns>32 byte key</returns>
+Array<unsigned char>^ Sodium::KDF::Argon2i(String^ password, PasswordHashOptions options)
+{
+	Array<unsigned char>^ salt = Sodium::Core::GetRandomBytes(crypto_pwhash_SALTBYTES);
+	return Sodium::KDF::Argon2i(
+		password,
+		salt,
+		options
+	);
+}
+
+/// <summary>The scrypt Password-Based Key Derivation Function</summary>
+/// <remarks>https://tools.ietf.org/html/rfc7914.html</remarks>
+/// <param name="password">The string password</param>
+/// <param name="salt">A 32 byte salt</param>
+/// <param name="options">PasswordHash options</param>
+/// <returns>32 byte key</returns>
+Array<unsigned char>^ Sodium::KDF::Scrypt(String^ password, const Array<unsigned char>^ salt, PasswordHashOptions options)
+{
+	// If the salt isn't provided, generate a random salt value
+	if (salt->Length == 0 || salt == nullptr) {
+		salt = Sodium::Core::GetRandomBytes(crypto_pwhash_scryptsalsa208sha256_SALTBYTES);
+	}
+
+	if (salt->Length != crypto_pwhash_scryptsalsa208sha256_SALTBYTES) {
+		throw ref new Platform::InvalidArgumentException("Salt must be " + crypto_pwhash_scryptsalsa208sha256_SALTBYTES + " bytes in length");
+	}
+
+	if (options.memory_cost <= 0) {
+		throw ref new Platform::InvalidArgumentException("options.memory_cost must be greater than 0");
+	}
+
+	if (options.time_cost <= 0) {
+		throw ref new Platform::InvalidArgumentException("options.time_cost must be greater than 0");
+	}
+
+	Array<unsigned char>^ key = ref new Array<unsigned char>(crypto_box_SEEDBYTES);
+	std::string sPassword(password->Begin(), password->End());
+
+	int result = crypto_pwhash_scryptsalsa208sha256(
+		key->Data,
+		key->Length,
+		sPassword.c_str(),
+		strlen(sPassword.c_str()),
+		salt->Data,
+		options.time_cost,
+		(options.memory_cost * 1024U)
+	);
+
+	if (result != 0) {
+		throw ref new Platform::Exception(0, "Out of memory");
+	}
+
+	return key;
+}
+
+/// <summary>The scrypt Password-Based Key Derivation Function</summary>
+/// <remarks>https://tools.ietf.org/html/rfc7914.html</remarks>
+/// <param name="password">The string password</param>
+/// <param name="options">PasswordHash options</param>
+/// <returns>32 byte key</returns>
+Array<unsigned char>^ Sodium::KDF::Scrypt(String^ password, PasswordHashOptions options)
+{
+	Array<unsigned char>^ salt = Sodium::Core::GetRandomBytes(crypto_pwhash_scryptsalsa208sha256_SALTBYTES);
+	return Sodium::KDF::Scrypt(
+		password,
+		salt,
+		options
+	);
+}

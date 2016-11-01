@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Sodium;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Windows.Security.Cryptography.Core;
@@ -333,6 +333,44 @@ namespace Test
             result = Sodium.KDF.HSalsa20(nonceprefix, result, c);
             Assert.AreEqual(Convert.ToBase64String(expected), Convert.ToBase64String(result));
             Assert.IsTrue(result.Length == 32);
+        }
+
+        [TestCategory("Argon2i")]
+        [TestMethod]
+        public void Argon2iTest()
+        {
+            string password = "correct horse battery staple";
+            var options = new PasswordHashOptions
+            {
+                time_cost = 3,
+                memory_cost = 1<<8
+            };
+
+            var result = Sodium.KDF.Argon2i(password, options);
+            Assert.AreEqual(32, result.Length);
+
+            var salt = Sodium.Core.GetRandomBytes(32);
+            result = Sodium.KDF.Argon2i(password, salt, options);
+            Assert.AreEqual(32, result.Length);
+        }
+
+        [TestCategory("Scrypt")]
+        [TestMethod]
+        public void ScryptTest()
+        {
+            string password = "correct horse battery staple";
+            var options = new PasswordHashOptions
+            {
+                time_cost = 1 << 8,
+                memory_cost = 1 << 8
+            };
+
+            var result = Sodium.KDF.Scrypt(password, options);
+            Assert.AreEqual(32, result.Length);
+
+            var salt = Sodium.Core.GetRandomBytes(32);
+            result = Sodium.KDF.Scrypt(password, salt, options);
+            Assert.AreEqual(32, result.Length);
         }
     }
 }

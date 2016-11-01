@@ -45,13 +45,21 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		);
 
 		if (result != 0) {
-			throw ref new Platform::InvalidArgumentException("Out of memory");
+			throw ref new Platform::Exception(0, "Out of memory");
 		}
 		
 		std::string hash_str = std::string(hash);
 		std::wstring whash_str = std::wstring(hash_str.begin(), hash_str.end());
 		return ref new Platform::String(whash_str.c_str());
 	} else if (algorithm == PasswordHash::Scrypt) { // Scrypt
+		if (options.memory_cost <= 0) {
+			throw ref new Platform::InvalidArgumentException("options.memory_cost must be greater than 0");
+		}
+
+		if (options.time_cost <= 0 ) {
+			throw ref new Platform::InvalidArgumentException("options.time_cost must be greater than 0");
+		}
+
 		char hash[crypto_pwhash_scryptsalsa208sha256_STRBYTES];
 		int result = crypto_pwhash_scryptsalsa208sha256_str(
 			hash,
@@ -62,7 +70,7 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		);
 
 		if (result != 0) {
-			throw ref new Platform::InvalidArgumentException("Out of memory");
+			throw ref new Platform::Exception(0, "Out of memory");
 		}
 
 		std::string hash_str = std::string(hash);
