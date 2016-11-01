@@ -1,5 +1,6 @@
 # libsodium-uwp
 
+[![AppVeyor](https://img.shields.io/appveyor/ci/charlesportwoodii/libsodium-uwp.svg?style=flat-square)](https://ci.appveyor.com/project/charlesportwoodii/libsodium-uwp)
 [![License](https://img.shields.io/github/license/charlesportwoodii/libsodium-uwp.svg?style=flat-square)](https://github.com/charlesportwoodii/libsodium-uwp/blob/master/LICENSE.md)
 [![Nuget](https://img.shields.io/nuget/vpre/libsodium-uwp.svg?style=flat-square)](https://www.nuget.org/packages/libsodium-uwp/)
 
