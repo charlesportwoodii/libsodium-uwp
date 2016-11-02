@@ -9,7 +9,9 @@
     <projectUrl>https://github.com/charlesportwoodii/libsodium-uwp</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>libsodium-uwp - A secure cryptographic library for Universal Windows Platform</description>
-    <releaseNotes>Initial release. Please see README.md for full installation instructions.</releaseNotes>
+    <releaseNotes><![CDATA[
+            For full release notes, documentation, and installation instructions see https://github.com/charlesportwoodii/libsodium-uwp/releases
+            ]]></releaseNotes>
     <copyright>Copyright (c) 2016 Charles R. Portwood II &amp; Contributors</copyright>
     <language>en-US</language>
     <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash kdf pbdfk2 hkdf Agon2i Scrypt</tags>
