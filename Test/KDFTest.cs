@@ -349,7 +349,7 @@ namespace Test
             var result = Sodium.KDF.Argon2i(password, options);
             Assert.AreEqual(32, result.Length);
 
-            var salt = Sodium.Core.GetRandomBytes(32);
+            var salt = Sodium.Core.GetRandomBytes(16);
             result = Sodium.KDF.Argon2i(password, salt, options);
             Assert.AreEqual(32, result.Length);
         }

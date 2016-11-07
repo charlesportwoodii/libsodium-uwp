@@ -243,7 +243,7 @@ Array<unsigned char>^ Sodium::KDF::HSalsa20(const Array<unsigned char>^ in, cons
 
 /// <summary>Argon2i key derivation</summary>
 /// <param name="password">The string password</param>
-/// <param name="salt">A 32 byte salt</param>
+/// <param name="salt">A 16 byte salt</param>
 /// <param name="options">PasswordHash options</param>
 /// <returns>32 byte key</returns>
 Array<unsigned char>^ Sodium::KDF::Argon2i(String^ password, const Array<unsigned char>^ salt, PasswordHashOptions options)

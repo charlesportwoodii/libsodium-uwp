@@ -30,8 +30,6 @@
     <file src="..\Release\libsodium-uwp\*.pri" target="runtimes\win10-x86\native" />
     <file src="..\Release\libsodium-uwp\*.lib" target="runtimes\win10-x86\native" />
 
-    <!-- x86 runtime DLL, PRI -->
-
     <!-- x64 runtime DLL, PRI -->
     <file src="..\x64\Release\libsodium-uwp\*.dll" target="runtimes\win10-x64\native" />
     <file src="..\x64\Release\libsodium-uwp\*.pri" target="runtimes\win10-x64\native" />
