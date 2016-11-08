@@ -35,13 +35,15 @@ Cryptography is hard. This library was written to make libsodium available to th
 2. Add the following to your `Package.appxmanifest` file.
 
     ```xml
-    <Extensions>
+      <Extensions>
         <Extension Category="windows.activatableClass.inProcessServer">
             <InProcessServer>
                 <Path>libsodium-uwp.dll</Path>
                 <ActivatableClass ActivatableClassId="Sodium.Core" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.CryptoHash" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.GenericHash" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.GenericHashAlgorithmProvider" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.GenericHashAlgorithmNames" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.KDF" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.KeyPair" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.OneTimeAuth" ThreadingModel="both" />
