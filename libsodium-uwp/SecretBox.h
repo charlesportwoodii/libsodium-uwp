@@ -17,8 +17,8 @@ namespace Sodium
 		static Array<unsigned char>^ GenerateKey();
 
 		[Windows::Foundation::Metadata::DefaultOverloadAttribute]
-		static Array<unsigned char>^ Create(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
+		static Array<unsigned char>^ Create(String^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 		static Array<unsigned char>^ Open(const Array<unsigned char>^ ciphertext, const Array<unsigned char>^ nonce, const Array<unsigned char>^ key);
 
 		[Windows::Foundation::Metadata::DefaultOverloadAttribute]
