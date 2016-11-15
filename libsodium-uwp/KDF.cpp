@@ -82,7 +82,7 @@ Array<unsigned char>^ Sodium::KDF::PBKDF2(String^ algorithm, String^ password, c
 		KeyDerivationAlgorithmNames::Pbkdf2Sha1,
 		KeyDerivationAlgorithmNames::Pbkdf2Sha256,
 		KeyDerivationAlgorithmNames::Pbkdf2Sha384,
-		KeyDerivationAlgorithmNames::Pbkdf2Sha384,
+		KeyDerivationAlgorithmNames::Pbkdf2Sha512,
 	};
 
 	bool inArray = false;
