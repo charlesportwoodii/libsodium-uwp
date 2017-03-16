@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Sodium;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
@@ -11,12 +11,12 @@ namespace Test
         [TestMethod]
         public void SodiumVersionStringTest()
         {
-            const string EXPECTED = "1.0.11";
+            const string EXPECTED = "1.0.12";
             var actual = Core.SodiumVersionString();
             Assert.AreEqual(EXPECTED, actual);
             
             actual = Core.SodiumVersionString();
-            Assert.AreNotEqual("1.0.10", actual);
+            Assert.AreNotEqual("1.0.11", actual);
         }
 
         [TestCategory("Core")]
