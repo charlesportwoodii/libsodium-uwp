@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>libsodium-uwp</id>
-    <version>1.0.0-rc1</version>
+    <version>1.0.12.0</version>
     <title>libsodium for UWP</title>
     <authors>Charles R. Portwood II (charlesportwoodii)</authors>
     <licenseUrl>https://github.com/charlesportwoodii/libsodium-uwp/blob/master/LICENSE.md</licenseUrl>
@@ -12,7 +12,7 @@
     <releaseNotes><![CDATA[
             For full release notes, documentation, and installation instructions see https://github.com/charlesportwoodii/libsodium-uwp/releases
             ]]></releaseNotes>
-    <copyright>Copyright (c) 2016 Charles R. Portwood II &amp; Contributors</copyright>
+    <copyright>Copyright (c) 2016-2017 Charles R. Portwood II &amp; Contributors</copyright>
     <language>en-US</language>
     <tags>libsodium NaCL encryption cryptography XSalsa20 Curve25519 Ed25519 Poly1305 hash kdf pbdfk2 hkdf Agon2i Scrypt</tags>
   </metadata>
