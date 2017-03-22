@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
@@ -339,28 +339,27 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="GenericHash.h" />
-    <ClInclude Include="PasswordHash.h" />
-    <ClInclude Include="SodiumCore.h" />
-    <ClInclude Include="CryptoHash.h" />
-    <ClInclude Include="DetachedBox.h" />
-    <ClInclude Include="Extern.h" />
-    <ClInclude Include="include\randombytes_default.h" />
-    <ClInclude Include="include\randombytes_uwp.h" />
-    <ClInclude Include="internal.h" />
-    <ClInclude Include="KDF.h" />
-    <ClInclude Include="KeyPair.h" />
-    <ClInclude Include="OneTimeAuth.h" />
-    <ClInclude Include="PublicKeyAuth.h" />
-    <ClInclude Include="PublicKeyBox.h" />
-    <ClInclude Include="ScalarMult.h" />
-    <ClInclude Include="SealedPublicKeyBox.h" />
-    <ClInclude Include="SecretAead.h" />
-    <ClInclude Include="SecretBox.h" />
-    <ClInclude Include="SecretKeyAuth.h" />
-    <ClInclude Include="ShortHash.h" />
-    <ClInclude Include="StreamEncryption.h" />
-    <ClInclude Include="Utilities.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-avx2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-sse41.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-ssse3.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-load-avx2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-load-sse2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-load-sse41.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_shorthash\siphash24\ref\shorthash_siphash_ref.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_sign\ed25519\ref10\ed25519_ref10.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\common.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\consts.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\int128.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\chacha20_dolbeau-avx2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\chacha20_dolbeau-ssse3.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\u0.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\u1.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\u4.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\u8.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\ref\chacha20_ref.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\ref\salsa20_ref.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\stream_salsa20.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base2.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\hchacha20\core_hchacha20.h" />
@@ -405,15 +404,24 @@
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\ref\stream_chacha20_ref.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\stream_chacha20.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\vec\stream_chacha20_vec.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\salsa20_xmm6int-avx2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\salsa20_xmm6int-sse2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\u0.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\u1.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\u4.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\u8.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6\salsa20_xmm6.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\core.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_aead_aes256gcm.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_aead_chacha20poly1305.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_aead_xchacha20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_auth.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_auth_hmacsha256.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_auth_hmacsha512.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_auth_hmacsha512256.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_box.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_box_curve25519xchacha20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_box_curve25519xsalsa20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_core_hchacha20.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_core_hsalsa20.h" />
@@ -427,6 +435,9 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_hash_sha512.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_int32.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_int64.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_kdf.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_kdf_blake2b.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_kx.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_onetimeauth.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_onetimeauth_poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_pwhash.h" />
@@ -435,6 +446,7 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult_curve25519.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretbox.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretbox_xchacha20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretbox_xsalsa20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_shorthash.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_shorthash_siphash24.h" />
@@ -460,32 +472,42 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\common.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\curve25519_ref10.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\mutex.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\private\sse2_64_32.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_nativeclient.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_salsa20_random.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_sysrandom.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\runtime.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\utils.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\version.h" />
+    <ClInclude Include="GenericHash.h" />
+    <ClInclude Include="PasswordHash.h" />
+    <ClInclude Include="SodiumCore.h" />
+    <ClInclude Include="CryptoHash.h" />
+    <ClInclude Include="DetachedBox.h" />
+    <ClInclude Include="Extern.h" />
+    <ClInclude Include="include\randombytes_default.h" />
+    <ClInclude Include="include\randombytes_uwp.h" />
+    <ClInclude Include="internal.h" />
+    <ClInclude Include="KDF.h" />
+    <ClInclude Include="KeyPair.h" />
+    <ClInclude Include="OneTimeAuth.h" />
+    <ClInclude Include="PublicKeyAuth.h" />
+    <ClInclude Include="PublicKeyBox.h" />
+    <ClInclude Include="ScalarMult.h" />
+    <ClInclude Include="SealedPublicKeyBox.h" />
+    <ClInclude Include="SecretAead.h" />
+    <ClInclude Include="SecretBox.h" />
+    <ClInclude Include="SecretKeyAuth.h" />
+    <ClInclude Include="ShortHash.h" />
+    <ClInclude Include="StreamEncryption.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CryptoHash.cpp" />
     <ClCompile Include="GenericHash.cpp" />
     <ClCompile Include="KDF.cpp" />
-    <ClCompile Include="OneTimeAuth.cpp" />
-    <ClCompile Include="PasswordHash.cpp" />
-    <ClCompile Include="PublicKeyAuth.cpp" />
-    <ClCompile Include="PublicKeyBox.cpp" />
-    <ClCompile Include="ScalarMult.cpp" />
-    <ClCompile Include="SealedPublicKeyBox.cpp" />
-    <ClCompile Include="SecretAead.cpp" />
-    <ClCompile Include="SecretBox.cpp" />
-    <ClCompile Include="SecretKeyAuth.cpp" />
-    <ClCompile Include="ShortHash.cpp" />
-    <ClCompile Include="SodiumCore.cpp" />
-    <ClCompile Include="Extern.cpp" />
-    <ClCompile Include="internal.cpp" />
-    <ClCompile Include="randombytes_uwp.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_aead\aes256gcm\aesni\aead_aes256gcm_aesni.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -494,43 +516,23 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_aead\xchacha20poly1305\sodium\aead_xchacha20poly1305.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_auth\crypto_auth.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha256\auth_hmacsha256_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha256\auth_hmacsha256.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha256\cp\hmac_hmacsha256.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512256\auth_hmacsha512256.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha256\cp\verify_hmacsha256.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512256\auth_hmacsha512256_api.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512256\cp\hmac_hmacsha512256.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512256\cp\verify_hmacsha512256.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512\auth_hmacsha512_api.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512\cp\hmac_hmacsha512.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512\cp\verify_hmacsha512.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512\auth_hmacsha512.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -546,23 +548,11 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_box\curve25519xsalsa20poly1305\box_curve25519xsalsa20poly1305_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_box\curve25519xchacha20poly1305\box_curve25519xchacha20poly1305.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_box\curve25519xsalsa20poly1305\ref\after_curve25519xsalsa20poly1305.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_box\curve25519xsalsa20poly1305\ref\before_curve25519xsalsa20poly1305.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_box\curve25519xsalsa20poly1305\ref\box_curve25519xsalsa20poly1305.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_box\curve25519xsalsa20poly1305\ref\keypair_curve25519xsalsa20poly1305.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_box\curve25519xsalsa20poly1305\box_curve25519xsalsa20poly1305.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -574,63 +564,43 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\hsalsa20\core_hsalsa20_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_core\hsalsa20\core_hsalsa20.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\hsalsa20\ref2\core_hsalsa20.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_core\hsalsa20\ref2\core_hsalsa20_ref2.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\salsa2012\core_salsa2012_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_core\salsa\ref\core_salsa_ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\salsa2012\ref\core_salsa2012.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\generichash_blake2.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\salsa208\core_salsa208_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-avx2.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\salsa208\ref\core_salsa208.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\salsa20\core_salsa20_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-sse41.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\salsa20\ref\core_salsa20.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-ssse3.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2\generichash_blake2_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2b-compress-avx2.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2b-compress-ref.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2b-compress-sse41.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2b-compress-ssse3.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2b-ref.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\generichash_blake2b.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\generichash_blake2b.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -642,19 +612,31 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha256\cp\hash_sha256.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha256\cp\hash_sha256_cp.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha256\hash_sha256_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha256\hash_sha256.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha512\cp\hash_sha512.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha512\cp\hash_sha512_cp.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha512\hash_sha512_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha512\hash_sha512.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_kdf\blake2b\kdf_blake2b.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_kdf\crypto_kdf.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_kx\crypto_kx.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -766,11 +748,11 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_secretbox\xsalsa20poly1305\ref\box_xsalsa20poly1305.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_secretbox\xchacha20poly1305\secretbox_xchacha20poly1305.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_secretbox\xsalsa20poly1305\secretbox_xsalsa20poly1305_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_secretbox\xsalsa20poly1305\secretbox_xsalsa20poly1305.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -778,11 +760,19 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_shorthash\siphash24\ref\shorthash_siphash24.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_shorthash\siphash24\ref\shorthash_siphash24_ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_shorthash\siphash24\shorthash_siphash24_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_shorthash\siphash24\ref\shorthash_siphashx24_ref.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_shorthash\siphash24\shorthash_siphash24.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_shorthash\siphash24\shorthash_siphashx24.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -806,39 +796,47 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_sign\ed25519\sign_ed25519_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_sign\ed25519\sign_ed25519.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\afternm_aes128ctr.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\afternm_aes128ctr.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\beforenm_aes128ctr.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\beforenm_aes128ctr.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\consts_aes128ctr.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\consts_aes128ctr.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\int128_aes128ctr.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\int128_aes128ctr.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\stream_aes128ctr.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\stream_aes128ctr_nacl.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\xor_afternm_aes128ctr.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\xor_afternm_aes128ctr.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\stream_aes128ctr_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\stream_aes128ctr.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\chacha20\ref\stream_chacha20_ref.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\chacha20_dolbeau-avx2.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\chacha20\dolbeau\chacha20_dolbeau-ssse3.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\chacha20\ref\chacha20_ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -846,47 +844,43 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\chacha20\vec\stream_chacha20_vec.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_stream\crypto_stream.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa2012\ref\stream_salsa2012.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa2012\ref\stream_salsa2012_ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa2012\ref\xor_salsa2012.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa2012\stream_salsa2012.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa2012\stream_salsa2012_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa208\ref\stream_salsa208_ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa208\ref\stream_salsa208.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa208\stream_salsa208.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa208\ref\xor_salsa208.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\ref\salsa20_ref.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa208\stream_salsa208_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\stream_salsa20.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\ref\stream_salsa20_ref.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\salsa20_xmm6int-avx2.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\ref\xor_salsa20_ref.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6int\salsa20_xmm6int-sse2.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\stream_salsa20_api.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\salsa20\xmm6\salsa20_xmm6.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -894,43 +888,27 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\xsalsa20\ref\stream_xsalsa20.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_stream\xsalsa20\stream_xsalsa20.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\xsalsa20\ref\xor_xsalsa20.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_verify\sodium\verify.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\xsalsa20\stream_xsalsa20_api.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_verify\16\ref\verify_16.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_verify\16\verify_16_api.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_verify\32\ref\verify_32.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_verify\32\verify_32_api.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_verify\64\ref\verify_64.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_verify\64\verify_64_api.c">
+    <ClCompile Include="libsodium\src\libsodium\randombytes\nativeclient\randombytes_nativeclient.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\randombytes\randombytes.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\randombytes\salsa20\randombytes_salsa20_random.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -947,6 +925,23 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\sodium\version.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="OneTimeAuth.cpp" />
+    <ClCompile Include="PasswordHash.cpp" />
+    <ClCompile Include="PublicKeyAuth.cpp" />
+    <ClCompile Include="PublicKeyBox.cpp" />
+    <ClCompile Include="ScalarMult.cpp" />
+    <ClCompile Include="SealedPublicKeyBox.cpp" />
+    <ClCompile Include="SecretAead.cpp" />
+    <ClCompile Include="SecretBox.cpp" />
+    <ClCompile Include="SecretKeyAuth.cpp" />
+    <ClCompile Include="ShortHash.cpp" />
+    <ClCompile Include="SodiumCore.cpp" />
+    <ClCompile Include="Extern.cpp" />
+    <ClCompile Include="internal.cpp" />
+    <ClCompile Include="randombytes_uwp.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
