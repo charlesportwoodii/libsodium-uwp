@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<Target Name="PlatformCheck" BeforeTargets="InjectReference"
-		Condition=" '$(TargetExt)' == '.exe' AND ( ('$(Platform)' != 'x86') AND ('$(Platform)' != 'ARM') AND  ('$(Platform)' != 'x64') )">
-		<Error  Text="Please specify a platform (ARM,x64,x86) for .EXE targets." />
-	</Target>
-	<ItemGroup>
-		<SDKReference Include="Microsoft.VCLibs, Version=14.0" />
-	</ItemGroup>
-	<ItemGroup Condition="!Exists('project.json') AND !Exists('$(MSBuildProjectName).project.json') AND '$(TargetPlatformIdentifier)' == 'UAP'">
-		<PropertyGroup>
-			<libsodium-Platform Condition="'$(Platform)' == 'Win32'">x86</libsodium-Platform>
-			<libsodium-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</libsodium-Platform>
-		</PropertyGroup>
 
-		<Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\Sodium.winmd">
-			<Implementation>libsodium-uwp.dll</Implementation>
-		</Reference>
-		<ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(libsodium-Platform)\native\libsodium-uwp.dll" />
-	</ItemGroup>
-	<ItemDefinitionGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
-		<ClCompile>
-			<AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-		</ClCompile>
-	</ItemDefinitionGroup>
+  <ItemGroup>
+	<SDKReference Include="Microsoft.VCLibs, Version=14.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <libsodium-Platform Condition="'$(Platform)' == 'Win32'">x86</libsodium-Platform>
+    <libsodium-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</libsodium-Platform>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
+      <Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\Sodium.winmd">
+        <Implementation>libsodium-uwp.dll</Implementation>
+      </Reference>
+      <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(libsodium-Platform)\native\libsodium-uwp.dll" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
 </Project>
