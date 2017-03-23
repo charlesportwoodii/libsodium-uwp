@@ -1,6 +1,9 @@
-﻿using System;
+using System;
 using Sodium;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Windows.Storage.Streams;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
 
 namespace Test
 {
@@ -137,6 +140,20 @@ namespace Test
             var kp = PublicKeyAuth.GenerateKeyPair();
             var pub = PublicKeyAuth.ExtractEd25519PublicKeyFromEd25519SecretKey(kp.Secret);
             Assert.AreEqual(Convert.ToBase64String(kp.Public), Convert.ToBase64String(pub));
+        }
+
+        [TestCategory("PublicKeyAuth")]
+        [TestMethod]
+        public void SignAndVerifyFromMessageTest()
+        {
+            var kp = PublicKeyAuth.GenerateKeyPair();
+            var signature = new PublicKeyAuth();
+            IBuffer data = CryptographicBuffer.ConvertStringToBinary("Hello, World!", BinaryStringEncoding.Utf8);
+            signature.Append(data);
+
+            var output = signature.GetValueAndReset(kp.Secret);
+            Assert.AreEqual(64, output.Length);
+            Assert.AreEqual(true, signature.GetValueAndVerify(output, kp.Public));
         }
     }
 }

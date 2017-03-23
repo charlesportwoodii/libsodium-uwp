@@ -12,7 +12,30 @@ namespace Sodium
 {
 	public ref class PublicKeyAuth sealed
 	{
+	private:
+		property Array<unsigned char>^ state;
+		property size_t state_len;
+
 	public:
+		PublicKeyAuth()
+		{
+			crypto_sign_state state;
+			size_t state_len = sizeof(state);
+
+			int result = crypto_sign_init(&state);
+
+			Array<unsigned char>^ s = ref new Array<unsigned char>(state_len);
+			memcpy(s->Data, &state, state_len);
+
+			this->state = s;
+			this->state_len = state_len;
+		}
+
+		// Class methods
+		void Append(IBuffer^ data);
+		Array<unsigned char>^ GetValueAndReset(const Array<unsigned char>^ secretKey);
+		bool GetValueAndVerify(const Array<unsigned char>^ signature, const Array<unsigned char>^ publicKey);
+
 		static KeyPair^ GenerateKeyPair();
 		static KeyPair^ GenerateKeyPair(const Array<unsigned char>^ seed);
 

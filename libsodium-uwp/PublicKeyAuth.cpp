@@ -11,6 +11,71 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 
+
+/// <summary>Appends data to the crypto sign state</summary>
+/// <param name="data">The data to append</param>
+void Sodium::PublicKeyAuth::Append(IBuffer^ data)
+{
+	Array<unsigned char>^ d = ref new Array<unsigned char>(data->Length);
+	CryptographicBuffer::CopyToByteArray(data, &d);
+
+	crypto_sign_state state;
+	memcpy(&state, this->state->Data, this->state_len);
+
+	int result = crypto_sign_update(
+		&state,
+		d->Data,
+		d->Length
+	);
+
+	Array<unsigned char>^ s = ref new Array<unsigned char>(state_len);
+	memcpy(s->Data, &state, state_len);
+
+	this->state = s;
+}
+
+/// <summary>Gets the signature given the secret key</summary>
+/// <param name="secretKey">The secret key</param>
+/// <returns>The signature</returns>
+Array<unsigned char>^ Sodium::PublicKeyAuth::GetValueAndReset(const Array<unsigned char>^ secretKey)
+{
+	Array<unsigned char>^ signature = ref new Array<unsigned char>(crypto_sign_BYTES);
+
+	crypto_sign_state state;
+	memcpy(&state, this->state->Data, this->state_len);
+
+	int result = crypto_sign_final_create(
+		&state,
+		signature->Data,
+		NULL,
+		secretKey->Data
+	);
+
+	return signature;
+}
+
+/// <summary>Verifies the value of a signature given a publickey</summary>
+/// <param name="signature">The signature</param>
+/// <param name="publicKey">The public key</param>
+/// <returns>Boolean</returns>
+bool Sodium::PublicKeyAuth::GetValueAndVerify(const Array<unsigned char>^ signature, const Array<unsigned char>^ publicKey)
+{
+	crypto_sign_state state;
+	memcpy(&state, this->state->Data, this->state_len);
+
+	int result = crypto_sign_final_verify(
+		&state,
+		signature->Data,
+		publicKey->Data
+	);
+
+	if (result == 0) {
+		return true;
+	}
+
+	return false;
+}
+
 /// <summary>Generates a KeyPair</summary>
 /// <returns>A KeyPair object</returns>
 KeyPair ^ Sodium::PublicKeyAuth::GenerateKeyPair()
