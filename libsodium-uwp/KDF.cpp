@@ -266,13 +266,13 @@ Array<unsigned char>^ Sodium::KDF::Argon2i(String^ password, const Array<unsigne
 	}
 
 	Array<unsigned char>^ key = ref new Array<unsigned char>(crypto_box_SEEDBYTES);
-	std::string sPassword(password->Begin(), password->End());
-	
+	const Array<unsigned char>^ sPassword = Sodium::internal::StringToUnsignedCharArray(password);
+
 	int result = crypto_pwhash(
 		key->Data,
 		key->Length,
-		sPassword.c_str(),
-		strlen(sPassword.c_str()),
+		(const char*)sPassword->Data,
+		sPassword->Length,
 		salt->Data,
 		options.time_cost,
 		(options.memory_cost * 1024U),
@@ -327,13 +327,13 @@ Array<unsigned char>^ Sodium::KDF::Scrypt(String^ password, const Array<unsigned
 	}
 
 	Array<unsigned char>^ key = ref new Array<unsigned char>(crypto_box_SEEDBYTES);
-	std::string sPassword(password->Begin(), password->End());
+	const Array<unsigned char>^ sPassword = Sodium::internal::StringToUnsignedCharArray(password);
 
 	int result = crypto_pwhash_scryptsalsa208sha256(
 		key->Data,
 		key->Length,
-		sPassword.c_str(),
-		strlen(sPassword.c_str()),
+		(const char*)sPassword->Data,
+		sPassword->Length,
 		salt->Data,
 		options.time_cost,
 		(options.memory_cost * 1024U)
