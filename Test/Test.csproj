@@ -97,9 +97,6 @@
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>
-    <SDKReference Include="Microsoft.VCLibs.120, Version=14.0">
-      <Name>Microsoft Visual C++ 2013 Runtime Package for Windows Universal</Name>
-    </SDKReference>
     <SDKReference Include="MSTestFramework.Universal, Version=$(UnitTestPlatformVersion)" />
     <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
   </ItemGroup>
