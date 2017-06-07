@@ -22,7 +22,7 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 	}
 
 	char hash;
-	std::string sPassword(password->Begin(), password->End());
+	const Array<unsigned char>^ sPassword = Sodium::internal::StringToUnsignedCharArray(password);
 
 	// Argon2i
 	if (algorithm == PasswordHash::Argon2i) {
@@ -38,8 +38,8 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 
 		int result = crypto_pwhash_str(
 			hash,
-			sPassword.c_str(),
-			strlen(sPassword.c_str()),
+			(const char*)sPassword->Data,
+			sPassword->Length,
 			options.time_cost,
 			(options.memory_cost * 1024U)
 		);
@@ -63,8 +63,8 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		char hash[crypto_pwhash_scryptsalsa208sha256_STRBYTES];
 		int result = crypto_pwhash_scryptsalsa208sha256_str(
 			hash,
-			sPassword.c_str(),
-			strlen(sPassword.c_str()),
+			(const char*)sPassword->Data,
+			sPassword->Length,
 			options.time_cost,
 			(options.memory_cost * 1024U)
 		);

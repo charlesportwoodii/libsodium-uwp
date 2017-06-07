@@ -282,7 +282,6 @@ Array<unsigned char>^ Sodium::KDF::Argon2i(String^ password, const Array<unsigne
 	if (result != 0) {
 		throw ref new Platform::Exception(0, "Out of memory");
 	}
-	
 
 	return key;
 }
