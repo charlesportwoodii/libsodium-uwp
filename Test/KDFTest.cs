@@ -340,11 +340,7 @@ namespace Test
         public void Argon2iTest()
         {
             string password = "correct horse battery staple";
-            var options = new PasswordHashOptions
-            {
-                time_cost = 3,
-                memory_cost = 1<<8
-            };
+            var options = PasswordHash.CreateOptions(1 << 8, 3);
 
             var result = Sodium.KDF.Argon2i(password, options);
             Assert.AreEqual(32, result.Length);
@@ -359,11 +355,7 @@ namespace Test
         public void ScryptTest()
         {
             string password = "correct horse battery staple";
-            var options = new PasswordHashOptions
-            {
-                time_cost = 1 << 8,
-                memory_cost = 1 << 8
-            };
+            var options = PasswordHash.CreateOptions(1 << 8, 3);
 
             var result = Sodium.KDF.Scrypt(password, options);
             Assert.AreEqual(32, result.Length);

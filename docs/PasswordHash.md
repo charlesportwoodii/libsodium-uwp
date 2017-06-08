@@ -24,6 +24,8 @@ Options can be summarized by the following structure for both Argon2i and Scrypt
 var options = PasswordHash.CreateOptions(int memory, int time);
 ```
 
+> Avoid calling `new PasswordHashOptions { }` directly. Use the wrapper function.
+
 The recommended minimum values are outlined below:
 
 __Argon2i__

@@ -268,6 +268,8 @@ Array<unsigned char>^ Sodium::KDF::Argon2i(String^ password, const Array<unsigne
 	Array<unsigned char>^ key = ref new Array<unsigned char>(crypto_box_SEEDBYTES);
 	const Array<unsigned char>^ sPassword = Sodium::internal::StringToUnsignedCharArray(password);
 
+	sodium_mlock(sPassword->Data, sPassword->Length);
+
 	int result = crypto_pwhash(
 		key->Data,
 		key->Length,
@@ -278,6 +280,9 @@ Array<unsigned char>^ Sodium::KDF::Argon2i(String^ password, const Array<unsigne
 		(options.memory_cost * 1024U),
 		crypto_pwhash_ALG_DEFAULT
 	);
+
+	sodium_munlock(sPassword->Data, sPassword->Length);
+	sodium_memzero(sPassword->Data, sPassword->Length);
 	
 	if (result != 0) {
 		throw ref new Platform::Exception(0, "Out of memory");
@@ -328,6 +333,8 @@ Array<unsigned char>^ Sodium::KDF::Scrypt(String^ password, const Array<unsigned
 	Array<unsigned char>^ key = ref new Array<unsigned char>(crypto_box_SEEDBYTES);
 	const Array<unsigned char>^ sPassword = Sodium::internal::StringToUnsignedCharArray(password);
 
+	sodium_mlock(sPassword->Data, sPassword->Length);
+
 	int result = crypto_pwhash_scryptsalsa208sha256(
 		key->Data,
 		key->Length,
@@ -337,6 +344,9 @@ Array<unsigned char>^ Sodium::KDF::Scrypt(String^ password, const Array<unsigned
 		options.time_cost,
 		(options.memory_cost * 1024U)
 	);
+
+	sodium_munlock(sPassword->Data, sPassword->Length);
+	sodium_memzero(sPassword->Data, sPassword->Length);
 
 	if (result != 0) {
 		throw ref new Platform::Exception(0, "Out of memory");

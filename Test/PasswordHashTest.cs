@@ -11,12 +11,7 @@ namespace Test
         [TestMethod]
         public void Argon2iTest()
         {
-            // Run this test with low memory so it doesn't take forever
-            var options = new PasswordHashOptions
-            {
-                time_cost = 3,
-                memory_cost = 1<<8
-            };
+            var options = PasswordHash.CreateOptions(1 << 8, 3);
 
             string password = "correct horse battery staple";
             var hash = PasswordHash.Hash(password, PasswordHash.Argon2i, options);
@@ -28,12 +23,7 @@ namespace Test
         [TestMethod]
         public void ScryptTest()
         {
-            // Run this test with low memory so it doesn't take forever
-            var options = new PasswordHashOptions
-            {
-                time_cost = 1 << 10,
-                memory_cost = 1 << 9
-            };
+            var options = PasswordHash.CreateOptions(1 << 8, 3);
 
             string password = "correct horse battery staple";
             var hash = PasswordHash.Hash(password, PasswordHash.Scrypt, options);
