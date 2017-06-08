@@ -21,11 +21,7 @@ As a conservative alternative to Argon2, Sodium provides an implementation of th
 Options can be summarized by the following structure for both Argon2i and Scrypt:
 
 ```C#
-var options = new PasswordHashOptions
-{
-    time_cost,
-    memory_cost
-}
+var options = PasswordHash.CreateOptions(int memory, int time);
 ```
 
 The recommended minimum values are outlined below:

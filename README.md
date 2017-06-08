@@ -29,7 +29,7 @@ Cryptography is hard. This library was written to make libsodium available to th
 1. Install from Nuget
 
     ```
-    Install-Package libsodium-uwp -Pre
+    Install-Package libsodium-uwp
     ```
 
 2. Add the following to your `Package.appxmanifest` file.
