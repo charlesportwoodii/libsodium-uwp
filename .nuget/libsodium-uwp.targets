@@ -2,7 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <ItemGroup>
-	<SDKReference Include="Microsoft.VCLibs, Version=14.0" />
+	  <SDKReference Include="Microsoft.VCLibs, Version=14.0" />
   </ItemGroup>
   <PropertyGroup>
     <libsodium-Platform Condition="'$(Platform)' == 'Win32'">x86</libsodium-Platform>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
-      <Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\Sodium.winmd">
+      <Reference Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(libsodium-Platform)\native\lib\uap10.0\Sodium.winmd">
         <Implementation>libsodium-uwp.dll</Implementation>
       </Reference>
       <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(libsodium-Platform)\native\libsodium-uwp.dll" />

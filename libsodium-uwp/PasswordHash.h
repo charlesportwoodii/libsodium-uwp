@@ -35,5 +35,7 @@ namespace Sodium
 
 		static String^ Hash(String^ password, int algorithm, PasswordHashOptions options);
 		static bool Verify(String^ hash, String^ password);
+
+		static PasswordHashOptions CreateOptions(int m, int t);
 	};
 }

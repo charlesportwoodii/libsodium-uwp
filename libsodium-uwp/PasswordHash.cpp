@@ -129,3 +129,22 @@ int Sodium::PasswordHash::DetermineAlgorithm(String^ hash)
 		return -1;
 	}
 }
+
+/// <summary>Creates a PasswordHashOptions struct</summary>
+/// <param name="m">The memory cost </param>
+/// <param name="t">The time cost </param>
+/// <returns>PasswordHashOptions</returns>
+PasswordHashOptions Sodium::PasswordHash::CreateOptions(int m, int t)
+{
+	if (m <= 0) {
+		throw ref new Platform::InvalidArgumentException("memory_cost must be greater than 0");
+	}
+
+	if (t <= 0) {
+		throw ref new Platform::InvalidArgumentException("time_cost must be greater than 0");
+	}
+
+	PasswordHashOptions options = { m, t };
+
+	return options;
+}
