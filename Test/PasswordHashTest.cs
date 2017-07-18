@@ -21,6 +21,18 @@ namespace Test
 
         [TestCategory("PasswordHash")]
         [TestMethod]
+        public void Argon2idTest()
+        {
+            var options = PasswordHash.CreateOptions(1 << 8, 3);
+
+            string password = "correct horse battery staple";
+            var hash = PasswordHash.Hash(password, PasswordHash.Argon2id, options);
+            Assert.IsTrue(PasswordHash.Verify(hash, password));
+            Assert.IsFalse(PasswordHash.Verify(hash, "the wrong password"));
+        }
+
+        [TestCategory("PasswordHash")]
+        [TestMethod]
         public void ScryptTest()
         {
             var options = PasswordHash.CreateOptions(1 << 8, 3);

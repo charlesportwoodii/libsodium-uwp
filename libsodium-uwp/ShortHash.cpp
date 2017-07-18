@@ -40,7 +40,7 @@ Array<unsigned char>^ Sodium::ShortHash::Hash(const Array<unsigned char>^ messag
 
 /// <summary>Generates a short SIP-2-4 hash of the given message</summary>
 /// <param name="message">The message to hash</param>
-/// <param name=key">A 32 byte key</param>
+/// <param name="key">A 32 byte key</param>
 /// <returns>An 8 byte hash</returns>
 Array<unsigned char>^ Sodium::ShortHash::Hash(String^ message, const Array<unsigned char>^ key)
 {
@@ -52,7 +52,7 @@ Array<unsigned char>^ Sodium::ShortHash::Hash(String^ message, const Array<unsig
 
 /// <summary>Generates a short SIP-2-4 hash of the given message</summary>
 /// <param name="message">The message to hash</param>
-/// <param name=key">A 32 byte key</param>
+/// <param name="key">A 32 byte key</param>
 /// <returns>An 8 byte hash</returns>
 Array<unsigned char>^ Sodium::ShortHash::Hash(String^ message, String^ key)
 {

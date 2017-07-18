@@ -22,7 +22,7 @@ namespace Sodium
 	private:
 		static int DetermineAlgorithm(String^ hash);
 
-		static String^ HashArgon2i(String^ password, PasswordHashOptions options);
+		static String^ HashArgon2i(String^ password, PasswordHashOptions options, int algorithm = PasswordHash::Argon2i);
 		static String^ HashScrypt(String^ password, PasswordHashOptions options);
 
 		static bool VerifyArgon2i(String^ hash, String^ password);
@@ -38,6 +38,11 @@ namespace Sodium
 		{
 			int get() { return 2; }
 		};
+
+		static property int Argon2id
+		{
+			int get() { return 3; }
+		}
 
 		static String^ Hash(String^ password, int algorithm, PasswordHashOptions options);
 		static bool Verify(String^ hash, String^ password);

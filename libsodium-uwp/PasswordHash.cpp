@@ -21,11 +21,12 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		throw ref new Platform::InvalidArgumentException("Password must not be null");
 	}
 
-	if (algorithm == PasswordHash::Argon2i) {
-		return PasswordHash::HashArgon2i(password, options);
+	if (algorithm == PasswordHash::Argon2i || algorithm == PasswordHash::Argon2id) {
+		return PasswordHash::HashArgon2i(password, options, algorithm);
 	} else if (algorithm == PasswordHash::Scrypt) {
 		return PasswordHash::HashScrypt(password, options);
-	} else {
+	}
+	else {
 		throw ref new Platform::InvalidArgumentException("Algorithm must be defined");
 	}
 }
@@ -38,7 +39,7 @@ bool Sodium::PasswordHash::Verify(String^ hash, String^ password)
 {
 	int algorithm = PasswordHash::DetermineAlgorithm(hash);
 	
-	if (algorithm == PasswordHash::Argon2i) {
+	if (algorithm == PasswordHash::Argon2i || algorithm == PasswordHash::Argon2id) {
 		return PasswordHash::VerifyArgon2i(hash, password);
 	} else if (algorithm == PasswordHash::Scrypt) {
 		return PasswordHash::VerifyScrypt(hash, password);
@@ -57,7 +58,9 @@ int Sodium::PasswordHash::DetermineAlgorithm(String^ hash)
 
 	if (len >= sizeof("$argon2i$") - 1 && !memcmp(sHash.c_str(), "$argon2i$", sizeof("$argon2i$") - 1)) {
 		return PasswordHash::Argon2i;
-	} else if (len >= sizeof("$7") - 1 && !memcmp(sHash.c_str(), "$7", sizeof("$7") - 1)) {
+	} else if (len >= sizeof("$argon2id$") - 1 && !memcmp(sHash.c_str(), "$argon2id$", sizeof("$argon2id$") - 1)) {
+		return PasswordHash::Argon2i;
+	}else if (len >= sizeof("$7") - 1 && !memcmp(sHash.c_str(), "$7", sizeof("$7") - 1)) {
 		return PasswordHash::Scrypt;
 	} else {
 		return -1;
@@ -68,8 +71,9 @@ int Sodium::PasswordHash::DetermineAlgorithm(String^ hash)
 /// <param name="password">The password to hash</param>
 /// <param name="algorithm">The PasswordHash algorithm to use</param>
 /// <param name="options">PasswordHashOptions struct</param>
+/// <param name="algorithm">The Argon2 algorithm to use</param>
 /// <returns>The hash string</returns>
-String^ Sodium::PasswordHash::HashArgon2i(String^ password, PasswordHashOptions options)
+String^ Sodium::PasswordHash::HashArgon2i(String^ password, PasswordHashOptions options, int algorithm)
 {
 	const Array<unsigned char>^ sPassword = Sodium::internal::StringToUnsignedCharArray(password);
 
@@ -85,13 +89,27 @@ String^ Sodium::PasswordHash::HashArgon2i(String^ password, PasswordHashOptions 
 
 	char hash[crypto_pwhash_STRBYTES];
 
-	int result = crypto_pwhash_str(
-		hash,
-		(const char*)sPassword->Data,
-		sPassword->Length,
-		options.time_cost,
-		(options.memory_cost * 1024U)
-	);
+	int result = -1;
+
+	if (algorithm == PasswordHash::Argon2i) {
+		result = crypto_pwhash_argon2i_str(
+			hash,
+			(const char*)sPassword->Data,
+			sPassword->Length,
+			options.time_cost,
+			(options.memory_cost * 1024U)
+		);
+	} else if (algorithm == PasswordHash::Argon2id) {
+		result = crypto_pwhash_argon2id_str(
+			hash,
+			(const char*)sPassword->Data,
+			sPassword->Length,
+			options.time_cost,
+			(options.memory_cost * 1024U)
+		);
+	} else {
+		throw ref new Platform::InvalidArgumentException("Algorithm must be either Argon2i or Argon2id");
+	}
 
 	sodium_munlock(sPassword->Data, sPassword->Length);
 	sodium_memzero(sPassword->Data, sPassword->Length);
@@ -149,7 +167,7 @@ String^ Sodium::PasswordHash::HashScrypt(String^ password, PasswordHashOptions o
 /// <param name="hash">The hash to check</param>
 /// <param name="password">The password to check</param>
 /// <returns>True of the provided password matches the string</returns>
-bool Sodium::PasswordHash::VerifyArgon2i(String^ hash, String ^ password)
+bool Sodium::PasswordHash::VerifyArgon2i(String^ hash, String^ password)
 {
 	std::string sHash(hash->Begin(), hash->End());
 	std::string sPassword(password->Begin(), password->End());

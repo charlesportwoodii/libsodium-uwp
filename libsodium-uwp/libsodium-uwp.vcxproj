@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
@@ -442,6 +442,7 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_onetimeauth_poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_pwhash.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_pwhash_argon2i.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_pwhash_argon2id.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_pwhash_scryptsalsa208sha256.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult_curve25519.h" />
@@ -473,6 +474,7 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\curve25519_ref10.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\mutex.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\sse2_64_32.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\private\implementations.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_nativeclient.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_salsa20_random.h" />
@@ -668,6 +670,10 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-avx2.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-ssse3.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -681,6 +687,10 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\pwhash_argon2i.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\pwhash_argon2id.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>

@@ -52,7 +52,7 @@ KeyPair^ Sodium::PublicKeyBox::GenerateKeyPair(const Array<unsigned char>^ priva
 /// <summary>Encrypts a message using crypto_box_easy</summary>
 /// <param name="message">The byte message to be encrypted</param>
 /// <param name="nonce">A unique nonce for this message</param>
-/// <param name="secretKey>The senders private key</param>
+/// <param name="secretKey">The senders private key</param>
 /// <param name="publicKey">The recipients public key</param>
 /// <returns>An encrypted byte array</returns>
 Array<unsigned char>^ Sodium::PublicKeyBox::Create(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
@@ -89,7 +89,7 @@ Array<unsigned char>^ Sodium::PublicKeyBox::Create(const Array<unsigned char>^ m
 /// <summary>Encrypts a message using crypto_box_easy</summary>
 /// <param name="message">The string message to be encrypted</param>
 /// <param name="nonce">A unique nonce for this message</param>
-/// <param name="secretKey>The senders private key</param>
+/// <param name="secretKey">The senders private key</param>
 /// <param name="publicKey">The recipients public key</param>
 /// <returns>An encrypted byte array</returns>
 /// <see>Sodium.PublicKeyBox.Create</see>
@@ -106,7 +106,7 @@ Array<unsigned char>^ Sodium::PublicKeyBox::Create(String ^ message, const Array
 /// <summary>Decrypts a cipherText using crypto_box_open_easy</summary>
 /// <param name="cipherText">The byte message to be encrypted</param>
 /// <param name="nonce">A unique nonce for this message</param>
-/// <param name="secretKey>The recipients private key</param>
+/// <param name="secretKey">The recipients private key</param>
 /// <param name="publicKey">The senders public key</param>
 /// <returns>An encrypted byte array</returns>
 Array<unsigned char>^ Sodium::PublicKeyBox::Open(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
@@ -143,7 +143,7 @@ Array<unsigned char>^ Sodium::PublicKeyBox::Open(const Array<unsigned char>^ cip
 /// <summary>Encrypts a message in detached mode</summary>
 /// <param name="message">The byte message to be encrypted</param>
 /// <param name="nonce">A unique nonce for this message</param>
-/// <param name="secretKey>The senders private key</param>
+/// <param name="secretKey">The senders private key</param>
 /// <param name="publicKey">The recipients public key</param>
 /// <returns>An encrypted byte array</returns>
 DetachedBox ^ Sodium::PublicKeyBox::CreateDetached(const Array<unsigned char>^ message, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
@@ -183,7 +183,7 @@ DetachedBox ^ Sodium::PublicKeyBox::CreateDetached(const Array<unsigned char>^ m
 /// <summary>Encrypts a message in detached mode</summary>
 /// <param name="message">The string message to be encrypted</param>
 /// <param name="nonce">A unique nonce for this message</param>
-/// <param name="secretKey>The senders private key</param>
+/// <param name="secretKey">The senders private key</param>
 /// <param name="publicKey">The recipients public key</param>
 /// <returns>An encrypted byte array</returns>
 /// <see>Sodium.PublicKeyBox.CreateDetached</see>
@@ -201,7 +201,7 @@ DetachedBox ^ Sodium::PublicKeyBox::CreateDetached(String^ message, const Array<
 /// <param name="cipherText">The byte message to be dencrypted</param>
 /// <param name="mac">The message authentication code</param>
 /// <param name="nonce">A unique nonce for this message</param>
-/// <param name="secretKey>The recipients private key</param>
+/// <param name="secretKey">The recipients private key</param>
 /// <param name="publicKey">The senders public key</param>
 /// <returns>The decrypted message as a byte array</returns>
 Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(const Array<unsigned char>^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
@@ -244,7 +244,7 @@ Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(const Array<unsigned ch
 /// <param name="cipherText">The string message to be dencrypted</param>
 /// <param name="mac">The message authentication code</param>
 /// <param name="nonce">A unique nonce for this message</param>
-/// <param name="secretKey>The recipients private key</param>
+/// <param name="secretKey">The recipients private key</param>
 /// <param name="publicKey">The senders public key</param>
 /// <returns>The decrypted message as a byte array</returns>
 Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(String^ cipherText, const Array<unsigned char>^ mac, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
@@ -260,7 +260,7 @@ Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(String^ cipherText, con
 
 /// <summary>Decrypts a cipherText in detached mode</summary>
 /// <param name="detached">A DetachedBox instance that contains the cipherText and message</param>
-/// <param name="secretKey>The recipients private key</param>
+/// <param name="secretKey">The recipients private key</param>
 /// <param name="publicKey">The senders public key</param>
 /// <returns>The decrypted message as a byte array</returns>
 Array<unsigned char>^ Sodium::PublicKeyBox::OpenDetached(DetachedBox^ detached, const Array<unsigned char>^ nonce, const Array<unsigned char>^ secretKey, const Array<unsigned char>^ publicKey)
