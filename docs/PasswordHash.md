@@ -61,7 +61,7 @@ PasswordHash.Scrypt // Scrypt
 __Namespace:__ _Sodium.PasswordHash_
 
 ```C#
-public static String Sodium.PasswordHash.Hash(String password, int algorithm, PasswordHashOptions options)
+public static String Sodium.PasswordHash.Hash(String password, PasswordHashOptions options, int algorithm)
 ```
 
 _Internally this method will use either `crypto_pwhash_scryptsalsa208sha256_str`, `crypto_pwhash_argon2i_str`, or `crypto_pwhash_argon2id_str`, depending upon the algorithm set._
