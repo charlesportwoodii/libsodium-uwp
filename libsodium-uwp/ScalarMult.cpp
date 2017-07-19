@@ -11,12 +11,12 @@ using namespace Windows::Storage::Streams;
 
 int Sodium::ScalarMult::Bytes()
 {
-	return crypto_scalarmult_bytes();
+	return (int)crypto_scalarmult_bytes();
 }
 
 int Sodium::ScalarMult::ScalarBytes()
 {
-	return crypto_scalarmult_scalarbytes();
+	return (int)crypto_scalarmult_scalarbytes();
 }
 
 /// <summary>Extracts the public key from the secret key</summary>

@@ -35,7 +35,7 @@ namespace Sodium
 			this->bytes = bytes;
 
 			crypto_generichash_state state;
-			size_t state_len = sizeof(state);
+			int state_len = sizeof(state);
 
 			int result = crypto_generichash_init(
 				&state,

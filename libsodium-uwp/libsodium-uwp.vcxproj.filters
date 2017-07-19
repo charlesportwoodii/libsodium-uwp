@@ -17,9 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="randombytes_uwp.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="Extern.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -389,8 +386,13 @@
     <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\xor_afternm_aes128ctr.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\pwhash_argon2id.c" />
     <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-avx2.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\pwhash_argon2id.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="randombytes_default.c">
       <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -702,9 +704,6 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="include\randombytes_uwp.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="include\randombytes_default.h">
       <Filter>Resources</Filter>
     </ClInclude>

@@ -20,15 +20,14 @@ namespace Sodium
 		PublicKeyAuth()
 		{
 			crypto_sign_state state;
-			size_t state_len = sizeof(state);
 
 			int result = crypto_sign_init(&state);
 
-			Array<unsigned char>^ s = ref new Array<unsigned char>(state_len);
-			memcpy(s->Data, &state, state_len);
-
+			Array<unsigned char>^ s = ref new Array<unsigned char>(sizeof state);
+			memcpy(s->Data, &state, sizeof state);
 			this->state = s;
-			this->state_len = state_len;
+			this->state_len = sizeof state;
+			sodium_memzero(&state, sizeof state);
 		}
 
 		// Class methods

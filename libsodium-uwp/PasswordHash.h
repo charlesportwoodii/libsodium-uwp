@@ -13,8 +13,8 @@ namespace Sodium
 	public value struct PasswordHashOptions
 	{
 	public:
-		size_t memory_cost;
-		size_t time_cost;
+		int memory_cost;
+		int time_cost;
 	};
 
 	public ref class PasswordHash sealed

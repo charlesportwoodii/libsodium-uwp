@@ -28,9 +28,9 @@ void Sodium::PublicKeyAuth::Append(IBuffer^ data)
 		d->Length
 	);
 
-	Array<unsigned char>^ s = ref new Array<unsigned char>(state_len);
-	memcpy(s->Data, &state, state_len);
-
+	Array<unsigned char>^ s = ref new Array<unsigned char>(sizeof state);
+	memcpy(s->Data, &state, sizeof state);
+	sodium_memzero(&state, sizeof state);
 	this->state = s;
 }
 
@@ -50,6 +50,8 @@ Array<unsigned char>^ Sodium::PublicKeyAuth::GetValueAndReset(const Array<unsign
 		NULL,
 		secretKey->Data
 	);
+
+	sodium_memzero(&state, sizeof state);
 
 	return signature;
 }

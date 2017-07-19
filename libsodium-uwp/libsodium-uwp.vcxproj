@@ -34,7 +34,7 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
   </PropertyGroup>
@@ -42,35 +42,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -102,7 +99,7 @@
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
     <EmbedManifest>true</EmbedManifest>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,7 +107,7 @@
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
     <EmbedManifest>true</EmbedManifest>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -118,7 +115,7 @@
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
     <EmbedManifest>true</EmbedManifest>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -126,7 +123,7 @@
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
     <EmbedManifest>true</EmbedManifest>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,7 +131,7 @@
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
     <EmbedManifest>true</EmbedManifest>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,13 +139,13 @@
     <CustomBuildBeforeTargets>
     </CustomBuildBeforeTargets>
     <EmbedManifest>true</EmbedManifest>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MixedRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC=1;RANDOMBYTES_DEFAULT_IMPLEMENTATION;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -156,9 +153,13 @@
       <DisableSpecificWarnings>28204;4146;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)libsodium\src\libsodium\include;$(ProjectDir)libsodium\src\libsodium\include\sodium;$(ProjectDir)libsodium\builds\msvc</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <EnablePREfast>true</EnablePREfast>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <ExpandAttributedSource>
+      </ExpandAttributedSource>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -181,7 +182,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC=1;RANDOMBYTES_DEFAULT_IMPLEMENTATION;NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -213,7 +214,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC=1;RANDOMBYTES_DEFAULT_IMPLEMENTATION;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -223,6 +224,11 @@
       <WarningLevel>Level3</WarningLevel>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <EnablePREfast>true</EnablePREfast>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <ExpandAttributedSource>
+      </ExpandAttributedSource>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -245,7 +251,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC=1;RANDOMBYTES_DEFAULT_IMPLEMENTATION;NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -277,7 +283,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC=1;RANDOMBYTES_DEFAULT_IMPLEMENTATION;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -287,6 +293,11 @@
       <WarningLevel>Level3</WarningLevel>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <EnablePREfast>true</EnablePREfast>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <ExpandAttributedSource>
+      </ExpandAttributedSource>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -309,7 +320,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC;NDEBUG;%(PreprocessorDefinitions);RANDOMBYTES_DEFAULT_IMPLEMENTATION</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT_DLL;SODIUM_STATIC=1;RANDOMBYTES_DEFAULT_IMPLEMENTATION;NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
@@ -476,9 +487,6 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\sse2_64_32.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\implementations.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes.h" />
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_nativeclient.h" />
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_salsa20_random.h" />
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_sysrandom.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\runtime.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\utils.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\version.h" />
@@ -489,7 +497,6 @@
     <ClInclude Include="DetachedBox.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="include\randombytes_default.h" />
-    <ClInclude Include="include\randombytes_uwp.h" />
     <ClInclude Include="internal.h" />
     <ClInclude Include="KDF.h" />
     <ClInclude Include="KeyPair.h" />
@@ -906,19 +913,7 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\nativeclient\randombytes_nativeclient.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\randombytes\randombytes.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\salsa20\randombytes_salsa20_random.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -950,8 +945,10 @@
     <ClCompile Include="ShortHash.cpp" />
     <ClCompile Include="SodiumCore.cpp" />
     <ClCompile Include="Extern.cpp" />
+    <ClCompile Include="StreamEncryption.cpp" />
+    <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="internal.cpp" />
-    <ClCompile Include="randombytes_uwp.c">
+    <ClCompile Include="randombytes_default.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -963,8 +960,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="StreamEncryption.cpp" />
-    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
