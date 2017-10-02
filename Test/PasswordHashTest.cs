@@ -33,6 +33,20 @@ namespace Test
 
         [TestCategory("PasswordHash")]
         [TestMethod]
+        public void NeedsRehashTest()
+        {
+            var options = PasswordHash.CreateOptions(1 << 8, 3);
+
+            string password = "correct horse battery staple";
+            var hash = PasswordHash.Hash(password, PasswordHash.Argon2id, options);
+            Assert.IsFalse(PasswordHash.NeedsRehash(hash, options));
+
+            var newOptions = PasswordHash.CreateOptions(1 << 8, 4);
+            Assert.IsTrue(PasswordHash.NeedsRehash(hash, newOptions));
+        }
+
+        [TestCategory("PasswordHash")]
+        [TestMethod]
         public void ScryptTest()
         {
             var options = PasswordHash.CreateOptions(1 << 8, 3);

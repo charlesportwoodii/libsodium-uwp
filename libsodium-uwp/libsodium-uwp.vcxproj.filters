@@ -80,9 +80,6 @@
     <ClCompile Include="libsodium\src\libsodium\crypto_aead\xchacha20poly1305\sodium\aead_xchacha20poly1305.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\afternm_aes128ctr.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2.c">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -105,9 +102,6 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_auth\hmacsha512256\auth_hmacsha512256.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\beforenm_aes128ctr.c">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-avx2.c">
@@ -141,9 +135,6 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_stream\chacha20\ref\chacha20_ref.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\consts_aes128ctr.c">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\sodium\core.c">
@@ -245,9 +236,6 @@
     <ClCompile Include="libsodium\src\libsodium\crypto_hash\sha512\cp\hash_sha512_cp.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\int128_aes128ctr.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_kdf\blake2b\kdf_blake2b.c">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -285,15 +273,6 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\randombytes\randombytes.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\nativeclient\randombytes_nativeclient.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\salsa20\randombytes_salsa20_random.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\randombytes\sysrandom\randombytes_sysrandom.c">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\sodium\runtime.c">
@@ -341,12 +320,6 @@
     <ClCompile Include="libsodium\src\libsodium\crypto_sign\ed25519\sign_ed25519.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\stream_aes128ctr.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\stream_aes128ctr_nacl.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_stream\chacha20\stream_chacha20.c">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -383,9 +356,6 @@
     <ClCompile Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\ref10\x25519_ref10.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\xor_afternm_aes128ctr.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-avx2.c">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -393,6 +363,13 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="randombytes_default.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_secretstream\xchacha20poly1305\secretstream_xchacha20poly1305.c" />
+    <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-avx512f.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\sodium\codecs.c">
       <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -448,13 +425,7 @@
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\blamka-round-ssse3.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\common.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\common.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\consts.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\sandy2x\consts_namespace.h">
@@ -637,9 +608,6 @@
     <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\sandy2x\fe51_namespace.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\int128.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\sandy2x\ladder.h">
       <Filter>Resources</Filter>
     </ClInclude>
@@ -692,9 +660,6 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\vec\stream_chacha20_vec.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\portable\types.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\include\sodium\utils.h">
@@ -803,12 +768,6 @@
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\ref\chacha20_ref.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\common.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\consts.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_aead_xchacha20poly1305.h">
       <Filter>Resources</Filter>
     </ClInclude>
@@ -828,18 +787,6 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_sign\ed25519\ref10\ed25519_ref10.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_stream\aes128ctr\nacl\int128.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_nativeclient.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_salsa20_random.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\randombytes_sysrandom.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\ref\salsa20_ref.h">
@@ -888,6 +835,12 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\implementations.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretstream_xchacha20poxy1305.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\blamka-round-avx512f.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>

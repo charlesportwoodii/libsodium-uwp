@@ -25,8 +25,7 @@ String^ Sodium::PasswordHash::Hash(String^ password, int algorithm, PasswordHash
 		return PasswordHash::HashArgon2i(password, options, algorithm);
 	} else if (algorithm == PasswordHash::Scrypt) {
 		return PasswordHash::HashScrypt(password, options);
-	}
-	else {
+	} else {
 		throw ref new Platform::InvalidArgumentException("Algorithm must be defined");
 	}
 }
@@ -48,6 +47,28 @@ bool Sodium::PasswordHash::Verify(String^ hash, String^ password)
 	}
 }
 
+bool Sodium::PasswordHash::NeedsRehash(String^ hash, PasswordHashOptions options)
+{
+	int algorithm = Sodium::PasswordHash::DetermineAlgorithm(hash);
+	if (algorithm == PasswordHash::Scrypt) {
+		throw ref new Platform::InvalidArgumentException("NeedsRehash may only be used for Argon2i and Argon2id");
+	}
+
+	std::string sHash(hash->Begin(), hash->End());
+
+	int result = crypto_pwhash_str_needs_rehash(
+		sHash.c_str(),
+		options.time_cost,
+		(options.memory_cost * 1024U)
+	);
+
+	if (result == 0) {
+		return false;
+	}
+
+	return true;
+}
+
 /// <summary>Determines the algorithm used for the selected hash</summary>
 /// <param name="hash">The hash</param>
 /// <returns>Integer representing the PasswordHash algorithm</returns>
@@ -59,7 +80,7 @@ int Sodium::PasswordHash::DetermineAlgorithm(String^ hash)
 	if (len >= sizeof("$argon2i$") - 1 && !memcmp(sHash.c_str(), "$argon2i$", sizeof("$argon2i$") - 1)) {
 		return PasswordHash::Argon2i;
 	} else if (len >= sizeof("$argon2id$") - 1 && !memcmp(sHash.c_str(), "$argon2id$", sizeof("$argon2id$") - 1)) {
-		return PasswordHash::Argon2i;
+		return PasswordHash::Argon2id;
 	}else if (len >= sizeof("$7") - 1 && !memcmp(sHash.c_str(), "$7", sizeof("$7") - 1)) {
 		return PasswordHash::Scrypt;
 	} else {
@@ -89,27 +110,14 @@ String^ Sodium::PasswordHash::HashArgon2i(String^ password, PasswordHashOptions 
 
 	char hash[crypto_pwhash_STRBYTES];
 
-	int result = -1;
-
-	if (algorithm == PasswordHash::Argon2i) {
-		result = crypto_pwhash_argon2i_str(
-			hash,
-			(const char*)sPassword->Data,
-			sPassword->Length,
-			options.time_cost,
-			(options.memory_cost * 1024U)
-		);
-	} else if (algorithm == PasswordHash::Argon2id) {
-		result = crypto_pwhash_argon2id_str(
-			hash,
-			(const char*)sPassword->Data,
-			sPassword->Length,
-			options.time_cost,
-			(options.memory_cost * 1024U)
-		);
-	} else {
-		throw ref new Platform::InvalidArgumentException("Algorithm must be either Argon2i or Argon2id");
-	}
+	int result = crypto_pwhash_str_alg(
+		hash,
+		(const char*)sPassword->Data,
+		sPassword->Length,
+		options.time_cost,
+		(options.memory_cost * 1024U),
+		algorithm
+	);
 
 	sodium_munlock(sPassword->Data, sPassword->Length);
 	sodium_memzero(sPassword->Data, sPassword->Length);

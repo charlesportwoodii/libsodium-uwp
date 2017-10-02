@@ -48,7 +48,7 @@ memory_cost = 1<<14
 
 ## Algorithm Selection
 
-The algorithm can be selected using the constants provided by `PasswordHash`.
+The algorithm can be selected using the constants provided by `PasswordHash`. By default passwords will be hashed using `Password.Argon2id`.
 
 ```C#
 PasswordHash.Argon2i // Argon2i
@@ -61,10 +61,10 @@ PasswordHash.Scrypt // Scrypt
 __Namespace:__ _Sodium.PasswordHash_
 
 ```C#
-public static String Sodium.PasswordHash.Hash(String password, PasswordHashOptions options, int algorithm)
+public static String Sodium.PasswordHash.Hash(String password, PasswordHashOptions options, int algorithm = Password.Argon2id)
 ```
 
-_Internally this method will use either `crypto_pwhash_scryptsalsa208sha256_str`, `crypto_pwhash_argon2i_str`, or `crypto_pwhash_argon2id_str`, depending upon the algorithm set._
+_Internally this method will use either `crypto_pwhash_scryptsalsa208sha256_str` or `crypto_pwhash_str_alg`, depending upon the algorithm set._
 
 ## Verifying passwords
 
@@ -75,3 +75,13 @@ public static bool Sodium.PasswordHash.Verify(String hash, String password)
 ```
 
 _Internally this method will use either `crypto_pwhash_scryptsalsa208sha256_str_verify` or `crypto_pwhash_str_verify`, depending upon the algorithm set._
+
+## Determine if password needs to be rehashed
+
+__Namespace:__ _Sodium.PasswordHash_
+
+```C#
+public static bool Sodium.PasswordHash.NeedsRehash(String hash, PasswordHashOptions options);
+```
+
+_Internally this method uses `crypto_pwhash_str_needs_rehash`. Note that this method only works with `Password.Argon2i` and `Password.Argon2id`._
