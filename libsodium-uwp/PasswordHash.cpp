@@ -47,6 +47,10 @@ bool Sodium::PasswordHash::Verify(String^ hash, String^ password)
 	}
 }
 
+/// <summary>Indicates if a given password needs to be rehashed given a set of options.</summary>
+/// <param name="hash">The hash</param>
+/// <param name="options">The PasswordHashOptions</param
+/// <returns>Boolean - true if the password needs to be rehashed</returns>
 bool Sodium::PasswordHash::NeedsRehash(String^ hash, PasswordHashOptions options)
 {
 	int algorithm = Sodium::PasswordHash::DetermineAlgorithm(hash);
@@ -81,7 +85,7 @@ int Sodium::PasswordHash::DetermineAlgorithm(String^ hash)
 		return PasswordHash::Argon2i;
 	} else if (len >= sizeof("$argon2id$") - 1 && !memcmp(sHash.c_str(), "$argon2id$", sizeof("$argon2id$") - 1)) {
 		return PasswordHash::Argon2id;
-	}else if (len >= sizeof("$7") - 1 && !memcmp(sHash.c_str(), "$7", sizeof("$7") - 1)) {
+	} else if (len >= sizeof("$7") - 1 && !memcmp(sHash.c_str(), "$7", sizeof("$7") - 1)) {
 		return PasswordHash::Scrypt;
 	} else {
 		return -1;
