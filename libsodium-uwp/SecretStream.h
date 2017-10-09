@@ -69,6 +69,8 @@ namespace Sodium
 		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int tag, const Array<unsigned char>^ additionalData);
 		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int tag, String^ additionalData);
 
+		void Rekey();
+		
 		static Array<unsigned char>^ GenerateKey();
 		static Array<unsigned char>^ GenerateHeader();
 
