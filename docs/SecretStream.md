@@ -92,6 +92,8 @@ public static byte[] Sodium.PublicKeyBox.GenerateKey()
 
 This method returns a 32 byte key. Within the same application you can use this method to generate a 32 byte key for encrypting and decrypting. When working with remote peers however, use a key exchange method such as [`Sodium::ScalarMult::Mult`](ScalarMult.md) to create a 32 byte shared key that can be safely transmitted to the remote peer.
 
+_Internally this method uses `crypto_secretstream_xchacha20poly1305_keygen`._
+
 ```C#
 public static byte[] Sodium.PublicKeyBox.GenerateHeader()
 ```
