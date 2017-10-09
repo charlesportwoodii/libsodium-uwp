@@ -487,6 +487,7 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\version.h" />
     <ClInclude Include="GenericHash.h" />
     <ClInclude Include="PasswordHash.h" />
+    <ClInclude Include="SecretStream.h" />
     <ClInclude Include="SodiumCore.h" />
     <ClInclude Include="CryptoHash.h" />
     <ClInclude Include="DetachedBox.h" />
@@ -921,6 +922,7 @@
     <ClCompile Include="SecretAead.cpp" />
     <ClCompile Include="SecretBox.cpp" />
     <ClCompile Include="SecretKeyAuth.cpp" />
+    <ClCompile Include="SecretStream.cpp" />
     <ClCompile Include="ShortHash.cpp" />
     <ClCompile Include="SodiumCore.cpp" />
     <ClCompile Include="Extern.cpp" />

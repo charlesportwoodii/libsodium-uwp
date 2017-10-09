@@ -365,11 +365,16 @@
     <ClCompile Include="randombytes_default.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_secretstream\xchacha20poly1305\secretstream_xchacha20poly1305.c" />
     <ClCompile Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2-fill-block-avx512f.c">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\sodium\codecs.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="SecretStream.cpp">
+      <Filter>src\Sodium</Filter>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_secretstream\xchacha20poly1305\secretstream_xchacha20poly1305.c">
       <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -842,6 +847,9 @@
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\blamka-round-avx512f.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="SecretStream.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
