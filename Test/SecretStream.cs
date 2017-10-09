@@ -34,9 +34,11 @@ namespace Test
             var message2 = "{ \"json\": \"data\" }";
 
             var ciphertext1 = encrypter.Push(message1);
+            encrypter.Rekey();
             var ciphertext2 = encrypter.Push(message2, Sodium.SecretStream.TAG_FINAL);
 
             var d1 = decrypter.Pull(ciphertext1);
+            decrypter.Rekey();
             var d2 = decrypter.Pull(ciphertext2, Sodium.SecretStream.TAG_FINAL);
 
             // Verify that the original string and the decrypted string are equivalent

@@ -199,7 +199,9 @@ Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ cip
 Array<unsigned char>^ Sodium::SecretStream::GenerateKey()
 {
 	Array<unsigned char>^ key = ref new Array<unsigned char>(crypto_secretstream_xchacha20poly1305_KEYBYTES);
-	return crypto_secretstream_xchacha20poly1305_keygen(key->Data);
+	crypto_secretstream_xchacha20poly1305_keygen(key->Data);
+
+	return key;
 }
 
 /// <summary>Creates a 24 byte header</summary>
@@ -218,7 +220,7 @@ void Sodium::SecretStream::Rekey()
 	memcpy(&state, this->state->Data, this->state_len);
 
 	// Trigger the rekey
-	crypto_secretstream_xchacha20poly1305_rekey(state);
+	crypto_secretstream_xchacha20poly1305_rekey(&state);
 
 	// Copy the state back onto the class
 	int state_len = sizeof(state);
