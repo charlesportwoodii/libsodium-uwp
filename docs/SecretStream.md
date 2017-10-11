@@ -18,30 +18,30 @@ This API can be used to securely send an ordered sequence of messages to a peer.
 
 The following is a rough example of how to use the API.
 
-    ```C#
-    var key = SecretStream.GenerateKey();
-    var header = SecretStream.GenerateHeader();
-    var encrypter = new SecretStream(key, header, SecretStream.MODE_PUSH);
-    var decrypter = new SecretStream(key, header, SecretStream.MODE_PULL);
+```C#
+var key = SecretStream.GenerateKey();
+var header = SecretStream.GenerateHeader();
+var encrypter = new SecretStream(key, header, SecretStream.MODE_PUSH);
+var decrypter = new SecretStream(key, header, SecretStream.MODE_PULL);
 
-    var message1 = "Hello, World!";
-    var message2 = "{ \"json\": \"data\" }";
-    var message3 = "Some more random messaging";
+var message1 = "Hello, World!";
+var message2 = "{ \"json\": \"data\" }";
+var message3 = "Some more random messaging";
 
-    var ciphertext1 = encrypter.Push(message1);
-    encrypter.Rekey();
-    var ciphertext2 = encrypter.Push(message2, SecretStream.TAG_PUSH);
-    var ciphertext3 = encrypter.Push(message3, SecretStream.TAG_FINAL);
+var ciphertext1 = encrypter.Push(message1);
+encrypter.Rekey();
+var ciphertext2 = encrypter.Push(message2, SecretStream.TAG_PUSH);
+var ciphertext3 = encrypter.Push(message3, SecretStream.TAG_FINAL);
 
-    int tag = -1;
-    var d1 = decrypter.Pull(ciphertext1, out tag);
-    // tag == Sodium.SecretStream.TAG_MESSAGE
-    decrypter.Rekey();
-    var d2 = decrypter.Pull(ciphertext2, out tag);
-    // tag == Sodium.SecretStream.TAG_PUSH
-    var d3 = decrypter.Pull(ciphertext3, out tag);
-    // tag == Sodium.SecretStream.TAG_FINAL
-    ```
+int tag = -1;
+var d1 = decrypter.Pull(ciphertext1, out tag);
+// tag == Sodium.SecretStream.TAG_MESSAGE
+decrypter.Rekey();
+var d2 = decrypter.Pull(ciphertext2, out tag);
+// tag == Sodium.SecretStream.TAG_PUSH
+var d3 = decrypter.Pull(ciphertext3, out tag);
+// tag == Sodium.SecretStream.TAG_FINAL
+```
 
 ## Stream Modes
 
