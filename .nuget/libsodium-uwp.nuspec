@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>libsodium-uwp</id>
-    <version>1.0.151</version>
+    <version>1.0.152</version>
     <title>libsodium for UWP</title>
     <authors>Charles R. Portwood II (charlesportwoodii)</authors>
     <licenseUrl>https://github.com/charlesportwoodii/libsodium-uwp/blob/master/LICENSE.md</licenseUrl>
