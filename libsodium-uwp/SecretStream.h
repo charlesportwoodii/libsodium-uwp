@@ -15,6 +15,7 @@ namespace Sodium
 		property Array<unsigned char>^ state;
 		property size_t state_len;
 
+		int GetIndexFromTag(unsigned char tag);
 		unsigned char GetTagFromIndex(int tag);
 
 	public:
@@ -62,12 +63,11 @@ namespace Sodium
 		Array<unsigned char>^ Push(const Array<unsigned char>^ message, int tag, const Array<unsigned char>^ additionalData);
 		Array<unsigned char>^ Push(String^ message, int tag, String^ additionalData);
 
-		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext);
-		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int tag);
+		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int *tag);
 
 		[Windows::Foundation::Metadata::DefaultOverloadAttribute]
-		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int tag, const Array<unsigned char>^ additionalData);
-		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int tag, String^ additionalData);
+		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int *tag, const Array<unsigned char>^ additionalData);
+		Array<unsigned char>^ Pull(const Array<unsigned char>^ ciphertext, int *tag, String^ additionalData);
 
 		void Rekey();
 		

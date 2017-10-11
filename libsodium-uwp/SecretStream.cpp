@@ -29,6 +29,24 @@ unsigned char Sodium::SecretStream::GetTagFromIndex(int tag)
 	throw ref new Platform::InvalidArgumentException("Unable to determine tag from index");
 }
 
+/// <summary>Internal function to convert a unsigned char to a tag</summary>
+/// <param name="tag">And unsigned char</param>
+/// <returns>Returns a Sodium::SecretStream::TAG_* int</returns>
+int Sodium::SecretStream::GetIndexFromTag(unsigned char tag)
+{
+	if (tag == crypto_secretstream_xchacha20poly1305_TAG_MESSAGE) {
+		return Sodium::SecretStream::TAG_MESSAGE;
+	} else if (tag == crypto_secretstream_xchacha20poly1305_TAG_PUSH) {
+		return Sodium::SecretStream::TAG_PUSH;
+	} else if (tag == crypto_secretstream_xchacha20poly1305_TAG_REKEY) {
+		return Sodium::SecretStream::TAG_REKEY;
+	} else if (tag == crypto_secretstream_xchacha20poly1305_TAG_FINAL) {
+		return Sodium::SecretStream::TAG_FINAL;
+	}
+
+	throw ref new Platform::InvalidArgumentException("Unable to determine tag from index");
+}
+
 /// <summary>Encrypts a given message</summary>
 /// <param name="message">The message to encrypt</param>
 /// <returns>An encrypted cipher text</returns>
@@ -108,6 +126,7 @@ Array<unsigned char>^ Sodium::SecretStream::Push(const Array<unsigned char>^ mes
 
 	crypto_secretstream_xchacha20poly1305_state state;
 	memcpy(&state, this->state->Data, this->state_len);
+	unsigned char refTag = GetTagFromIndex(tag);
 
 	crypto_secretstream_xchacha20poly1305_push(
 		&state,
@@ -117,7 +136,7 @@ Array<unsigned char>^ Sodium::SecretStream::Push(const Array<unsigned char>^ mes
 		message->Length,
 		additionalData->Length == 0 ? NULL : additionalData->Data,
 		additionalData->Length,
-		tag == 0 ? 0 : GetTagFromIndex(tag)
+		refTag
 	);
 
 	return ciphertext;
@@ -125,20 +144,9 @@ Array<unsigned char>^ Sodium::SecretStream::Push(const Array<unsigned char>^ mes
 
 /// <summary>Decrypts a given ciphertext</summary>
 /// <param name="message">The message to decrypt</param>
-/// <returns>An decrypted message</returns>
-Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ ciphertext)
-{
-	return Sodium::SecretStream::Pull(
-		ciphertext,
-		Sodium::SecretStream::TAG_MESSAGE
-	);
-}
-
-/// <summary>Decrypts a given ciphertext</summary>
-/// <param name="message">The message to decrypt</param>
 /// <param name="tag">Decrypts a message with a given tag</param>
 /// <returns>An decrypted message</returns>
-Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ ciphertext, int tag)
+Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ ciphertext, int *tag)
 {
 	Array<unsigned char>^ ad = ref new Array<unsigned char>(0);
 	return Sodium::SecretStream::Pull(
@@ -153,7 +161,7 @@ Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ cip
 /// <param name="tag">Decrypts a message with a given tag</param>
 /// <param name="additionalData">Additional parameters to decrypt with the stream</param>
 /// <returns>An decrypted message</returns>
-Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ ciphertext, int tag, String^ additionalData)
+Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ ciphertext, int *tag, String^ additionalData)
 {
 	return Sodium::SecretStream::Pull(
 		ciphertext,
@@ -167,11 +175,10 @@ Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ cip
 /// <param name="tag">Decrypts a message with a given tag</param>
 /// <param name="additionalData">Additional parameters to decrypt with the stream</param>
 /// <returns>An decrypted message</returns>
-Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ ciphertext, int tag, const Array<unsigned char>^ additionalData)
+Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ ciphertext, int *tag, const Array<unsigned char>^ additionalData)
 {
 	Array<unsigned char>^ message = ref new Array<unsigned char>(ciphertext->Length - crypto_secretstream_xchacha20poly1305_ABYTES);
-
-	unsigned char tagActual = GetTagFromIndex(tag);
+	unsigned char refTag;
 
 	crypto_secretstream_xchacha20poly1305_state state;
 	memcpy(&state, this->state->Data, this->state_len);
@@ -180,12 +187,14 @@ Array<unsigned char>^ Sodium::SecretStream::Pull(const Array<unsigned char>^ cip
 		&state,
 		message->Data,
 		NULL,
-		&tagActual,
+		&refTag,
 		ciphertext->Data,
 		ciphertext->Length,
 		additionalData->Length == 0 ? NULL : additionalData->Data,
 		additionalData->Length
 	);
+
+	(*tag) = GetIndexFromTag(refTag);
 
 	if (result != 0) {
 		throw ref new Platform::FailureException("Invalid, incomplete, or corrupted ciphertext.");

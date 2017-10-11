@@ -18,29 +18,30 @@ This API can be used to securely send an ordered sequence of messages to a peer.
 
 The following is a rough example of how to use the API.
 
-```C#
-// Starting on the sender
-// Create a new key
-var key = Sodium.SecretStream.GenerateKey();
-// Create a new header
-var header = Sodium.SecretStream.GenerateHeader();
+    ```C#
+    var key = SecretStream.GenerateKey();
+    var header = SecretStream.GenerateHeader();
+    var encrypter = new SecretStream(key, header, SecretStream.MODE_PUSH);
+    var decrypter = new SecretStream(key, header, SecretStream.MODE_PULL);
 
-// Create a new stream in PUSH mode to push new messages onto the stream.
-var encrypter = new Sodium.SecretStream(key, header, Sodium.SecretStream.MODE_PUSH);
+    var message1 = "Hello, World!";
+    var message2 = "{ \"json\": \"data\" }";
+    var message3 = "Some more random messaging";
 
-var message1 = "Hello, World!";
-var message2 = "{ \"json\": \"data\" }";
+    var ciphertext1 = encrypter.Push(message1);
+    encrypter.Rekey();
+    var ciphertext2 = encrypter.Push(message2, SecretStream.TAG_PUSH);
+    var ciphertext3 = encrypter.Push(message3, SecretStream.TAG_FINAL);
 
-var ciphertext1 = encrypter.Push(message1);
-var ciphertext2 = encrypter.Push(message2, Sodium.SecretStream.TAG_FINAL);
-
-// On the peer, create a PULL stream, and pull in the stream as it comes in from the peer and decrypt it
-var decrypter = new Sodium.SecretStream(key, header, Sodium.SecretStream.MODE_PULL);
-// System.Text.Encoding.UTF8.GetBytes(message1) == d1
-var d1 = decrypter.Pull(ciphertext1);
-// System.Text.Encoding.UTF8.GetBytes(message2) == d2
-var d2 = decrypter.Pull(ciphertext2, Sodium.SecretStream.TAG_FINAL);
-```
+    int tag = -1;
+    var d1 = decrypter.Pull(ciphertext1, out tag);
+    // tag == Sodium.SecretStream.TAG_MESSAGE
+    decrypter.Rekey();
+    var d2 = decrypter.Pull(ciphertext2, out tag);
+    // tag == Sodium.SecretStream.TAG_PUSH
+    var d3 = decrypter.Pull(ciphertext3, out tag);
+    // tag == Sodium.SecretStream.TAG_FINAL
+    ```
 
 ## Stream Modes
 
@@ -143,20 +144,14 @@ _Internally this method uses `crypto_secretstream_xchacha20poly1305_push`._
 __Namespace:__ _Sodium.SecretStream_
 
 ```C#
-public byte[] Pull(byte[] ciphertext);
+public byte[] Pull(byte[] ciphertext, out int tag);
 ```
 
-Streams can be decrypted with the default `TAG_MESSAGE`.
+The default method will return a `byte[]` containing the decrypted response, and will `out` the tag used during the encryption process. After decryption, check if `tag == Sodium.SecretStream.TAG_FINAL` to determine if there are more messages to parse.
 
 ```C#
-public byte[] Pull(byte[] ciphertext, int tag);
-```
-
-Tags may be specified in the decryption.
-
-```C#
-public byte[] Pull(byte[] ciphertext, int tag, byte[] additionalData);
-public byte[] Pull(byte[] ciphertext, int tag, String additionalData);
+public byte[] Pull(byte[] ciphertext, out int tag, byte[] additionalData);
+public byte[] Pull(byte[] ciphertext, out int tag, String additionalData);
 ```
 
 Additional data may also be specified
