@@ -17,13 +17,14 @@
 | [SecretAead](SecretAead.md) | Secret authenticated encryption with additional data |
 | [SecretBox](SecretBox.md) | Secret key cryptography |
 | [SecretKeyAuth](SecretKeyAuth.md) | Authenticated secret key cryptography |
+| [SecretStream](SecretStream.md) | Encrypt and decrypt streams of arbitrary length |
 | [ShortHash](ShortHash.md) | SigHash-2-4 Short Hashing |
 | [StreamEncryption](StreamEncryption.md) | Streaming encryption with Salsa20, ChaCha20, and XSalsa20 |
 | [Utilities](Utilities.md) | libsodium utilities |
 
 # Design Goals
 
-The primary goal of this runtime component is to implement libsodium for UWP using an API similar to that provided by [libsodium-net](https://github.com/adamcaudill/libsodium-net).
+The initial goal of this runtime component was to implement libsodium for UWP using an API similar to that provided by [libsodium-net](https://github.com/adamcaudill/libsodium-net). When a direct 1-1 matching is not possible, the API will implement designs consistent with UWP functions (e.g. `GenericHash` mimics `HashAlgorithmProvider` behavior).
 
 # Using this library
 
