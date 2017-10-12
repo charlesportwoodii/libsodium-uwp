@@ -55,6 +55,7 @@ Cryptography is hard. This library was written to make libsodium available to th
                 <ActivatableClass ActivatableClassId="Sodium.SecretBox" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.SecretKeyAuth" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.SecretAead" ThreadingModel="both" />
+                <ActivatableClass ActivatableClassId="Sodium.SecretStream" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.ShortHash" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.StreamEncryption" ThreadingModel="both" />
                 <ActivatableClass ActivatableClassId="Sodium.Utilities" ThreadingModel="both" />
