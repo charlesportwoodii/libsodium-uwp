@@ -49,7 +49,7 @@ bool Sodium::PasswordHash::Verify(String^ hash, String^ password)
 
 /// <summary>Indicates if a given password needs to be rehashed given a set of options.</summary>
 /// <param name="hash">The hash</param>
-/// <param name="options">The PasswordHashOptions</param
+/// <param name="options">The PasswordHashOptions</param>
 /// <returns>Boolean - true if the password needs to be rehashed</returns>
 bool Sodium::PasswordHash::NeedsRehash(String^ hash, PasswordHashOptions options)
 {

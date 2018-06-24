@@ -34,7 +34,7 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.10240.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
   </PropertyGroup>
@@ -160,10 +160,15 @@
       <ExpandAttributedSource>
       </ExpandAttributedSource>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -192,10 +197,15 @@
       <WarningLevel>Level3</WarningLevel>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <EnablePREfast>true</EnablePREfast>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -229,10 +239,15 @@
       <ExpandAttributedSource>
       </ExpandAttributedSource>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -261,10 +276,15 @@
       <WarningLevel>Level3</WarningLevel>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <EnablePREfast>true</EnablePREfast>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -298,10 +318,15 @@
       <ExpandAttributedSource>
       </ExpandAttributedSource>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/nodefaultlib:vccorlibd /nodefaultlib:msvcrtd vccorlibd.lib msvcrtd.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -330,10 +355,15 @@
       <WarningLevel>Level3</WarningLevel>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <EnablePREfast>true</EnablePREfast>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/nodefaultlib:vccorlib /nodefaultlib:msvcrt vccorlib.lib msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -350,6 +380,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\base.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\base2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\constants.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\fe.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\base.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\base2.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\constants.h" />
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\fe.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-avx2.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2b\ref\blake2b-compress-sse41.h" />
@@ -368,8 +406,6 @@
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\chacha20\ref\chacha20_ref.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\ref\salsa20_ref.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_stream\salsa20\stream_salsa20.h" />
-    <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base.h" />
-    <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base2.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_core\hchacha20\core_hchacha20.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2-impl.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2.h" />
@@ -394,7 +430,6 @@
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\blamka-round-avx512f.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\scryptsalsa208sha256\crypto_scrypt.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\scryptsalsa208sha256\pbkdf2-sha256.h" />
-    <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\donna_c64\curve25519_donna_c64.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\ref10\x25519_ref10.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\sandy2x\consts_namespace.h" />
     <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\sandy2x\curve25519_sandy2x.h" />
@@ -428,6 +463,7 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_box.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_box_curve25519xchacha20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_box_curve25519xsalsa20poly1305.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_core_ed25519.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_core_hchacha20.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_core_hsalsa20.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_core_salsa20.h" />
@@ -451,9 +487,11 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_pwhash_scryptsalsa208sha256.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult_curve25519.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult_ed25519.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretbox.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretbox_xchacha20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretbox_xsalsa20poly1305.h" />
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretstream_xchacha20poly1305.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_shorthash.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_shorthash_siphash24.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_sign.h" />
@@ -477,7 +515,6 @@
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_verify_64.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\export.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\common.h" />
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\private\curve25519_ref10.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\mutex.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\sse2_64_32.h" />
     <ClInclude Include="libsodium\src\libsodium\include\sodium\private\implementations.h" />
@@ -510,9 +547,6 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CryptoHash.cpp" />
-    <ClCompile Include="GenericHash.cpp" />
-    <ClCompile Include="KDF.cpp" />
     <ClCompile Include="libsodium\src\libsodium\crypto_aead\aes256gcm\aesni\aead_aes256gcm_aesni.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -561,7 +595,11 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\curve25519_ref10.c">
+    <ClCompile Include="libsodium\src\libsodium\crypto_core\ed25519\core_ed25519.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\ed25519_ref10.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -701,6 +739,10 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_scalarmult\ed25519\ref10\scalarmult_ed25519_ref10.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_secretstream\xchacha20poly1305\secretstream_xchacha20poly1305.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -734,10 +776,6 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_scalarmult\crypto_scalarmult.c">
-      <CompileAsWinRT>false</CompileAsWinRT>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\donna_c64\curve25519_donna_c64.c">
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -913,6 +951,9 @@
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CryptoHash.cpp" />
+    <ClCompile Include="GenericHash.cpp" />
+    <ClCompile Include="KDF.cpp" />
     <ClCompile Include="OneTimeAuth.cpp" />
     <ClCompile Include="PasswordHash.cpp" />
     <ClCompile Include="PublicKeyAuth.cpp" />

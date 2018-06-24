@@ -203,12 +203,6 @@
     <ClCompile Include="libsodium\src\libsodium\crypto_stream\crypto_stream.c">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\donna_c64\curve25519_donna_c64.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\curve25519_ref10.c">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\sandy2x\curve25519_sandy2x.c">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -377,6 +371,15 @@
     <ClCompile Include="libsodium\src\libsodium\crypto_secretstream\xchacha20poly1305\secretstream_xchacha20poly1305.c">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_core\ed25519\core_ed25519.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\ed25519_ref10.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="libsodium\src\libsodium\crypto_scalarmult\ed25519\ref10\scalarmult_ed25519_ref10.c">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2.h">
@@ -389,12 +392,6 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_pwhash\argon2\argon2-impl.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_core\curve25519\ref10\base2.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_generichash\blake2\ref\blake2.h">
@@ -590,12 +587,6 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_verify_64.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\donna_c64\curve25519_donna_c64.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="libsodium\src\libsodium\include\sodium\private\curve25519_ref10.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="libsodium\src\libsodium\crypto_scalarmult\curve25519\sandy2x\curve25519_sandy2x.h">
@@ -850,6 +841,39 @@
     </ClInclude>
     <ClInclude Include="SecretStream.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\base.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\base.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\base2.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\base2.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\constants.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\constants.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_core_ed25519.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_scalarmult_ed25519.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\include\sodium\crypto_secretstream_xchacha20poly1305.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_25_5\fe.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="libsodium\src\libsodium\crypto_core\ed25519\ref10\fe_51\fe.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
